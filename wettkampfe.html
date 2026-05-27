@@ -32,8 +32,12 @@
   .race-card .btn { margin-top: auto; }
   .race-date { color: var(--gold-light); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
   .race-name { font-size: 1.3rem; font-weight: 700; margin: 0.4rem 0; color: #fff; }
-  .race-loc { color: #b0aea6; font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
-  .race-loc svg { flex-shrink: 0; }
+  .race-link { display: inline-block; margin: 0.5rem 0 0.8rem; font-size: 0.8rem; color: var(--gold-light); text-decoration: none; border-bottom: 1px solid rgba(198,154,58,0.3); transition: border-color 0.2s; }
+  .race-link:hover { border-color: var(--gold-light); }
+  .countdown { display: flex; gap: 0.6rem; margin: 0.8rem 0; }
+  .cd-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 0.5rem 0.7rem; text-align: center; min-width: 48px; }
+  .cd-num { font-size: 1.3rem; font-weight: 700; color: var(--gold-light); line-height: 1; }
+  .cd-label { font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
   .race-dist { display: inline-block; background: rgba(198,154,58,0.15); color: var(--gold-light); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1.2rem; }
   .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
   .btn-primary { background: var(--gold); color: #fff; }
@@ -88,6 +92,8 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
         <a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">Rapperswil, Schweiz</a>
       </div>
+      <a href="https://www.ironman.com/races/im703-switzerland" target="_blank" class="race-link">Offizielle Rennseite</a>
+      <div class="countdown" id="cd-ironman"></div>
       <span class="race-dist">Mitteldistanz – 1.9 km Swim / 90 km Velo / 21.1 km Laufen</span>
       <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
     </div>
@@ -108,6 +114,8 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
         <a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">San Remo, Italien</a>
       </div>
+      <a href="https://challenge-sanremo.com/" target="_blank" class="race-link">Offizielle Rennseite</a>
+      <div class="countdown" id="cd-sanremo"></div>
       <span class="race-dist">Challenge Distanz – 1.9 km Swim / 80 km Velo / 21 km Laufen</span>
       <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
     </div>
