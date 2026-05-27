@@ -26,39 +26,71 @@
   .section-title span { color: var(--gold); }
   .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; }
 
-  .race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-  .race-card { background: var(--dark-soft); border-radius: 14px; padding: 1.8rem; border: 1px solid rgba(198,154,58,0.2); transition: transform 0.25s, border-color 0.25s; display: flex; flex-direction: column; }
-  .race-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-  .race-card .btn { margin-top: auto; }
-  .race-date { color: var(--gold-light); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
-  .race-name { font-size: 1.3rem; font-weight: 700; margin: 0.4rem 0; color: #fff; }
-  .race-link { display: inline-block; margin: 0.5rem 0 0.8rem; font-size: 0.8rem; color: var(--gold-light); text-decoration: none; border-bottom: 1px solid rgba(198,154,58,0.3); transition: border-color 0.2s; }
-  .race-link:hover { border-color: var(--gold-light); }
-  .countdown { display: flex; gap: 0.6rem; margin: 0.8rem 0; }
-  .cd-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 0.5rem 0.7rem; text-align: center; min-width: 48px; }
-  .cd-num { font-size: 1.3rem; font-weight: 700; color: var(--gold-light); line-height: 1; }
-  .cd-label { font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-  .race-dist { display: inline-block; background: rgba(198,154,58,0.15); color: var(--gold-light); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1.2rem; }
-  .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
-  .btn-primary { background: var(--gold); color: #fff; }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  /* RACE CARDS */
+  .race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
 
+  .race-card {
+    background: var(--dark);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(198,154,58,0.15);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .race-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+
+  .race-card-top { padding: 1.5rem 1.5rem 0; }
+  .race-tag { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(198,154,58,0.12); color: var(--gold-light); padding: 0.25rem 0.8rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 1rem; }
+  .race-name { font-size: 1.35rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 0.8rem; }
+
+  .race-meta { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1rem; }
+  .race-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #b0aea6; }
+  .race-meta-row svg { flex-shrink: 0; color: var(--gold); }
+  .race-meta-row a { color: #b0aea6; text-decoration: none; border-bottom: 1px dashed rgba(176,174,166,0.35); transition: color 0.2s; }
+  .race-meta-row a:hover { color: var(--gold-light); }
+
+  .race-dist-bar { background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.06); padding: 1rem 1.5rem; }
+  .race-dist-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+  .race-dist-items { display: flex; gap: 1rem; }
+  .dist-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; color: #cfcdc5; font-weight: 500; }
+  .dist-item svg { color: var(--gold); }
+
+  .race-countdown { background: rgba(0,0,0,0.25); padding: 1rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
+  .cd-label-top { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.6rem; }
+  .countdown { display: flex; gap: 0.5rem; }
+  .cd-box { flex: 1; background: rgba(198,154,58,0.08); border: 1px solid rgba(198,154,58,0.15); border-radius: 8px; padding: 0.5rem 0.3rem; text-align: center; }
+  .cd-num { font-size: 1.4rem; font-weight: 800; color: var(--gold-light); line-height: 1; font-variant-numeric: tabular-nums; }
+  .cd-unit { font-size: 0.62rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+
+  .race-card-bottom { padding: 1.2rem 1.5rem 1.5rem; margin-top: auto; }
+  .btn { padding: 0.85rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; display: block; text-align: center; }
+  .btn-primary { background: var(--gold); color: #fff; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* PAST */
   .past-section { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2rem; }
   .past-section h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text); }
-  .past-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 0.5px solid #e0ddd4; }
+  .past-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 0.5px solid #e8e6df; }
   .past-item:last-child { border-bottom: none; }
-  .past-name { font-weight: 600; font-size: 0.95rem; }
-  .past-info { font-size: 0.85rem; color: var(--text-muted); }
-  .past-badge { background: rgba(198,154,58,0.15); color: var(--gold); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+  .past-left { display: flex; align-items: center; gap: 1rem; }
+  .past-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(198,154,58,0.1); border: 1px solid rgba(198,154,58,0.2); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
+  .past-name { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+  .past-info { font-size: 0.82rem; color: var(--text-muted); }
+  .past-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
+  .past-time { font-size: 1rem; font-weight: 700; color: var(--gold); }
+  .past-badge { background: rgba(198,154,58,0.1); color: var(--gold); padding: 0.15rem 0.7rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
 
-  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; }
+  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: 4rem; }
   footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
 
   @media (max-width: 768px) {
     nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
     nav ul.open { display: flex; }
     .menu-toggle { display: block; }
-    .past-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    .past-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .past-right { align-items: flex-start; }
+    .dist-item span { display: none; }
   }
 </style>
 </head>
@@ -82,67 +114,136 @@
 
 <div class="container">
   <h2 class="section-title">Kommende <span>Rennen</span></h2>
-  <p class="section-sub">Jeder Beitrag hilft mir, meine Ziele zu erreichen – ob Startgeld, Ausrüstung oder Reisekosten.</p>
+  <p class="section-sub">Jeder Beitrag hilft mir – ob Startgeld, Ausrüstung oder Reisekosten.</p>
 
   <div class="race-grid">
+
+    <!-- IRONMAN -->
     <div class="race-card">
-      <div class="race-date">7. Juni 2026</div>
-      <div class="race-name">Ironman 70.3 Rapperswil</div>
-      <div class="race-loc">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">Rapperswil, Schweiz</a>
+      <div class="race-card-top">
+        <div class="race-tag">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          7. Juni 2026
+        </div>
+        <div class="race-name">Ironman 70.3 Rapperswil</div>
+        <div class="race-meta">
+          <div class="race-meta-row">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank">Rapperswil, Schweiz</a>
+          </div>
+          <div class="race-meta-row">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <a href="https://www.ironman.com/races/im703-switzerland" target="_blank">Offizielle Rennseite</a>
+          </div>
+        </div>
       </div>
-      <a href="https://www.ironman.com/races/im703-switzerland" target="_blank" class="race-link">Offizielle Rennseite</a>
-      <div class="countdown" id="cd-ironman"></div>
-      <span class="race-dist">Mitteldistanz – 1.9 km Swim / 90 km Velo / 21.1 km Laufen</span>
-      <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      <div class="race-dist-bar">
+        <div class="race-dist-label">Mitteldistanz</div>
+        <div class="race-dist-items">
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/><path d="M12 8v4l3 3"/></svg><span>1.9 km Swim</span></div>
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/><path d="M12 17.5V9"/></svg><span>90 km Velo</span></div>
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M7.5 13.5c.83 1 2 2 4 2s3.5-1.5 3.5-3-1.5-2.5-3-3-3-1.5-3-3 1.5-3 3.5-3 3.17 1 4 2"/><path d="M12 19v-6.5"/></svg><span>21.1 km Laufen</span></div>
+        </div>
+      </div>
+      <div class="race-countdown">
+        <div class="cd-label-top">Countdown zum Rennen</div>
+        <div class="countdown" id="cd-ironman"></div>
+      </div>
+      <div class="race-card-bottom">
+        <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      </div>
     </div>
+
+    <!-- USTER -->
     <div class="race-card">
-      <div class="race-date">Sommer 2026</div>
-      <div class="race-name">Sprint Triathlon Uster</div>
-      <div class="race-loc">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <a href="https://maps.google.com/?q=Uster,Zürich,Schweiz" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">Uster, Zürich</a>
+      <div class="race-card-top">
+        <div class="race-tag">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Sommer 2026
+        </div>
+        <div class="race-name">Sprint Triathlon Uster</div>
+        <div class="race-meta">
+          <div class="race-meta-row">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <a href="https://maps.google.com/?q=Uster,Zürich,Schweiz" target="_blank">Uster, Zürich</a>
+          </div>
+        </div>
       </div>
-      <span class="race-dist">Sprint Distanz</span>
-      <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      <div class="race-dist-bar">
+        <div class="race-dist-label">Sprint Distanz</div>
+        <div class="race-dist-items">
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/></svg><span>Swim</span></div>
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/></svg><span>Velo</span></div>
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg><span>Laufen</span></div>
+        </div>
+      </div>
+      <div class="race-card-bottom" style="margin-top:auto;">
+        <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      </div>
     </div>
+
+    <!-- SAN REMO -->
     <div class="race-card">
-      <div class="race-date">4. Oktober 2026</div>
-      <div class="race-name">Challenge San Remo</div>
-      <div class="race-loc">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">San Remo, Italien</a>
+      <div class="race-card-top">
+        <div class="race-tag">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          4. Oktober 2026
+        </div>
+        <div class="race-name">Challenge San Remo</div>
+        <div class="race-meta">
+          <div class="race-meta-row">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank">San Remo, Italien</a>
+          </div>
+          <div class="race-meta-row">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <a href="https://challenge-sanremo.com/" target="_blank">Offizielle Rennseite</a>
+          </div>
+        </div>
       </div>
-      <a href="https://challenge-sanremo.com/" target="_blank" class="race-link">Offizielle Rennseite</a>
-      <div class="countdown" id="cd-sanremo"></div>
-      <span class="race-dist">Challenge Distanz – 1.9 km Swim / 80 km Velo / 21 km Laufen</span>
-      <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      <div class="race-dist-bar">
+        <div class="race-dist-label">Challenge Distanz</div>
+        <div class="race-dist-items">
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/></svg><span>1.9 km Swim</span></div>
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/></svg><span>80 km Velo</span></div>
+          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg><span>21 km Laufen</span></div>
+        </div>
+      </div>
+      <div class="race-countdown">
+        <div class="cd-label-top">Countdown zum Rennen</div>
+        <div class="countdown" id="cd-sanremo"></div>
+      </div>
+      <div class="race-card-bottom">
+        <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      </div>
     </div>
+
   </div>
 
+  <!-- VERGANGENE -->
+  <h2 class="section-title">Vergangene <span>Wettkämpfe</span></h2>
+  <p class="section-sub">Meine bisherigen Resultate.</p>
   <div class="past-section">
-    <h3>Vergangene Wettkämpfe</h3>
     <div class="past-item">
-      <div>
-        <div class="past-name">Kerzerslauf</div>
-        <div class="past-info">Kerzers · März 2026</div>
+      <div class="past-left">
+        <div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="past-name">Kerzerslauf</div><div class="past-info">Kerzers · März 2026</div></div>
       </div>
-      <span class="past-badge">1h 11min</span>
+      <div class="past-right"><div class="past-time">1h 11min</div><span class="past-badge">Finisher</span></div>
     </div>
     <div class="past-item">
-      <div>
-        <div class="past-name">Sprint Triathlon Wallisellen</div>
-        <div class="past-info">Wallisellen · April 2026</div>
+      <div class="past-left">
+        <div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="past-name">Sprint Triathlon Wallisellen</div><div class="past-info">Wallisellen · April 2026</div></div>
       </div>
-      <span class="past-badge">1h 03min</span>
+      <div class="past-right"><div class="past-time">1h 03min</div><span class="past-badge">Finisher</span></div>
     </div>
     <div class="past-item">
-      <div>
-        <div class="past-name">Sprint Triathlon Aarau</div>
-        <div class="past-info">Aarau · September 2025</div>
+      <div class="past-left">
+        <div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <div><div class="past-name">Sprint Triathlon Aarau</div><div class="past-info">Aarau · September 2025</div></div>
       </div>
-      <span class="past-badge">1h 17min</span>
+      <div class="past-right"><div class="past-time">1h 17min</div><span class="past-badge">Finisher</span></div>
     </div>
   </div>
 </div>
@@ -151,6 +252,31 @@
   <div class="motto-foot">"One step further every day."</div>
   <div>© 2026 Nico Rüttimann · Triathlet & Student</div>
 </footer>
-<script>document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));</script>
+
+<script>
+  document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));
+
+  function buildCountdown(id, targetDate) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    function update() {
+      const diff = new Date(targetDate) - new Date();
+      if (diff <= 0) { el.innerHTML = '<span style="color:var(--gold-light);font-size:0.85rem;font-weight:600;">Rennen hat stattgefunden</span>'; return; }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      el.innerHTML = `
+        <div class="cd-box"><div class="cd-num">${d}</div><div class="cd-unit">Tage</div></div>
+        <div class="cd-box"><div class="cd-num">${String(h).padStart(2,'0')}</div><div class="cd-unit">Std</div></div>
+        <div class="cd-box"><div class="cd-num">${String(m).padStart(2,'0')}</div><div class="cd-unit">Min</div></div>
+        <div class="cd-box"><div class="cd-num">${String(s).padStart(2,'0')}</div><div class="cd-unit">Sek</div></div>`;
+    }
+    update();
+    setInterval(update, 1000);
+  }
+  buildCountdown('cd-ironman', '2026-06-07T07:00:00');
+  buildCountdown('cd-sanremo', '2026-10-04T07:00:00');
+</script>
 </body>
 </html>
