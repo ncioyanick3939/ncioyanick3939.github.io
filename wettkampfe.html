@@ -31,7 +31,8 @@
   .race-card:hover { transform: translateY(-4px); border-color: var(--gold); }
   .race-date { color: var(--gold-light); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
   .race-name { font-size: 1.3rem; font-weight: 700; margin: 0.4rem 0; color: #fff; }
-  .race-loc { color: #b0aea6; font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .race-loc { color: #b0aea6; font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+  .race-loc svg { flex-shrink: 0; }
   .race-dist { display: inline-block; background: rgba(198,154,58,0.15); color: var(--gold-light); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1.2rem; }
   .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
   .btn-primary { background: var(--gold); color: #fff; }
@@ -80,43 +81,60 @@
 
   <div class="race-grid">
     <div class="race-card">
-      <div class="race-date">Datum · 2026</div>
-      <div class="race-name">Triathlon Beispielort</div>
-      <div class="race-loc">📍 Schweiz</div>
-      <span class="race-dist">Olympische Distanz</span><br><br>
+      <div class="race-date">7. Juni 2026</div>
+      <div class="race-name">Ironman 70.3 Rapperswil</div>
+      <div class="race-loc">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">Rapperswil, Schweiz</a>
+      </div>
+      <span class="race-dist">Mitteldistanz – 1.9 km Swim / 90 km Velo / 21.1 km Laufen</span><br><br>
       <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
     </div>
     <div class="race-card">
-      <div class="race-date">Datum · 2026</div>
-      <div class="race-name">Halbmarathon</div>
-      <div class="race-loc">📍 Bern</div>
-      <span class="race-dist">21,1 km</span><br><br>
+      <div class="race-date">Sommer 2026</div>
+      <div class="race-name">Sprint Triathlon Uster</div>
+      <div class="race-loc">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <a href="https://maps.google.com/?q=Uster,Zürich,Schweiz" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">Uster, Zürich</a>
+      </div>
+      <span class="race-dist">Sprint Distanz</span><br><br>
       <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
     </div>
     <div class="race-card">
-      <div class="race-date">Datum · 2026</div>
-      <div class="race-name">Ironman 70.3</div>
-      <div class="race-loc">📍 TBA</div>
-      <span class="race-dist">Mitteldistanz</span><br><br>
+      <div class="race-date">4. Oktober 2026</div>
+      <div class="race-name">Challenge San Remo</div>
+      <div class="race-loc">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank" style="color:#b0aea6; text-decoration:none; border-bottom: 1px dashed rgba(176,174,166,0.4);">San Remo, Italien</a>
+      </div>
+      <span class="race-dist">Challenge Distanz – 1.9 km Swim / 80 km Velo / 21 km Laufen</span><br><br>
       <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
     </div>
   </div>
 
   <div class="past-section">
-    <h3>🏅 Vergangene Wettkämpfe</h3>
+    <h3>Vergangene Wettkämpfe</h3>
     <div class="past-item">
-      <div><div class="past-name">Beispiel Triathlon</div><div class="past-info">Ort · 2025</div></div>
-      <span class="past-badge">Finisher</span>
+      <div>
+        <div class="past-name">Kerzerslauf</div>
+        <div class="past-info">Kerzers · März 2026</div>
+      </div>
+      <span class="past-badge">1h 11min</span>
     </div>
     <div class="past-item">
-      <div><div class="past-name">Beispiel Lauf</div><div class="past-info">Ort · 2025</div></div>
-      <span class="past-badge">Finisher</span>
+      <div>
+        <div class="past-name">Sprint Triathlon Wallisellen</div>
+        <div class="past-info">Wallisellen · April 2026</div>
+      </div>
+      <span class="past-badge">1h 03min</span>
     </div>
     <div class="past-item">
-      <div><div class="past-name">Beispiel Radrennen</div><div class="past-info">Ort · 2024</div></div>
-      <span class="past-badge">Finisher</span>
+      <div>
+        <div class="past-name">Sprint Triathlon Aarau</div>
+        <div class="past-info">Aarau · September 2025</div>
+      </div>
+      <span class="past-badge">1h 17min</span>
     </div>
-    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:1rem;">💡 Ersetze diese Beispiele mit deinen echten Wettkämpfen.</p>
   </div>
 </div>
 
