@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wettkämpfe – Nico Rüttimann</title>
+<style>
+  :root { --gold: #c69a3a; --gold-light: #d9b556; --dark: #2b2b29; --dark-soft: #34332f; --cream: #faf8f3; --text: #2b2b29; --text-muted: #6b6a64; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(43,43,41,0.97); }
+  nav .logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; }
+  nav .logo span { color: var(--gold-light); }
+  nav ul { display: flex; gap: 1.6rem; list-style: none; }
+  nav a { color: #e8e6df; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  nav a:hover { color: var(--gold-light); }
+  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+  .page-hero { padding: 8rem 1.5rem 4rem; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%); color: #fff; text-align: center; }
+  .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
+  .page-hero h1 span { color: var(--gold-light); }
+  .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .section-title span { color: var(--gold); }
+  .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; }
+
+  .race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+  .race-card { background: var(--dark-soft); border-radius: 14px; padding: 1.8rem; border: 1px solid rgba(198,154,58,0.2); transition: transform 0.25s, border-color 0.25s; }
+  .race-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .race-date { color: var(--gold-light); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+  .race-name { font-size: 1.3rem; font-weight: 700; margin: 0.4rem 0; color: #fff; }
+  .race-loc { color: #b0aea6; font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .race-dist { display: inline-block; background: rgba(198,154,58,0.15); color: var(--gold-light); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1.2rem; }
+  .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
+  .btn-primary { background: var(--gold); color: #fff; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .past-section { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2rem; }
+  .past-section h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text); }
+  .past-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 0.5px solid #e0ddd4; }
+  .past-item:last-child { border-bottom: none; }
+  .past-name { font-weight: 600; font-size: 0.95rem; }
+  .past-info { font-size: 0.85rem; color: var(--text-muted); }
+  .past-badge { background: rgba(198,154,58,0.15); color: var(--gold); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+
+  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; }
+  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .past-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
+  <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+  <ul id="nl">
+    <li><a href="uebermich.html">Über mich</a></li>
+    <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+    <li><a href="sponsoring.html">Sponsoring</a></li>
+    <li><a href="unterstuetzen.html">Unterstützen</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <h1>Nächste <span>Wettkämpfe</span></h1>
+  <p>Unterstütze mich gezielt für ein bestimmtes Rennen</p>
+</div>
+
+<div class="container">
+  <h2 class="section-title">Kommende <span>Rennen</span></h2>
+  <p class="section-sub">Jeder Beitrag hilft mir, meine Ziele zu erreichen – ob Startgeld, Ausrüstung oder Reisekosten.</p>
+
+  <div class="race-grid">
+    <div class="race-card">
+      <div class="race-date">Datum · 2026</div>
+      <div class="race-name">Triathlon Beispielort</div>
+      <div class="race-loc">📍 Schweiz</div>
+      <span class="race-dist">Olympische Distanz</span><br><br>
+      <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+    </div>
+    <div class="race-card">
+      <div class="race-date">Datum · 2026</div>
+      <div class="race-name">Halbmarathon</div>
+      <div class="race-loc">📍 Bern</div>
+      <span class="race-dist">21,1 km</span><br><br>
+      <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+    </div>
+    <div class="race-card">
+      <div class="race-date">Datum · 2026</div>
+      <div class="race-name">Ironman 70.3</div>
+      <div class="race-loc">📍 TBA</div>
+      <span class="race-dist">Mitteldistanz</span><br><br>
+      <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+    </div>
+  </div>
+
+  <div class="past-section">
+    <h3>🏅 Vergangene Wettkämpfe</h3>
+    <div class="past-item">
+      <div><div class="past-name">Beispiel Triathlon</div><div class="past-info">Ort · 2025</div></div>
+      <span class="past-badge">Finisher</span>
+    </div>
+    <div class="past-item">
+      <div><div class="past-name">Beispiel Lauf</div><div class="past-info">Ort · 2025</div></div>
+      <span class="past-badge">Finisher</span>
+    </div>
+    <div class="past-item">
+      <div><div class="past-name">Beispiel Radrennen</div><div class="past-info">Ort · 2024</div></div>
+      <span class="past-badge">Finisher</span>
+    </div>
+    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:1rem;">💡 Ersetze diese Beispiele mit deinen echten Wettkämpfen.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="motto-foot">"One step further every day."</div>
+  <div>© 2026 Nico Rüttimann · Triathlet & Student</div>
+</footer>
+<script>document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));</script>
+</body>
+</html>
