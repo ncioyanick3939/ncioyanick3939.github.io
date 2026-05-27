@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nico Rüttimann – Athlet & Student</title>
+<style>
+  :root {
+    --gold: #c69a3a;
+    --gold-light: #d9b556;
+    --dark: #2b2b29;
+    --dark-soft: #34332f;
+    --cream: #faf8f3;
+    --text: #2b2b29;
+    --text-muted: #6b6a64;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem; background: rgba(43,43,41,0.95); backdrop-filter: blur(8px);
+  }
+  nav .logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; }
+  nav .logo span { color: var(--gold-light); }
+  nav ul { display: flex; gap: 1.6rem; list-style: none; }
+  nav a { color: #e8e6df; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  nav a:hover { color: var(--gold-light); }
+  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 6rem 1.5rem 3rem;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%);
+    color: #fff; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; top: -50%; right: -20%; width: 60%; height: 200%;
+    background: radial-gradient(circle, rgba(198,154,58,0.15) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid var(--gold);
+    border-radius: 30px; color: var(--gold-light); font-size: 0.8rem; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 1.8rem; position: relative;
+  }
+  .hero h1 { font-size: clamp(2.8rem, 8vw, 5rem); font-weight: 800; line-height: 1.05; position: relative; }
+  .hero h1 .first { color: var(--gold-light); display: block; }
+  .hero .subtitle { font-size: clamp(1rem, 2.5vw, 1.3rem); color: #cfcdc5; margin-top: 1rem; font-weight: 300; position: relative; }
+  .hero .motto {
+    margin-top: 2.5rem; font-size: clamp(1.2rem, 3vw, 1.7rem); font-style: italic;
+    color: #fff; font-weight: 300; position: relative;
+  }
+  .hero .motto::before, .hero .motto::after { content: '"'; color: var(--gold); }
+  .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; position: relative; }
+  .btn {
+    padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: none;
+  }
+  .btn-primary { background: var(--gold); color: #fff; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(198,154,58,0.4); }
+  .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.4); }
+  .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); transform: translateY(-2px); }
+
+  /* SECTIONS */
+  section { padding: 5rem 1.5rem; max-width: 1000px; margin: 0 auto; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 0.5rem; text-align: center; }
+  .section-title span { color: var(--gold); }
+  .section-sub { text-align: center; color: var(--text-muted); margin-bottom: 3rem; }
+  .section-dark { background: var(--dark); color: #fff; max-width: 100%; }
+  .section-dark .section-title { color: #fff; }
+  .section-dark-inner { max-width: 1000px; margin: 0 auto; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: center; }
+  .about-photo {
+    aspect-ratio: 3/4; border-radius: 14px; background: linear-gradient(135deg, var(--gold) 0%, var(--dark) 100%);
+    display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.3); font-size: 4rem; font-weight: 800;
+  }
+  .about-text p { margin-bottom: 1.2rem; color: var(--text-muted); }
+  .about-stats { display: flex; gap: 2rem; margin-top: 1.5rem; }
+  .stat .num { font-size: 2rem; font-weight: 800; color: var(--gold); }
+  .stat .label { font-size: 0.85rem; color: var(--text-muted); }
+
+  /* WETTKAMPF CARDS */
+  .race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .race-card {
+    background: var(--dark-soft); border-radius: 14px; padding: 1.8rem; border: 1px solid rgba(198,154,58,0.2);
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .race-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .race-date { color: var(--gold-light); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+  .race-name { font-size: 1.3rem; font-weight: 700; margin: 0.4rem 0; color: #fff; }
+  .race-loc { color: #b0aea6; font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .race-dist { display: inline-block; background: rgba(198,154,58,0.15); color: var(--gold-light); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-bottom: 1.2rem; }
+  .race-card .btn { display: block; text-align: center; width: 100%; }
+
+  /* SPONSORING */
+  .sponsor-reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+  .reason { text-align: center; padding: 1.5rem; }
+  .reason .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+  .reason h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .reason p { color: var(--text-muted); font-size: 0.9rem; }
+
+  form { display: grid; gap: 1rem; max-width: 600px; margin: 0 auto; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  label { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; display: block; }
+  input, textarea, select {
+    width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 0.95rem; font-family: inherit; background: #fff;
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
+  .form-note { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+
+  /* SUPPORT */
+  .support-box { background: var(--cream); border: 2px dashed var(--gold); border-radius: 16px; padding: 2.5rem; text-align: center; max-width: 600px; margin: 0 auto; }
+  .support-methods { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+  .pay-btn {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.8rem; border-radius: 10px;
+    font-weight: 700; text-decoration: none; color: #fff; transition: transform 0.2s;
+  }
+  .pay-btn:hover { transform: translateY(-2px); }
+  .twint { background: #000; }
+  .paypal { background: #003087; }
+  .qr-placeholder { width: 140px; height: 140px; margin: 1.5rem auto 0; border: 2px dashed #ccc; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 0.8rem; text-align: center; padding: 1rem; }
+
+  /* TIMELINE */
+  .timeline { position: relative; max-width: 700px; margin: 0 auto; }
+  .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--gold); }
+  .tl-item { position: relative; padding-left: 2.5rem; margin-bottom: 2rem; }
+  .tl-item::before { content: ""; position: absolute; left: 0; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 3px solid var(--cream); }
+  .tl-date { font-size: 0.8rem; color: var(--gold); font-weight: 600; letter-spacing: 1px; }
+  .tl-title { font-size: 1.1rem; font-weight: 700; margin: 0.2rem 0; }
+  .tl-org { color: var(--text-muted); font-size: 0.9rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 800px; margin: 0 auto; }
+  .skill-row { margin-bottom: 1.2rem; }
+  .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.4rem; }
+  .skill-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+  .skill-fill { height: 100%; background: var(--gold); border-radius: 10px; }
+  .lang-item { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .lang-level { color: var(--gold-light); font-weight: 700; }
+
+  /* CONTACT */
+  .contact-grid { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .contact-item { text-align: center; }
+  .contact-item .ci-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .contact-item a { color: var(--gold); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+
+  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; }
+  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
+
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--dark); color: #fff; padding: 1rem 1.5rem; border-radius: 10px; border-left: 4px solid var(--gold); opacity: 0; transition: all 0.3s; z-index: 200; }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-photo { max-width: 250px; margin: 0 auto; }
+    .skills-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">NICO <span>RÜTTIMANN</span></div>
+  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <ul id="navlinks">
+    <li><a href="#about">Über mich</a></li>
+    <li><a href="#races">Wettkämpfe</a></li>
+    <li><a href="#sponsoring">Sponsoring</a></li>
+    <li><a href="#support">Unterstützen</a></li>
+    <li><a href="#career">Werdegang</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="home">
+  <span class="hero-badge">Triathlet · Jung & Motiviert</span>
+  <h1><span class="first">Nico</span>Rüttimann</h1>
+  <p class="subtitle">Triathlon-Athlet &amp; Student der Betriebsökonomie – Fokus Informatik</p>
+  <p class="motto">One step further every day.</p>
+  <div class="hero-cta">
+    <a href="#sponsoring" class="btn btn-primary">Sponsor werden</a>
+    <a href="#support" class="btn btn-outline">Mich unterstützen</a>
+  </div>
+</header>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-photo">NR</div>
+    <div class="about-text">
+      <h2 class="section-title" style="text-align:left;">Über <span>mich</span></h2>
+      <p>Ich bin Nico, 22 Jahre jung, Triathlet und Student der Betriebsökonomie mit Fokus Informatik an der BFH Bern. Sport und Ehrgeiz prägen mein Leben – ob auf der Laufstrecke, im Wasser oder auf dem Rad.</p>
+      <p>Meine KV-Ausbildung mit Berufsmatura bei der Freiburger Kantonalbank, eine sechsmonatige Weltreise und der Triathlon haben mich zu einem offenen, selbstständigen und zielstrebigen Menschen gemacht. Ich gebe jeden Tag mein Bestes – Schritt für Schritt.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="num">3</div><div class="label">Sportarten</div></div>
+        <div class="stat"><div class="num">14+</div><div class="label">Jahre Sport</div></div>
+        <div class="stat"><div class="num">100%</div><div class="label">Motivation</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark" id="races">
+  <div class="section-dark-inner">
+    <h2 class="section-title">Nächste <span>Wettkämpfe</span></h2>
+    <p class="section-sub" style="color:#b0aea6;">Unterstütze mich gezielt für ein bestimmtes Rennen – jeder Beitrag zählt!</p>
+    <div class="race-grid">
+      <div class="race-card">
+        <div class="race-date">Beispiel · 2026</div>
+        <div class="race-name">Triathlon Beispielort</div>
+        <div class="race-loc">📍 Schweiz</div>
+        <span class="race-dist">Olympische Distanz</span>
+        <a href="#support" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      </div>
+      <div class="race-card">
+        <div class="race-date">Beispiel · 2026</div>
+        <div class="race-name">Halbmarathon</div>
+        <div class="race-loc">📍 Bern</div>
+        <span class="race-dist">21,1 km</span>
+        <a href="#support" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      </div>
+      <div class="race-card">
+        <div class="race-date">Beispiel · 2026</div>
+        <div class="race-name">Ironman 70.3</div>
+        <div class="race-loc">📍 Tba</div>
+        <span class="race-dist">Mitteldistanz</span>
+        <a href="#support" class="btn btn-primary">Für dieses Rennen unterstützen</a>
+      </div>
+    </div>
+    <p class="form-note" style="margin-top:1.5rem; color:#888;">Tipp: Ersetze diese Beispiel-Wettkämpfe später durch deine echten Termine.</p>
+  </div>
+</section>
+
+<section id="sponsoring">
+  <h2 class="section-title">Warum mich <span>sponsern?</span></h2>
+  <p class="section-sub">Als Sponsor wirst du Teil meiner Reise und gewinnst Sichtbarkeit.</p>
+  <div class="sponsor-reasons">
+    <div class="reason"><div class="icon">🎯</div><h3>Zielstrebig</h3><p>Klare Ziele und volle Hingabe in jedem Training und Wettkampf.</p></div>
+    <div class="reason"><div class="icon">📣</div><h3>Sichtbarkeit</h3><p>Dein Logo auf Trikot, Webseite und Social Media.</p></div>
+    <div class="reason"><div class="icon">🤝</div><h3>Authentisch</h3><p>Eine ehrliche Partnerschaft mit einem motivierten Nachwuchsathleten.</p></div>
+  </div>
+
+  <h3 style="text-align:center; margin-bottom:1.5rem;">Als Sponsor anmelden</h3>
+  <form onsubmit="handleSubmit(event, 'Vielen Dank! Deine Sponsoring-Anfrage wurde notiert.')">
+    <div class="form-row">
+      <div><label>Name / Firma</label><input type="text" required placeholder="Dein Name oder Firma"></div>
+      <div><label>E-Mail</label><input type="email" required placeholder="name@beispiel.ch"></div>
+    </div>
+    <div>
+      <label>Art der Unterstützung</label>
+      <select>
+        <option>Finanzielles Sponsoring</option>
+        <option>Material / Ausrüstung</option>
+        <option>Reise / Logistik</option>
+        <option>Sonstiges</option>
+      </select>
+    </div>
+    <div><label>Nachricht</label><textarea rows="4" placeholder="Erzähl mir, wie du mich unterstützen möchtest…"></textarea></div>
+    <button type="submit" class="btn btn-primary">Anfrage senden</button>
+    <p class="form-note">Dieses Formular ist ein Platzhalter. Verbinde es später mit deiner E-Mail oder einem Formular-Dienst.</p>
+  </form>
+</section>
+
+<section class="section-dark" id="support">
+  <div class="section-dark-inner" style="text-align:center;">
+    <h2 class="section-title">Mich <span>unterstützen</span></h2>
+    <p class="section-sub" style="color:#b0aea6;">Jeder Beitrag hilft mir, meine Ziele zu erreichen – ob für Ausrüstung, Startgelder oder Trainingslager.</p>
+    <div class="support-box">
+      <h3 style="margin-bottom:0.5rem;">Sende mir direkt etwas</h3>
+      <p style="color:var(--text-muted);">Schnell und unkompliziert per TWINT oder PayPal.</p>
+      <div class="support-methods">
+        <a href="#" class="pay-btn twint" onclick="showToast('Hier kommt später dein TWINT-Link hin.'); return false;">📱 TWINT</a>
+        <a href="#" class="pay-btn paypal" onclick="showToast('Hier kommt später dein PayPal.me-Link hin.'); return false;">💳 PayPal</a>
+      </div>
+      <div class="qr-placeholder">Dein TWINT-QR-Code hier einfügen</div>
+      <p class="form-note" style="margin-top:1.5rem;">Ersetze die Buttons mit deinen echten Zahlungs-Links (z.&nbsp;B. paypal.me/deinname).</p>
+    </div>
+  </div>
+</section>
+
+<section id="career">
+  <h2 class="section-title">Mein <span>Werdegang</span></h2>
+  <p class="section-sub">Erfahrung in Wirtschaft, Banking und Informatik.</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">SEP 2024 – HEUTE</div>
+      <div class="tl-title">Bachelor Betriebsökonomie – Fokus Informatik</div>
+      <div class="tl-org">Berner Fachhochschule (BFH), Bern</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">SEP 2024 – MAI 2025</div>
+      <div class="tl-title">Verkaufserfahrung / Schalterbetrieb</div>
+      <div class="tl-org">Freiburger Kantonalbank, Düdingen</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">JUL 2024 – SEP 2024</div>
+      <div class="tl-title">Assistent Kredite</div>
+      <div class="tl-org">Freiburger Kantonalbank, Fribourg</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">AUG 2020 – AUG 2023</div>
+      <div class="tl-title">Kaufmännische Ausbildung (KV Bank) + Berufsmatura</div>
+      <div class="tl-org">Freiburger Kantonalbank, Fribourg</div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="section-dark-inner">
+    <h2 class="section-title">Fähigkeiten &amp; <span>Sprachen</span></h2>
+    <p class="section-sub" style="color:#b0aea6;">Was mich auszeichnet.</p>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-row"><div class="skill-label"><span>Lösungsorientiert</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+        <div class="skill-row"><div class="skill-label"><span>Teamfähigkeit</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+        <div class="skill-row"><div class="skill-label"><span>Kommunikation</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+        <div class="skill-row"><div class="skill-label"><span>Selbstständigkeit</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      </div>
+      <div>
+        <div class="lang-item"><span>Deutsch</span><span class="lang-level">C2</span></div>
+        <div class="lang-item"><span>Französisch</span><span class="lang-level">B2</span></div>
+        <div class="lang-item"><span>Englisch</span><span class="lang-level">B1</span></div>
+        <div style="margin-top:1.5rem; color:#b0aea6; font-size:0.9rem;">
+          <strong style="color:#fff;">Interessen:</strong> Triathlon, Fussball (FC Sense Mitte / FC Düdingen), Jubla Heitenried (Leiter &amp; Kassier), Reisen.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">Kontakt <span>aufnehmen</span></h2>
+  <p class="section-sub">Du möchtest mich unterstützen oder einfach Hallo sagen?</p>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="ci-icon">✉️</div>
+      <a href="mailto:nicoruettimann@gmx.ch">nicoruettimann@gmx.ch</a>
+    </div>
+    <div class="contact-item">
+      <div class="ci-icon">📞</div>
+      <a href="tel:+41774035779">+41 77 403 57 79</a>
+    </div>
+    <div class="contact-item">
+      <div class="ci-icon">📍</div>
+      <span>1700 Fribourg, Schweiz</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="motto-foot">"One step further every day."</div>
+  <div>© 2026 Nico Rüttimann · Triathlet &amp; Student</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+  function handleSubmit(e, msg) {
+    e.preventDefault();
+    e.target.reset();
+    showToast(msg);
+  }
+  document.querySelectorAll('#navlinks a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'));
+  });
+</script>
+</body>
+</html>
