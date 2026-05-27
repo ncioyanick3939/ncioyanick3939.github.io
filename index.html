@@ -252,23 +252,23 @@
   </div>
 
   <h3 style="text-align:center; margin-bottom:1.5rem;">Als Sponsor anmelden</h3>
-  <form onsubmit="handleSubmit(event, 'Vielen Dank! Deine Sponsoring-Anfrage wurde notiert.')">
+  <form action="https://formspree.io/f/mykvlznn" method="POST">
     <div class="form-row">
-      <div><label>Name / Firma</label><input type="text" required placeholder="Dein Name oder Firma"></div>
-      <div><label>E-Mail</label><input type="email" required placeholder="name@beispiel.ch"></div>
+      <div><label>Name / Firma</label><input type="text" name="name" required placeholder="Dein Name oder Firma"></div>
+      <div><label>E-Mail</label><input type="email" name="email" required placeholder="name@beispiel.ch"></div>
     </div>
     <div>
       <label>Art der Unterstützung</label>
-      <select>
+      <select name="art">
         <option>Finanzielles Sponsoring</option>
         <option>Material / Ausrüstung</option>
         <option>Reise / Logistik</option>
         <option>Sonstiges</option>
       </select>
     </div>
-    <div><label>Nachricht</label><textarea rows="4" placeholder="Erzähl mir, wie du mich unterstützen möchtest…"></textarea></div>
+    <div><label>Nachricht</label><textarea name="nachricht" rows="4" placeholder="Erzähl mir, wie du mich unterstützen möchtest…"></textarea></div>
     <button type="submit" class="btn btn-primary">Anfrage senden</button>
-    <p class="form-note">Dieses Formular ist ein Platzhalter. Verbinde es später mit deiner E-Mail oder einem Formular-Dienst.</p>
+    <p class="form-note">Nach dem Absenden erhältst du eine Bestätigung per E-Mail.</p>
   </form>
 </section>
 
