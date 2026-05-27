@@ -22,45 +22,63 @@
   .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
 
   .container { max-width: 800px; margin: 0 auto; padding: 4rem 1.5rem; }
-  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center; }
+
+  .section-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
   .section-title span { color: var(--gold); }
-  .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; text-align: center; }
+  .section-sub { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
 
-  .support-intro { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2.5rem; text-align: center; margin-bottom: 2.5rem; }
-  .support-intro p { color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
-
-  .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
-  .pay-card { background: var(--dark-soft); border-radius: 14px; padding: 2.5rem 2rem; text-align: center; border: 1px solid rgba(198,154,58,0.2); transition: border-color 0.2s, transform 0.2s; }
-  .pay-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-  .pay-card h3 { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-  .pay-card p { font-size: 0.9rem; color: #b0aea6; margin-bottom: 1.5rem; }
-  .pay-card .qr-box { width: 140px; height: 140px; margin: 0 auto 1.5rem; border: 2px dashed rgba(198,154,58,0.4); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-align: center; padding: 1rem; }
-  .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
-  .btn-primary { background: var(--gold); color: #fff; }
-  .btn-primary:hover { background: var(--gold-light); }
-  .btn-dark { background: #000; color: #fff; }
-  .btn-dark:hover { background: #222; }
-  .btn-paypal { background: #003087; color: #fff; }
-  .btn-paypal:hover { background: #00246b; }
-  .btn-bmc { background: #FFDD00; color: #000; font-weight: 700; }
-  .btn-bmc:hover { background: #f0d000; transform: translateY(-2px); }
-
-  .amounts { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
+  /* BETRAG */
+  .amounts { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
   .amount-btn { padding: 0.6rem 1.4rem; border-radius: 99px; border: 1.5px solid var(--gold); background: transparent; color: var(--gold); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .amount-btn:hover, .amount-btn.active { background: var(--gold); color: #fff; }
 
-  .note-box { background: #fff; border-radius: 14px; border: 2px dashed var(--gold); padding: 2rem; text-align: center; }
-  .note-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .note-box p { font-size: 0.9rem; color: var(--text-muted); }
+  /* ZAHLUNGSMETHODEN */
+  .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem; }
+  .pay-method { background: #fff; border-radius: 12px; border: 1.5px solid #e0ddd4; padding: 1.5rem 1rem; text-align: center; text-decoration: none; color: var(--text); transition: all 0.2s; cursor: pointer; }
+  .pay-method:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(198,154,58,0.12); transform: translateY(-2px); }
+  .pay-method.featured { border-color: var(--gold); background: rgba(198,154,58,0.04); }
+  .pay-method .pm-icon { width: 48px; height: 48px; border-radius: 12px; margin: 0 auto 0.8rem; display: flex; align-items: center; justify-content: center; }
+  .pay-method .pm-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
+  .pay-method .pm-desc { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* STRIPE HAUPTBUTTON */
+  .stripe-box { background: var(--dark); border-radius: 16px; padding: 2.5rem; text-align: center; margin-bottom: 3rem; }
+  .stripe-box h3 { color: #fff; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .stripe-box p { color: #b0aea6; font-size: 0.9rem; margin-bottom: 1.8rem; }
+  .stripe-badges { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .badge { background: rgba(255,255,255,0.08); color: #cfcdc5; padding: 0.3rem 0.8rem; border-radius: 99px; font-size: 0.78rem; font-weight: 500; display: flex; align-items: center; gap: 0.3rem; }
+  .btn-stripe { display: inline-block; background: #635BFF; color: #fff; padding: 1rem 2.5rem; border-radius: 10px; font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; width: 100%; }
+  .btn-stripe:hover { background: #4f46e5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,91,255,0.35); }
+
+  /* RECHNUNG */
+  .invoice-box { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2.5rem; margin-bottom: 3rem; }
+  .invoice-box h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .invoice-box p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  form { display: grid; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  label { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; display: block; }
+  input, textarea, select { width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; font-family: inherit; background: #fff; color: var(--text); transition: border-color 0.2s; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
+  .btn-primary { background: var(--gold); color: #fff; padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; border: none; cursor: pointer; width: 100%; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .form-note { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+
+  /* SPONSORING LINK */
+  .sponsor-link { background: rgba(198,154,58,0.06); border: 2px dashed rgba(198,154,58,0.3); border-radius: 14px; padding: 2rem; text-align: center; }
+  .sponsor-link h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .sponsor-link p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.2rem; }
+  .btn-outline { display: inline-block; background: transparent; color: var(--gold); border: 1.5px solid var(--gold); padding: 0.8rem 2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .btn-outline:hover { background: var(--gold); color: #fff; }
 
   footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: 4rem; }
   footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
     nav ul.open { display: flex; }
     .menu-toggle { display: block; }
-    .pay-grid { grid-template-columns: 1fr; }
+    .pay-methods { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -83,79 +101,80 @@
 </div>
 
 <div class="container">
-  <div class="support-intro">
-    <h2 class="section-title" style="margin-bottom:1rem;">Direkt <span>unterstützen</span></h2>
-    <p>Du möchtest mich auf meinem Weg unterstützen? Jeder Beitrag hilft mir bei Startgeldern, Ausrüstung und Reisekosten. Wähle einfach deinen bevorzugten Betrag und Zahlungsweg.</p>
-  </div>
 
-  <p class="section-sub">Wähle einen Betrag</p>
-  <div class="amounts">
-    <button class="amount-btn">CHF 10</button>
-    <button class="amount-btn">CHF 20</button>
-    <button class="amount-btn active">CHF 50</button>
-    <button class="amount-btn">CHF 100</button>
-    <button class="amount-btn">CHF 200</button>
-    <button class="amount-btn">Frei wählen</button>
-  </div>
-
-  <div class="pay-grid">
-    <div class="pay-card">
-      <h3>TWINT</h3>
-      <p>Scanne den QR-Code mit deiner TWINT-App oder klicke auf den Button.</p>
-      <div class="qr-box">QR-Code hier einfügen</div>
-      <a href="#" class="btn btn-dark">Mit TWINT bezahlen</a>
-    </div>
-    <div class="pay-card">
-      <h3>PayPal</h3>
-      <p>Schnell und sicher per PayPal – auch ohne eigenes Konto möglich.</p>
-      <div class="qr-box">QR-Code hier einfügen</div>
-      <a href="https://paypal.me/DEINNAME" class="btn btn-paypal">Mit PayPal bezahlen</a>
-    </div>
-    <div class="pay-card" style="grid-column: 1 / -1;">
-      <h3>Mit Kreditkarte bezahlen</h3>
-      <p>Visa, Mastercard, Apple Pay und mehr – schnell und sicher über Buy Me a Coffee.</p>
-      <br>
-      <a href="https://buymeacoffee.com/nicoruettimann" target="_blank" class="btn btn-bmc">☕ Unterstütze Nico auf Buy Me a Coffee</a>
+  <div style="text-align:center; margin-bottom:2.5rem;">
+    <h2 class="section-title">Wähle einen <span>Betrag</span></h2>
+    <p class="section-sub">Wähle einen Betrag oder gib deinen eigenen ein.</p>
+    <div class="amounts">
+      <button class="amount-btn">CHF 10</button>
+      <button class="amount-btn">CHF 20</button>
+      <button class="amount-btn active">CHF 50</button>
+      <button class="amount-btn">CHF 100</button>
+      <button class="amount-btn">CHF 200</button>
+      <button class="amount-btn">Frei wählen</button>
     </div>
   </div>
 
-  <div class="note-box" style="margin-bottom:2rem;">
-    <h3>Lieber per Sponsoring?</h3>
-    <p>Wenn du mich langfristig als Sponsor unterstützen möchtest, schau dir meine Sponsoring-Pakete an – ab CHF 100 pro Jahr mit Gegenleistungen wie Logo-Platzierung und Social-Media-Erwähnung.</p>
-    <br>
-    <a href="sponsoring.html" class="btn btn-primary" style="width:auto; padding: 0.8rem 2rem;">Sponsoring-Pakete ansehen</a>
+  <!-- ZAHLUNGSMETHODEN -->
+  <h2 class="section-title" style="margin-bottom:0.4rem;">Zahlungs<span>methoden</span></h2>
+  <p class="section-sub">Wähle deine bevorzugte Zahlungsart.</p>
+  <div class="pay-methods">
+    <div class="pay-method featured" onclick="window.open('https://buy.stripe.com/00w6oIaPk9NK4S8cpX73G00','_blank')">
+      <div class="pm-icon" style="background:#E5E5FF;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#635BFF" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      </div>
+      <div class="pm-name">Kreditkarte</div>
+      <div class="pm-desc">Visa & Mastercard</div>
+    </div>
+    <div class="pay-method" onclick="window.open('https://buy.stripe.com/00w6oIaPk9NK4S8cpX73G00','_blank')">
+      <div class="pm-icon" style="background:#E8F5E8;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18" stroke-width="3" stroke-linecap="round"/></svg>
+      </div>
+      <div class="pm-name">TWINT</div>
+      <div class="pm-desc">Schweizer Mobile Pay</div>
+    </div>
+    <div class="pay-method" onclick="window.open('https://buymeacoffee.com/nicoruettimann','_blank')">
+      <div class="pm-icon" style="background:#FFF8E1;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <div class="pm-name">Buy Me a Coffee</div>
+      <div class="pm-desc">Apple Pay & mehr</div>
+    </div>
   </div>
 
-  <div style="background:#fff; border-radius:16px; border:0.5px solid #e0ddd4; padding:2.5rem; max-width:600px; margin:0 auto;">
-    <h3 style="font-size:1.3rem; font-weight:700; margin-bottom:0.3rem;">Rechnung anfordern</h3>
-    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Du möchtest eine offizielle Rechnung? Füll das Formular aus – ich schicke dir die Rechnung per E-Mail.</p>
-    <form action="https://formspree.io/f/mykvlznn" method="POST" style="display:grid; gap:1rem;">
+  <!-- STRIPE BUTTON -->
+  <div class="stripe-box">
+    <h3>Sicher & schnell bezahlen</h3>
+    <p>Deine Zahlung wird verschlüsselt über Stripe abgewickelt – dem weltweit führenden Zahlungsanbieter.</p>
+    <div class="stripe-badges">
+      <span class="badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        SSL verschlüsselt
+      </span>
+      <span class="badge">Visa</span>
+      <span class="badge">Mastercard</span>
+      <span class="badge">TWINT</span>
+      <span class="badge">Apple Pay</span>
+    </div>
+    <a href="https://buy.stripe.com/00w6oIaPk9NK4S8cpX73G00" target="_blank" class="btn-stripe">Jetzt unterstützen</a>
+  </div>
+
+  <!-- RECHNUNG -->
+  <div class="invoice-box">
+    <h3>Rechnung anfordern</h3>
+    <p>Du möchtest eine offizielle Rechnung? Füll das Formular aus – ich schicke dir die Rechnung innerhalb von 24 Stunden per E-Mail.</p>
+    <form action="https://formspree.io/f/mykvlznn" method="POST">
       <input type="hidden" name="_subject" value="Rechnungsanfrage von der Webseite">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-        <div>
-          <label style="font-size:0.85rem; font-weight:600; margin-bottom:0.3rem; display:block;">Vorname *</label>
-          <input type="text" name="vorname" required placeholder="Max" style="width:100%; padding:0.8rem 1rem; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:inherit;">
-        </div>
-        <div>
-          <label style="font-size:0.85rem; font-weight:600; margin-bottom:0.3rem; display:block;">Nachname *</label>
-          <input type="text" name="nachname" required placeholder="Mustermann" style="width:100%; padding:0.8rem 1rem; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:inherit;">
-        </div>
+      <div class="form-row">
+        <div><label>Vorname *</label><input type="text" name="vorname" required placeholder="Max"></div>
+        <div><label>Nachname *</label><input type="text" name="nachname" required placeholder="Mustermann"></div>
       </div>
+      <div><label>E-Mail *</label><input type="email" name="email" required placeholder="max@beispiel.ch"></div>
+      <div><label>Telefonnummer (optional)</label><input type="tel" name="telefon" placeholder="+41 77 000 00 00"></div>
+      <div><label>Betrag in CHF *</label><input type="number" name="betrag" required placeholder="z.B. 50" min="1"></div>
       <div>
-        <label style="font-size:0.85rem; font-weight:600; margin-bottom:0.3rem; display:block;">E-Mail *</label>
-        <input type="email" name="email" required placeholder="max@beispiel.ch" style="width:100%; padding:0.8rem 1rem; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:inherit;">
-      </div>
-      <div>
-        <label style="font-size:0.85rem; font-weight:600; margin-bottom:0.3rem; display:block;">Telefonnummer (optional)</label>
-        <input type="tel" name="telefon" placeholder="+41 77 000 00 00" style="width:100%; padding:0.8rem 1rem; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:inherit;">
-      </div>
-      <div>
-        <label style="font-size:0.85rem; font-weight:600; margin-bottom:0.3rem; display:block;">Gewünschter Betrag (CHF) *</label>
-        <input type="number" name="betrag" required placeholder="z.B. 50" min="1" style="width:100%; padding:0.8rem 1rem; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:inherit;">
-      </div>
-      <div>
-        <label style="font-size:0.85rem; font-weight:600; margin-bottom:0.3rem; display:block;">Verwendungszweck (optional)</label>
-        <select name="verwendungszweck" style="width:100%; padding:0.8rem 1rem; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:inherit; background:#fff;">
+        <label>Verwendungszweck</label>
+        <select name="verwendungszweck">
           <option>Allgemeine Unterstützung</option>
           <option>Ironman 70.3 Rapperswil</option>
           <option>Sprint Triathlon Uster</option>
@@ -164,15 +183,19 @@
           <option>Trainingslager</option>
         </select>
       </div>
-      <div>
-        <label style="font-size:0.85rem; font-weight:600; margin-bottom:0.3rem; display:block;">Bemerkung (optional)</label>
-        <textarea name="bemerkung" rows="3" placeholder="Weitere Angaben…" style="width:100%; padding:0.8rem 1rem; border:1px solid #ddd; border-radius:8px; font-size:0.95rem; font-family:inherit; resize:vertical;"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" style="margin-bottom:0.5rem;">Rechnung anfordern & direkt bezahlen</button>
-      <a href="https://buy.stripe.com/00w6oIaPk9NK4S8cpX73G00" target="_blank" class="btn" style="background:#635BFF; color:#fff; display:block; text-align:center; margin-bottom:0.5rem;">Direkt mit Karte / TWINT bezahlen</a>
-      <p style="font-size:0.8rem; color:var(--text-muted); text-align:center;">Rechnung: Ich schicke dir die Bestätigung innerhalb von 24h. Direktzahlung: Sofortige Bestätigung per E-Mail.</p>
+      <div><label>Bemerkung (optional)</label><textarea name="bemerkung" rows="3" placeholder="Weitere Angaben…"></textarea></div>
+      <button type="submit" class="btn-primary">Rechnung anfordern</button>
+      <p class="form-note">Ich melde mich innerhalb von 24 Stunden bei dir.</p>
     </form>
   </div>
+
+  <!-- SPONSORING LINK -->
+  <div class="sponsor-link">
+    <h3>Lieber langfristig unterstützen?</h3>
+    <p>Werde offizieller Sponsor und profitiere von Sichtbarkeit auf Trikot, Webseite und Social Media – ab CHF 100 pro Jahr.</p>
+    <a href="sponsoring.html" class="btn-outline">Sponsoring-Pakete ansehen</a>
+  </div>
+
 </div>
 
 <footer>
