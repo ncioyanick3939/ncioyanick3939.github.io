@@ -22,19 +22,75 @@
   .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
 
   .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .section-title span { color: var(--gold); }
+  .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; }
 
-  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start; margin-bottom: 4rem; }
-  .about-photo { border-radius: 14px; overflow: hidden; }
-  .about-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start; margin-bottom: 5rem; }
+  .about-photo { border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+  .about-photo img { width: 100%; display: block; }
   .about-text p { margin-bottom: 1.2rem; color: var(--text-muted); }
   .about-stats { display: flex; gap: 2rem; margin-top: 1.5rem; }
   .stat .num { font-size: 2rem; font-weight: 800; color: var(--gold); }
   .stat .label { font-size: 0.85rem; color: var(--text-muted); }
 
-  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; }
-  .section-title span { color: var(--gold); }
+  /* PILLARS – Drei Säulen */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 5rem; }
+  .pillar { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2rem 1.5rem; text-align: center; transition: transform 0.25s, box-shadow 0.25s; }
+  .pillar:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+  .pillar .p-icon { width: 56px; height: 56px; border-radius: 14px; background: rgba(198,154,58,0.1); border: 1px solid rgba(198,154,58,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--gold); }
+  .pillar h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .pillar p { color: var(--text-muted); font-size: 0.9rem; }
 
-  .timeline { position: relative; max-width: 700px; margin: 0 auto 4rem; }
+  /* QUOTE */
+  .quote-box { background: var(--dark); color: #fff; border-radius: 16px; padding: 3rem 2rem; text-align: center; margin-bottom: 5rem; position: relative; overflow: hidden; }
+  .quote-box::before { content: '"'; position: absolute; top: -20px; left: 30px; font-size: 12rem; color: var(--gold); opacity: 0.15; font-family: Georgia, serif; line-height: 1; }
+  .quote-text { font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-style: italic; font-weight: 300; max-width: 700px; margin: 0 auto 1rem; position: relative; }
+  .quote-author { color: var(--gold-light); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; position: relative; }
+
+  /* STATISTIKEN */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 5rem; }
+  .stat-card { background: #fff; border-radius: 14px; border: 0.5px solid #e0ddd4; padding: 1.5rem 1rem; text-align: center; }
+  .stat-card .icon { width: 40px; height: 40px; margin: 0 auto 0.8rem; display: flex; align-items: center; justify-content: center; color: var(--gold); }
+  .stat-card .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--text); }
+  .stat-card .stat-unit { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.2rem; }
+
+  /* TRAININGSPLAN */
+  .training-week { background: var(--dark-soft); border-radius: 16px; padding: 2rem; margin-bottom: 5rem; }
+  .training-week h2 { color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .training-week h2 span { color: var(--gold-light); }
+  .training-week .sub { color: #b0aea6; font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; }
+  .day { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.8rem 0.5rem; text-align: center; }
+  .day-name { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+  .day-icon { color: var(--gold); margin: 0 auto 0.3rem; display: flex; justify-content: center; }
+  .day-act { font-size: 0.75rem; color: #cfcdc5; font-weight: 600; }
+  .day-time { font-size: 0.7rem; color: #888; margin-top: 0.2rem; }
+  .day.rest .day-icon { color: #666; }
+
+  /* HIGHLIGHTS */
+  .highlights { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2.5rem; margin-bottom: 5rem; }
+  .highlights h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .highlights h2 span { color: var(--gold); }
+  .highlights .sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .highlight-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 0.5px solid #e8e6df; }
+  .highlight-item:last-child { border-bottom: none; }
+  .h-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(198,154,58,0.1); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
+  .h-text strong { display: block; font-weight: 700; margin-bottom: 0.2rem; }
+  .h-text span { color: var(--text-muted); font-size: 0.9rem; }
+
+  /* MOTIVATION */
+  .motivation { background: linear-gradient(135deg, rgba(198,154,58,0.08) 0%, rgba(198,154,58,0.02) 100%); border: 1px solid rgba(198,154,58,0.2); border-radius: 16px; padding: 2.5rem; margin-bottom: 5rem; }
+  .motivation h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+  .motivation h2 span { color: var(--gold); }
+  .mot-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .mot-item { display: flex; align-items: flex-start; gap: 0.8rem; }
+  .mot-item .check { width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; font-weight: 700; }
+  .mot-item p { font-size: 0.95rem; color: var(--text); }
+
+  /* TIMELINE */
+  .timeline { position: relative; max-width: 700px; margin: 0 auto 5rem; }
   .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--gold); }
   .tl-item { position: relative; padding-left: 2.5rem; margin-bottom: 2rem; }
   .tl-item::before { content: ""; position: absolute; left: 0; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 3px solid var(--cream); }
@@ -43,10 +99,10 @@
   .tl-org { color: var(--text-muted); font-size: 0.9rem; }
   .tl-desc { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem; }
 
+  /* SKILLS */
   .dark-section { background: var(--dark); color: #fff; padding: 4rem 1.5rem; }
   .dark-inner { max-width: 1000px; margin: 0 auto; }
   .dark-section .section-title { color: #fff; }
-
   .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
   .skill-row { margin-bottom: 1.2rem; }
   .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.4rem; color: #fff; }
@@ -55,10 +111,15 @@
   .lang-item { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; }
   .lang-level { color: var(--gold-light); font-weight: 700; }
 
-  .interests { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-  .interest-card { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1.2rem; text-align: center; border: 0.5px solid rgba(255,255,255,0.1); }
-  .interest-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-  .interest-card p { font-size: 0.9rem; color: #cfcdc5; }
+  /* SOCIAL */
+  .social-section { background: var(--dark-soft); border-radius: 16px; padding: 2.5rem; text-align: center; margin-bottom: 3rem; }
+  .social-section h2 { color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .social-section h2 span { color: var(--gold-light); }
+  .social-section p { color: #b0aea6; margin-bottom: 1.8rem; font-size: 0.95rem; }
+  .social-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .social-btn { display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1.5rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+  .social-btn:hover { background: rgba(198,154,58,0.15); border-color: var(--gold); transform: translateY(-2px); }
+  .social-btn svg { flex-shrink: 0; }
 
   footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); }
   footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
@@ -68,7 +129,11 @@
     nav ul.open { display: flex; }
     .menu-toggle { display: block; }
     .about-grid { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .week-grid { grid-template-columns: 1fr 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
+    .mot-list { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -91,15 +156,16 @@
 </div>
 
 <div class="container">
+
+  <!-- ABOUT -->
   <div class="about-grid">
     <div class="about-photo">
-      <img src="Bild2.jpg" alt="Nico Rüttimann" style="width:100%; height:100%; object-fit:cover; border-radius:14px; display:block;">
+      <img src="Bild2.jpg" alt="Nico Rüttimann">
     </div>
     <div class="about-text">
       <h2 class="section-title">Wer bin <span>ich?</span></h2>
       <p>Ich bin Nico, 22 Jahre jung, Triathlet und Student der Betriebsökonomie mit Fokus Informatik an der BFH Bern. Sport und Ehrgeiz prägen mein Leben – ob auf der Laufstrecke, im Wasser oder auf dem Rad.</p>
       <p>Meine KV-Ausbildung mit Berufsmatura bei der Freiburger Kantonalbank, eine sechsmonatige Weltreise und der Triathlon haben mich zu einem offenen, selbstständigen und zielstrebigen Menschen gemacht.</p>
-      <p>Ich gebe jeden Tag mein Bestes – Schritt für Schritt. <em style="color: var(--gold);">"One step further every day."</em></p>
       <div class="about-stats">
         <div class="stat"><div class="num">3</div><div class="label">Sportarten</div></div>
         <div class="stat"><div class="num">14+</div><div class="label">Jahre Sport</div></div>
@@ -108,7 +174,180 @@
     </div>
   </div>
 
+  <!-- QUOTE -->
+  <div class="quote-box">
+    <p class="quote-text">Erfolg kommt nicht über Nacht – er ist das Ergebnis von tausenden kleinen Schritten, jeden einzelnen Tag.</p>
+    <div class="quote-author">— Nico Rüttimann</div>
+  </div>
+
+  <!-- DREI SÄULEN -->
+  <h2 class="section-title">Meine drei <span>Säulen</span></h2>
+  <p class="section-sub">Was mein Leben definiert.</p>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="p-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <h3>Sport</h3>
+      <p>Triathlon, Laufen und Radsport prägen meinen Alltag. Disziplin und Ehrgeiz auf höchstem Niveau.</p>
+    </div>
+    <div class="pillar">
+      <div class="p-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <h3>Studium</h3>
+      <p>Bachelor in Betriebsökonomie mit Fokus Informatik – Wirtschaft trifft Technologie.</p>
+    </div>
+    <div class="pillar">
+      <div class="p-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Leben</h3>
+      <p>Reisen, Freunde, Familie und neue Erfahrungen – Sport ist nicht alles, was zählt.</p>
+    </div>
+  </div>
+
+  <!-- STATISTIKEN -->
+  <h2 class="section-title">Meine <span>Zahlen</span></h2>
+  <p class="section-sub">Was hinter den Kulissen passiert.</p>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="stat-num">12</div>
+      <div class="stat-unit">Std / Woche</div>
+    </div>
+    <div class="stat-card">
+      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2"/><path d="M22 12c0 5.52-4.48 10-10 10"/><path d="M2 12c0 5.52 4.48 10 10 10"/><path d="M22 12C22 6.48 17.52 2 12 2"/></svg></div>
+      <div class="stat-num">~15</div>
+      <div class="stat-unit">km Swim / W</div>
+    </div>
+    <div class="stat-card">
+      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/><path d="M12 17.5V9"/></svg></div>
+      <div class="stat-num">~200</div>
+      <div class="stat-unit">km Velo / W</div>
+    </div>
+    <div class="stat-card">
+      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M7.5 13.5c.83 1 2 2 4 2s3.5-1.5 3.5-3-1.5-2.5-3-3-3-1.5-3-3 1.5-3 3.5-3 3.17 1 4 2"/><path d="M12 19v-6.5"/></svg></div>
+      <div class="stat-num">~50</div>
+      <div class="stat-unit">km Lauf / W</div>
+    </div>
+  </div>
+
+  <!-- TRAININGSPLAN -->
+  <div class="training-week">
+    <h2>Meine typische <span>Woche</span></h2>
+    <p class="sub">10–15 Stunden Training pro Woche, kombiniert mit Studium und Leben.</p>
+    <div class="week-grid">
+      <div class="day">
+        <div class="day-name">Mo</div>
+        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2"/><path d="M22 12c0 5.52-4.48 10-10 10"/></svg></div>
+        <div class="day-act">Schwimmen</div>
+        <div class="day-time">1.5h</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Di</div>
+        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg></div>
+        <div class="day-act">Laufen</div>
+        <div class="day-time">1h</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Mi</div>
+        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/></svg></div>
+        <div class="day-act">Velo</div>
+        <div class="day-time">2h</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Do</div>
+        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2"/><path d="M22 12c0 5.52-4.48 10-10 10"/></svg></div>
+        <div class="day-act">Schwimmen</div>
+        <div class="day-time">1h</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Fr</div>
+        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg></div>
+        <div class="day-act">Laufen</div>
+        <div class="day-time">1.5h</div>
+      </div>
+      <div class="day">
+        <div class="day-name">Sa</div>
+        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/></svg></div>
+        <div class="day-act">Lange Velo</div>
+        <div class="day-time">3-4h</div>
+      </div>
+      <div class="day rest">
+        <div class="day-name">So</div>
+        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></div>
+        <div class="day-act">Ruhetag</div>
+        <div class="day-time">Erholung</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS -->
+  <div class="highlights">
+    <h2>Meine <span>Highlights</span></h2>
+    <p class="sub">Meilensteine, auf die ich stolz bin.</p>
+    <div class="highlight-item">
+      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+      <div class="h-text"><strong>KV-Ausbildung mit Berufsmatura</strong><span>Erfolgreich abgeschlossen bei der Freiburger Kantonalbank, 2023.</span></div>
+    </div>
+    <div class="highlight-item">
+      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="h-text"><strong>Sechs Monate Weltreise</strong><span>Eine prägende Erfahrung, die meinen Horizont erweitert hat (2023–2024).</span></div>
+    </div>
+    <div class="highlight-item">
+      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+      <div class="h-text"><strong>Mehrere Triathlon-Finishes</strong><span>Aarau 2025, Wallisellen 2026, Kerzerslauf 2026 – jedes Rennen ein Schritt weiter.</span></div>
+    </div>
+    <div class="highlight-item">
+      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="h-text"><strong>Ehrenamtliche Führung Jubla Heitenried</strong><span>4 Jahre als Leiter, Kassier und Scharleiter – Verantwortung für Organisation und Finanzen.</span></div>
+    </div>
+  </div>
+
+  <!-- WAS MICH ANTREIBT -->
+  <div class="motivation">
+    <h2>Was mich <span>antreibt</span></h2>
+    <div class="mot-list">
+      <div class="mot-item">
+        <div class="check">✓</div>
+        <p><strong>Persönliches Wachstum</strong> – Jeden Tag eine bessere Version meiner selbst werden.</p>
+      </div>
+      <div class="mot-item">
+        <div class="check">✓</div>
+        <p><strong>Grenzen verschieben</strong> – Mental und körperlich über mich hinauswachsen.</p>
+      </div>
+      <div class="mot-item">
+        <div class="check">✓</div>
+        <p><strong>Disziplin & Routine</strong> – Erfolg ist das Ergebnis täglicher Konsistenz.</p>
+      </div>
+      <div class="mot-item">
+        <div class="check">✓</div>
+        <p><strong>Inspirieren</strong> – Andere motivieren, ihre eigenen Ziele zu verfolgen.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="social-section">
+    <h2>Folge meiner <span>Reise</span></h2>
+    <p>Verfolge meine Trainings und Wettkämpfe live mit – auf Instagram und Strava.</p>
+    <div class="social-grid">
+      <a href="https://instagram.com/" target="_blank" class="social-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+      <a href="https://strava.com/" target="_blank" class="social-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
+        Strava
+      </a>
+    </div>
+    <p style="font-size:0.75rem; color:#666; margin-top:1rem;">Tipp: Tausche die Links mit deinen echten Profilen aus.</p>
+  </div>
+
+  <!-- WERDEGANG -->
   <h2 class="section-title">Mein <span>Werdegang</span></h2>
+  <p class="section-sub">Wo ich war, wo ich hingehe.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-date">SEP 2024 – HEUTE</div>
@@ -141,6 +380,7 @@
       <div class="tl-desc">Schalterbereich, Anlageberatung, Kreditwesen, Betreuung von Kunden.</div>
     </div>
   </div>
+
 </div>
 
 <div class="dark-section">
@@ -158,14 +398,6 @@
         <div class="lang-item"><span>Französisch</span><span class="lang-level">B2</span></div>
         <div class="lang-item"><span>Englisch</span><span class="lang-level">B1</span></div>
       </div>
-    </div>
-
-    <h2 class="section-title" style="margin-top:3rem;">Interessen & <span>Aktivitäten</span></h2>
-    <div class="interests">
-      <div class="interest-card"><div class="icon">🏊‍♂️🚴‍♂️🏃‍♂️</div><p>Triathlon – Aktiver Athlet</p></div>
-      <div class="interest-card"><div class="icon">⚽</div><p>Fussball – FC Sense Mitte / FC Düdingen (2010–2024)</p></div>
-      <div class="interest-card"><div class="icon">👦</div><p>Jubla Heitenried – Leiter, Kassier & Scharleiter (2021–2025)</p></div>
-      <div class="interest-card"><div class="icon">🌍</div><p>Weltreise – Nov 2023 bis Jun 2024</p></div>
     </div>
   </div>
 </div>
