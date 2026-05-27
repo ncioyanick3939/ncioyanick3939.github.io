@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sponsoring – Nico Rüttimann</title>
+<style>
+  :root { --gold: #c69a3a; --gold-light: #d9b556; --dark: #2b2b29; --dark-soft: #34332f; --cream: #faf8f3; --text: #2b2b29; --text-muted: #6b6a64; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(43,43,41,0.97); }
+  nav .logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; }
+  nav .logo span { color: var(--gold-light); }
+  nav ul { display: flex; gap: 1.6rem; list-style: none; }
+  nav a { color: #e8e6df; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  nav a:hover { color: var(--gold-light); }
+  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+  .page-hero { padding: 8rem 1.5rem 4rem; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%); color: #fff; text-align: center; }
+  .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
+  .page-hero h1 span { color: var(--gold-light); }
+  .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .section-title span { color: var(--gold); }
+  .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; }
+
+  .reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+  .reason { background: #fff; border-radius: 14px; border: 0.5px solid #e0ddd4; padding: 1.8rem; text-align: center; }
+  .reason .icon { width: 56px; height: 56px; border-radius: 12px; background: rgba(198,154,58,0.1); border: 1px solid rgba(198,154,58,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--gold); }
+  .reason h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .reason p { font-size: 0.9rem; color: var(--text-muted); }
+
+  .packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+  .package { background: var(--dark-soft); border-radius: 14px; padding: 2rem; border: 1px solid rgba(198,154,58,0.2); color: #fff; }
+  .package.featured { border: 2px solid var(--gold); }
+  .package-badge { display: inline-block; background: var(--gold); color: #fff; padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.8rem; }
+  .package h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .package .price { font-size: 2rem; font-weight: 800; color: var(--gold-light); margin: 0.5rem 0; }
+  .package .price span { font-size: 0.9rem; font-weight: 400; color: #b0aea6; }
+  .package ul { list-style: none; margin: 1rem 0 1.5rem; }
+  .package ul li { padding: 0.3rem 0; font-size: 0.9rem; color: #cfcdc5; }
+  .package ul li::before { content: "✓ "; color: var(--gold); font-weight: 700; }
+
+  .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
+  .btn-primary { background: var(--gold); color: #fff; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-outline-white { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+  .btn-outline-white:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  .form-section { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2.5rem; max-width: 700px; margin: 0 auto; }
+  .form-section h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .form-section p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+  form { display: grid; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  label { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; display: block; color: var(--text); }
+  input, textarea, select { width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; font-family: inherit; background: #fff; color: var(--text); }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
+  .form-note { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--dark); color: #fff; padding: 1rem 1.5rem; border-radius: 10px; border-left: 4px solid var(--gold); opacity: 0; transition: all 0.3s; z-index: 200; }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: 4rem; }
+  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
+  <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+  <ul id="nl">
+    <li><a href="uebermich.html">Über mich</a></li>
+    <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+    <li><a href="sponsoring.html">Sponsoring</a></li>
+    <li><a href="unterstuetzen.html">Unterstützen</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <h1>Sponsor <span>werden</span></h1>
+  <p>Werde Teil meiner Reise – jung, motiviert & zielstrebig</p>
+</div>
+
+<div class="container">
+
+  <h2 class="section-title" style="text-align:center;">Warum mich <span>sponsern?</span></h2>
+  <p class="section-sub" style="text-align:center;">Als Sponsor unterstützt du einen motivierten Nachwuchsathleten und gewinnst Sichtbarkeit.</p>
+  <div class="reasons">
+    <div class="reason">
+      <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+      <h3>Zielstrebig</h3><p>Klare Ziele und volle Hingabe in jedem Training und Wettkampf.</p>
+    </div>
+    <div class="reason">
+      <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
+      <h3>Sichtbarkeit</h3><p>Dein Logo auf Trikot, Webseite und Social Media.</p>
+    </div>
+    <div class="reason">
+      <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <h3>Authentisch</h3><p>Ehrliche Partnerschaft mit einem jungen, motivierten Athleten.</p>
+    </div>
+    <div class="reason">
+      <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <h3>Reichweite</h3><p>Präsenz an Wettkämpfen in der ganzen Schweiz und darüber hinaus.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title" style="text-align:center; margin-bottom:0.5rem;">Sponsoring <span>Pakete</span></h2>
+  <p class="section-sub" style="text-align:center;">Wähle das Paket das zu dir passt – oder kontaktiere mich für ein individuelles Angebot.</p>
+  <div class="packages">
+    <div class="package featured">
+      <span class="package-badge">Beliebt</span>
+      <h3>Gold</h3>
+      <div class="price">CHF 500 <span>/ Jahr</span></div>
+      <ul>
+        <li>Logo prominent auf Webseite</li>
+        <li>Regelmässige Social-Media-Posts</li>
+        <li>Logo auf Trikot (gross)</li>
+        <li>Persönliches Treffen / Call</li>
+        <li>Individuelles Angebot möglich</li>
+      </ul>
+      <a href="#formular" class="btn btn-primary">Jetzt anfragen</a>
+    </div>
+    <div class="package">
+      <h3>Silber</h3>
+      <div class="price">CHF 300 <span>/ Jahr</span></div>
+      <ul>
+        <li>Logo auf Webseite</li>
+        <li>Erwähnung auf Social Media</li>
+        <li>Logo auf Trikot (klein)</li>
+        <li>Persönliches Update nach jedem Rennen</li>
+      </ul>
+      <a href="#formular" class="btn btn-outline-white">Jetzt anfragen</a>
+    </div>
+    <div class="package">
+      <h3>Bronze</h3>
+      <div class="price">CHF 100 <span>/ Jahr</span></div>
+      <ul>
+        <li>Namensnennung auf Webseite</li>
+        <li>Dankeschön per E-Mail</li>
+        <li>Updates über meine Wettkämpfe</li>
+      </ul>
+      <a href="#formular" class="btn btn-outline-white">Jetzt anfragen</a>
+    </div>
+  </div>
+
+  <div class="form-section" id="formular">
+    <h3>Sponsoring-Anfrage senden</h3>
+    <p>Füll das Formular aus und ich melde mich so schnell wie möglich bei dir.</p>
+    <form action="https://formspree.io/f/mykvlznn" method="POST">
+      <div class="form-row">
+        <div><label>Name / Firma</label><input type="text" name="name" required placeholder="Dein Name oder Firma"></div>
+        <div><label>E-Mail</label><input type="email" name="email" required placeholder="name@beispiel.ch"></div>
+      </div>
+      <div><label>Gewünschtes Paket</label>
+        <select name="paket">
+          <option>Bronze – CHF 100 / Jahr</option>
+          <option>Silber – CHF 300 / Jahr</option>
+          <option>Gold – CHF 500 / Jahr</option>
+          <option>Individuelles Angebot</option>
+          <option>Material / Ausrüstung</option>
+          <option>Sonstiges</option>
+        </select>
+      </div>
+      <div><label>Nachricht</label><textarea name="nachricht" rows="4" placeholder="Erzähl mir, wie du mich unterstützen möchtest…"></textarea></div>
+      <button type="submit" class="btn btn-primary">Anfrage senden ✉️</button>
+      <p class="form-note">Du erhältst eine Bestätigung und ich melde mich innerhalb von 48 Stunden.</p>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<footer>
+  <div class="motto-foot">"One step further every day."</div>
+  <div>© 2026 Nico Rüttimann · Triathlet & Student</div>
+</footer>
+<script>
+  document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));
+</script>
+</body>
+</html>
