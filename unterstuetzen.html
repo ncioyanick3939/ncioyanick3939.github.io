@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unterstützen – Nico Rüttimann</title>
+<style>
+  :root { --gold: #c69a3a; --gold-light: #d9b556; --dark: #2b2b29; --dark-soft: #34332f; --cream: #faf8f3; --text: #2b2b29; --text-muted: #6b6a64; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(43,43,41,0.97); }
+  nav .logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; }
+  nav .logo span { color: var(--gold-light); }
+  nav ul { display: flex; gap: 1.6rem; list-style: none; }
+  nav a { color: #e8e6df; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  nav a:hover { color: var(--gold-light); }
+  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+  .page-hero { padding: 8rem 1.5rem 4rem; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%); color: #fff; text-align: center; }
+  .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
+  .page-hero h1 span { color: var(--gold-light); }
+  .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 4rem 1.5rem; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center; }
+  .section-title span { color: var(--gold); }
+  .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; text-align: center; }
+
+  .support-intro { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2.5rem; text-align: center; margin-bottom: 2.5rem; }
+  .support-intro p { color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+  .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .pay-card { background: var(--dark-soft); border-radius: 14px; padding: 2.5rem 2rem; text-align: center; border: 1px solid rgba(198,154,58,0.2); transition: border-color 0.2s, transform 0.2s; }
+  .pay-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .pay-card h3 { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .pay-card p { font-size: 0.9rem; color: #b0aea6; margin-bottom: 1.5rem; }
+  .pay-card .qr-box { width: 140px; height: 140px; margin: 0 auto 1.5rem; border: 2px dashed rgba(198,154,58,0.4); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.8rem; text-align: center; padding: 1rem; }
+  .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
+  .btn-primary { background: var(--gold); color: #fff; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-dark { background: #000; color: #fff; }
+  .btn-dark:hover { background: #222; }
+  .btn-paypal { background: #003087; color: #fff; }
+  .btn-paypal:hover { background: #00246b; }
+
+  .amounts { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
+  .amount-btn { padding: 0.6rem 1.4rem; border-radius: 99px; border: 1.5px solid var(--gold); background: transparent; color: var(--gold); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .amount-btn:hover, .amount-btn.active { background: var(--gold); color: #fff; }
+
+  .note-box { background: #fff; border-radius: 14px; border: 2px dashed var(--gold); padding: 2rem; text-align: center; }
+  .note-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .note-box p { font-size: 0.9rem; color: var(--text-muted); }
+
+  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: 4rem; }
+  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
+
+  @media (max-width: 600px) {
+    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .pay-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
+  <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+  <ul id="nl">
+    <li><a href="uebermich.html">Über mich</a></li>
+    <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+    <li><a href="sponsoring.html">Sponsoring</a></li>
+    <li><a href="unterstuetzen.html">Unterstützen</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <h1>Mich <span>unterstützen</span></h1>
+  <p>Jeder Beitrag zählt – danke von Herzen</p>
+</div>
+
+<div class="container">
+  <div class="support-intro">
+    <h2 class="section-title" style="margin-bottom:1rem;">Direkt <span>unterstützen</span></h2>
+    <p>Du möchtest mich auf meinem Weg unterstützen? Jeder Beitrag hilft mir bei Startgeldern, Ausrüstung und Reisekosten. Wähle einfach deinen bevorzugten Betrag und Zahlungsweg.</p>
+  </div>
+
+  <p class="section-sub">Wähle einen Betrag</p>
+  <div class="amounts">
+    <button class="amount-btn">CHF 10</button>
+    <button class="amount-btn">CHF 20</button>
+    <button class="amount-btn active">CHF 50</button>
+    <button class="amount-btn">CHF 100</button>
+    <button class="amount-btn">CHF 200</button>
+    <button class="amount-btn">Frei wählen</button>
+  </div>
+
+  <div class="pay-grid">
+    <div class="pay-card">
+      <h3>TWINT</h3>
+      <p>Scanne den QR-Code mit deiner TWINT-App oder klicke auf den Button.</p>
+      <div class="qr-box">QR-Code hier einfügen</div>
+      <a href="#" class="btn btn-dark">Mit TWINT bezahlen</a>
+    </div>
+    <div class="pay-card">
+      <h3>PayPal</h3>
+      <p>Schnell und sicher per PayPal – auch ohne eigenes Konto möglich.</p>
+      <div class="qr-box">QR-Code hier einfügen</div>
+      <a href="https://paypal.me/DEINNAME" class="btn btn-paypal">Mit PayPal bezahlen</a>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <h3>Lieber per Sponsoring?</h3>
+    <p>Wenn du mich langfristig als Sponsor unterstützen möchtest, schau dir meine Sponsoring-Pakete an – ab CHF 100 pro Jahr mit Gegenleistungen wie Logo-Platzierung und Social-Media-Erwähnung.</p>
+    <br>
+    <a href="sponsoring.html" class="btn btn-primary" style="width:auto; padding: 0.8rem 2rem;">Sponsoring-Pakete ansehen</a>
+  </div>
+</div>
+
+<footer>
+  <div class="motto-foot">"One step further every day."</div>
+  <div>© 2026 Nico Rüttimann · Triathlet & Student</div>
+</footer>
+<script>
+  document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
