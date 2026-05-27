@@ -33,7 +33,7 @@
   .amount-btn:hover, .amount-btn.active { background: var(--gold); color: #fff; }
 
   /* ZAHLUNGSMETHODEN */
-  .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem; }
+  .pay-methods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 3rem; }
   .pay-method { background: #fff; border-radius: 12px; border: 1.5px solid #e0ddd4; padding: 1.5rem 1rem; text-align: center; text-decoration: none; color: var(--text); transition: all 0.2s; cursor: pointer; }
   .pay-method:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(198,154,58,0.12); transform: translateY(-2px); }
   .pay-method.featured { border-color: var(--gold); background: rgba(198,154,58,0.04); }
@@ -126,13 +126,7 @@
       <div class="pm-name">Kreditkarte</div>
       <div class="pm-desc">Visa & Mastercard</div>
     </div>
-    <div class="pay-method" onclick="window.open('https://buy.stripe.com/00w6oIaPk9NK4S8cpX73G00','_blank')">
-      <div class="pm-icon" style="background:#E8F5E8;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18" stroke-width="3" stroke-linecap="round"/></svg>
-      </div>
-      <div class="pm-name">TWINT</div>
-      <div class="pm-desc">Schweizer Mobile Pay</div>
-    </div>
+
     <div class="pay-method" onclick="window.open('https://buymeacoffee.com/nicoruettimann','_blank')">
       <div class="pm-icon" style="background:#FFF8E1;">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
@@ -153,7 +147,6 @@
       </span>
       <span class="badge">Visa</span>
       <span class="badge">Mastercard</span>
-      <span class="badge">TWINT</span>
       <span class="badge">Apple Pay</span>
     </div>
     <a href="https://buy.stripe.com/00w6oIaPk9NK4S8cpX73G00" target="_blank" class="btn-stripe">Jetzt unterstützen</a>
