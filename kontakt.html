@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt – Nico Rüttimann</title>
+<style>
+  :root { --gold: #c69a3a; --gold-light: #d9b556; --dark: #2b2b29; --dark-soft: #34332f; --cream: #faf8f3; --text: #2b2b29; --text-muted: #6b6a64; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(43,43,41,0.97); }
+  nav .logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; }
+  nav .logo span { color: var(--gold-light); }
+  nav ul { display: flex; gap: 1.6rem; list-style: none; }
+  nav a { color: #e8e6df; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  nav a:hover { color: var(--gold-light); }
+  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+  .page-hero { padding: 8rem 1.5rem 4rem; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%); color: #fff; text-align: center; }
+  .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
+  .page-hero h1 span { color: var(--gold-light); }
+  .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+
+  .contact-info h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .contact-info h2 span { color: var(--gold); }
+  .contact-info p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
+
+  .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 0.5px solid #e0ddd4; }
+  .contact-item:last-of-type { border-bottom: none; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(198,154,58,0.12); border: 1px solid rgba(198,154,58,0.25); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .contact-value { font-size: 0.95rem; font-weight: 500; color: var(--text); }
+  .contact-value a { color: var(--gold); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  .form-card { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2.5rem; }
+  .form-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .form-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  form { display: grid; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  label { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; display: block; }
+  input, textarea, select { width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; font-family: inherit; background: #fff; color: var(--text); }
+  input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+  .btn { padding: 0.9rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: transform 0.2s; border: none; display: inline-block; text-align: center; width: 100%; }
+  .btn-primary { background: var(--gold); color: #fff; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .form-note { font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+
+  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: 4rem; }
+  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
+  <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+  <ul id="nl">
+    <li><a href="uebermich.html">Über mich</a></li>
+    <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+    <li><a href="sponsoring.html">Sponsoring</a></li>
+    <li><a href="unterstuetzen.html">Unterstützen</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <h1>Kontakt <span>aufnehmen</span></h1>
+  <p>Ich freue mich von dir zu hören</p>
+</div>
+
+<div class="container">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>Schreib <span>mir</span></h2>
+      <p>Ob Sponsoring-Anfrage, allgemeine Frage oder einfach Hallo – ich antworte so schnell wie möglich.</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">@</div>
+        <div>
+          <div class="contact-label">E-Mail</div>
+          <div class="contact-value"><a href="mailto:nicoruettimann@gmx.ch">nicoruettimann@gmx.ch</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">T</div>
+        <div>
+          <div class="contact-label">Telefon</div>
+          <div class="contact-value"><a href="tel:+41774035779">+41 77 403 57 79</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">O</div>
+        <div>
+          <div class="contact-label">Wohnort</div>
+          <div class="contact-value">1700 Fribourg, Schweiz</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">S</div>
+        <div>
+          <div class="contact-label">Studium</div>
+          <div class="contact-value">BFH Bern – Betriebsökonomie</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>Nachricht senden</h3>
+      <p>Füll das Formular aus und ich melde mich bei dir.</p>
+      <form action="https://formspree.io/f/mykvlznn" method="POST">
+        <div class="form-row">
+          <div><label>Vorname</label><input type="text" name="vorname" required placeholder="Max"></div>
+          <div><label>Nachname</label><input type="text" name="nachname" required placeholder="Mustermann"></div>
+        </div>
+        <div><label>E-Mail</label><input type="email" name="email" required placeholder="max@beispiel.ch"></div>
+        <div><label>Betreff</label>
+          <select name="betreff">
+            <option>Allgemeine Anfrage</option>
+            <option>Sponsoring</option>
+            <option>Wettkampf-Unterstützung</option>
+            <option>Medien / Presse</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div><label>Nachricht</label><textarea name="nachricht" rows="5" placeholder="Deine Nachricht…" required></textarea></div>
+        <button type="submit" class="btn btn-primary">Nachricht senden</button>
+        <p class="form-note">Ich antworte in der Regel innerhalb von 24–48 Stunden.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="motto-foot">"One step further every day."</div>
+  <div>© 2026 Nico Rüttimann · Triathlet & Student</div>
+</footer>
+<script>
+  document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));
+</script>
+</body>
+</html>
