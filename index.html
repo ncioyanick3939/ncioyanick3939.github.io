@@ -28,8 +28,8 @@
     border-bottom: 1px solid rgba(198,154,58,0.15);
     transition: background 0.3s;
   }
-  nav .logo { color: #fff; font-weight: 700; font-size: 1.15rem; letter-spacing: 2px; text-decoration: none; }
-  nav .logo span { color: var(--gold-light); }
+  nav .logo { text-decoration: none; display: flex; align-items: center; }
+  nav .logo img { height: 44px; width: auto; object-fit: contain; }
   nav ul { display: flex; gap: 2rem; list-style: none; }
   nav a { color: #ccc9bf; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
   nav a:hover { color: var(--gold-light); }
@@ -302,7 +302,9 @@
 </head>
 <body>
 <nav>
-  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
+  <a href="index.html" class="logo">
+    <img src="logo_nico_ruettimann_transparent (1).png" alt="Nico Rüttimann Triathlon">
+  </a>
   <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
   <ul id="nl">
     <li><a href="uebermich.html">Über mich</a></li>
