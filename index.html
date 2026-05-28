@@ -17,7 +17,36 @@
   nav a:hover { color: var(--gold-light); }
   .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 6rem 1.5rem 3rem; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%); color: #fff; }
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 1.5rem 3rem;
+    position: relative;
+    color: #fff;
+    background: var(--dark);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('Sonnenaufgang bild.jpg');
+    background-size: cover;
+    background-position: center 40%;
+    background-repeat: no-repeat;
+    opacity: 0.35;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(43,43,41,0.55) 0%, rgba(43,43,41,0.75) 100%);
+    z-index: 1;
+  }
+  .hero > *:not(.hero-bg):not(.hero-overlay) { position: relative; z-index: 2; }
+
   .hero-badge { display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid var(--gold); border-radius: 30px; color: var(--gold-light); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.8rem; }
   .hero h1 { font-size: clamp(2.8rem, 8vw, 5rem); font-weight: 800; line-height: 1.05; }
   .hero h1 .first { color: var(--gold-light); display: block; }
@@ -62,13 +91,15 @@
 </nav>
 
 <header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <span class="hero-badge">Triathlet · Jung & Motiviert</span>
   <h1><span class="first">Nico</span>Rüttimann</h1>
   <p class="subtitle">Triathlon-Athlet & Student der Betriebsökonomie – Fokus Informatik</p>
   <p class="motto">One step further every day.</p>
   <div class="hero-cta">
     <a href="sponsoring.html" class="btn btn-primary">Sponsor werden</a>
-    <a href="unterstuetzen.html" class="btn btn-outline">Mich unterstützen</a>
+    <a href="unterstuetffen.html" class="btn btn-outline">Mich unterstützen</a>
   </div>
 </header>
 
