@@ -4,408 +4,698 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Über mich – Nico Rüttimann</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --gold: #c69a3a; --gold-light: #d9b556; --dark: #2b2b29; --dark-soft: #34332f; --cream: #faf8f3; --text: #2b2b29; --text-muted: #6b6a64; }
+  :root {
+    --gold: #b8912e;
+    --gold-light: #d4aa52;
+    --dark: #161614;
+    --dark-2: #1e1d1a;
+    --dark-3: #28261f;
+    --mid: #5a5850;
+    --muted: #9a9890;
+    --light: #f5f3ee;
+    --border: #e4e0d8;
+    --white: #fefefe;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(43,43,41,0.97); }
-  nav .logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; }
-  nav .logo span { color: var(--gold-light); }
-  nav ul { display: flex; gap: 1.6rem; list-style: none; }
-  nav a { color: #e8e6df; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-  nav a:hover { color: var(--gold-light); }
-  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-  .page-hero { padding: 8rem 1.5rem 4rem; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%); color: #fff; text-align: center; }
-  .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
-  .page-hero h1 span { color: var(--gold-light); }
-  .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 3rem; height: 68px;
+    background: rgba(22,22,20,0.96);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(184,145,46,0.12);
+  }
+  nav .logo { text-decoration: none; display: flex; align-items: center; height: 100%; }
+  nav .logo img { height: 42px; width: auto; object-fit: contain; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 0; list-style: none; height: 100%; }
+  .nav-links li { height: 100%; display: flex; align-items: center; }
+  .nav-links li a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
+    padding: 0 1.1rem; height: 100%; display: flex; align-items: center;
+    border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-links li a:hover, .nav-links li a.active { color: #fff; border-bottom-color: var(--gold); }
+  .nav-cta a {
+    background: transparent !important; border: 1px solid rgba(184,145,46,0.5) !important;
+    border-bottom: 1px solid rgba(184,145,46,0.5) !important;
+    color: var(--gold-light) !important; padding: 0 1.1rem !important;
+    height: 100% !important; letter-spacing: 1.8px; transition: all 0.2s !important;
+  }
+  .nav-cta a:hover { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
+  .menu-toggle { display: none; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.4rem; cursor: pointer; padding: 0.3rem; }
 
-  .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
-  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .section-title span { color: var(--gold); }
-  .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; }
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 70vh;
+    background: var(--dark-2);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('foto.jpeg');
+    background-size: cover; background-position: center top;
+    opacity: 0.35;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(22,22,20,0.2) 0%, rgba(22,22,20,0.85) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300; line-height: 0.92; letter-spacing: -1px;
+    color: #fff; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: #fff; }
+  .hero-sub {
+    font-size: 0.88rem; color: rgba(255,255,255,0.55);
+    font-weight: 300; letter-spacing: 0.3px;
+  }
 
-  /* ABOUT */
-  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start; margin-bottom: 5rem; }
-  .about-photo { border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
-  .about-photo img { width: 100%; display: block; }
-  .about-text p { margin-bottom: 1.2rem; color: var(--text-muted); }
-  .about-stats { display: flex; gap: 2rem; margin-top: 1.5rem; }
-  .stat .num { font-size: 2rem; font-weight: 800; color: var(--gold); }
-  .stat .label { font-size: 0.85rem; color: var(--text-muted); }
+  /* ─── SECTIONS SHARED ─── */
+  .section { padding: 7rem 3rem; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  h2.display {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.3px;
+    margin-bottom: 1.5rem;
+  }
+  h2.display em { font-style: italic; color: var(--gold); }
 
-  /* PILLARS – Drei Säulen */
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 5rem; }
-  .pillar { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2rem 1.5rem; text-align: center; transition: transform 0.25s, box-shadow 0.25s; }
-  .pillar:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-  .pillar .p-icon { width: 56px; height: 56px; border-radius: 14px; background: rgba(198,154,58,0.1); border: 1px solid rgba(198,154,58,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; color: var(--gold); }
-  .pillar h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .pillar p { color: var(--text-muted); font-size: 0.9rem; }
+  /* ─── INTRO ─── */
+  .intro-section { background: var(--white); }
+  .intro-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .intro-img {
+    aspect-ratio: 3/4; overflow: hidden;
+  }
+  .intro-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center top;
+    filter: grayscale(10%) contrast(1.05);
+    transition: transform 6s ease;
+  }
+  .intro-img:hover img { transform: scale(1.03); }
+  .intro-text p {
+    font-size: 0.92rem; color: var(--mid);
+    font-weight: 300; line-height: 1.9; margin-bottom: 1.2rem;
+  }
+  .intro-nums {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 1px solid var(--border); margin-top: 2.5rem;
+  }
+  .intro-num {
+    padding: 1.5rem 1rem; text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .intro-num:last-child { border-right: none; }
+  .intro-num-val {
+    font-family: var(--serif); font-size: 2rem; font-weight: 300;
+    color: var(--gold); line-height: 1; margin-bottom: 0.3rem;
+  }
+  .intro-num-label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted);
+  }
 
-  /* QUOTE */
-  .quote-box { background: var(--dark); color: #fff; border-radius: 16px; padding: 3rem 2rem; text-align: center; margin-bottom: 5rem; position: relative; overflow: hidden; }
-  .quote-box::before { content: '"'; position: absolute; top: -20px; left: 30px; font-size: 12rem; color: var(--gold); opacity: 0.15; font-family: Georgia, serif; line-height: 1; }
-  .quote-text { font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-style: italic; font-weight: 300; max-width: 700px; margin: 0 auto 1rem; position: relative; }
-  .quote-author { color: var(--gold-light); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; position: relative; }
+  /* ─── QUOTE ─── */
+  .quote-section {
+    background: var(--dark);
+    padding: 6rem 3rem;
+  }
+  .quote-inner {
+    max-width: 700px; margin: 0 auto; text-align: center;
+  }
+  .quote-mark {
+    font-family: var(--serif); font-size: 6rem; font-weight: 300;
+    color: rgba(184,145,46,0.2); line-height: 0.5; display: block;
+    margin-bottom: 2rem;
+  }
+  .quote-text {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 300; color: #fff; line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+  .quote-author {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+  }
 
-  /* STATISTIKEN */
-  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 5rem; }
-  .stat-card { background: #fff; border-radius: 14px; border: 0.5px solid #e0ddd4; padding: 1.5rem 1rem; text-align: center; }
-  .stat-card .icon { width: 40px; height: 40px; margin: 0 auto 0.8rem; display: flex; align-items: center; justify-content: center; color: var(--gold); }
-  .stat-card .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--text); }
-  .stat-card .stat-unit { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.2rem; }
+  /* ─── DREI SÄULEN ─── */
+  .pillars-section { background: var(--light); }
+  .pillars-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 1px solid var(--border); margin-top: 3rem;
+  }
+  .pillar {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--border);
+    transition: background 0.25s;
+  }
+  .pillar:last-child { border-right: none; }
+  .pillar:hover { background: var(--white); }
+  .pillar-num {
+    font-family: var(--serif); font-size: 3rem; font-weight: 300;
+    color: rgba(184,145,46,0.2); line-height: 1; margin-bottom: 1.2rem;
+  }
+  .pillar h3 {
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 300;
+    color: var(--dark); margin-bottom: 0.7rem;
+  }
+  .pillar p { font-size: 0.85rem; color: var(--mid); line-height: 1.75; font-weight: 300; }
 
-  /* TRAININGSPLAN */
-  .training-week { background: var(--dark-soft); border-radius: 16px; padding: 2rem; margin-bottom: 5rem; }
-  .training-week h2 { color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .training-week h2 span { color: var(--gold-light); }
-  .training-week .sub { color: #b0aea6; font-size: 0.9rem; margin-bottom: 1.5rem; }
-  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; }
-  .day { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.8rem 0.5rem; text-align: center; }
-  .day-name { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
-  .day-icon { color: var(--gold); margin: 0 auto 0.3rem; display: flex; justify-content: center; }
-  .day-act { font-size: 0.75rem; color: #cfcdc5; font-weight: 600; }
-  .day-time { font-size: 0.7rem; color: #888; margin-top: 0.2rem; }
-  .day.rest .day-icon { color: #666; }
+  /* ─── TRAINING WOCHE ─── */
+  .training-section { background: var(--dark-3); padding: 7rem 3rem; }
+  .training-inner { max-width: 1000px; margin: 0 auto; }
+  .training-section .label { color: var(--gold); }
+  .training-section h2.display { color: #fff; }
+  .training-section h2.display em { color: var(--gold-light); }
+  .training-sub {
+    font-size: 0.85rem; color: rgba(255,255,255,0.45);
+    font-weight: 300; margin-bottom: 3rem;
+  }
+  .week-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .day {
+    padding: 1.8rem 1rem; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s;
+  }
+  .day:last-child { border-right: none; }
+  .day:hover { background: rgba(184,145,46,0.06); }
+  .day-name {
+    font-size: 0.62rem; color: rgba(255,255,255,0.3);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem;
+  }
+  .day-icon { color: var(--gold); margin: 0 auto 0.8rem; display: flex; justify-content: center; }
+  .day.rest .day-icon { color: rgba(255,255,255,0.2); }
+  .day-act {
+    font-size: 0.75rem; color: rgba(255,255,255,0.75);
+    font-weight: 500; margin-bottom: 0.3rem;
+  }
+  .day-time { font-size: 0.68rem; color: rgba(255,255,255,0.3); }
 
-  /* HIGHLIGHTS */
-  .highlights { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2.5rem; margin-bottom: 5rem; }
-  .highlights h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .highlights h2 span { color: var(--gold); }
-  .highlights .sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
-  .highlight-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 0.5px solid #e8e6df; }
-  .highlight-item:last-child { border-bottom: none; }
-  .h-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(198,154,58,0.1); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
-  .h-text strong { display: block; font-weight: 700; margin-bottom: 0.2rem; }
-  .h-text span { color: var(--text-muted); font-size: 0.9rem; }
+  /* ─── HIGHLIGHTS ─── */
+  .highlights-section { background: var(--white); }
+  .highlights-list { margin-top: 3rem; }
+  .hl-item {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 2.5rem; align-items: start;
+    padding: 2rem 0; border-bottom: 1px solid var(--border);
+  }
+  .hl-item:first-child { border-top: 1px solid var(--border); }
+  .hl-year {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
+    color: var(--gold); padding-top: 0.15rem;
+  }
+  .hl-title {
+    font-size: 0.95rem; font-weight: 500; color: var(--dark);
+    margin-bottom: 0.3rem;
+  }
+  .hl-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-  /* MOTIVATION */
-  .motivation { background: linear-gradient(135deg, rgba(198,154,58,0.08) 0%, rgba(198,154,58,0.02) 100%); border: 1px solid rgba(198,154,58,0.2); border-radius: 16px; padding: 2.5rem; margin-bottom: 5rem; }
-  .motivation h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
-  .motivation h2 span { color: var(--gold); }
-  .mot-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .mot-item { display: flex; align-items: flex-start; gap: 0.8rem; }
-  .mot-item .check { width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; font-weight: 700; }
-  .mot-item p { font-size: 0.95rem; color: var(--text); }
+  /* ─── WERDEGANG ─── */
+  .timeline-section { background: var(--light); }
+  .timeline { max-width: 680px; margin-top: 3rem; }
+  .tl-item {
+    display: grid; grid-template-columns: 160px 1fr;
+    gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .tl-item:first-child { border-top: 1px solid var(--border); }
+  .tl-date {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gold); padding-top: 0.2rem;
+    line-height: 1.5;
+  }
+  .tl-title { font-size: 0.95rem; font-weight: 500; color: var(--dark); margin-bottom: 0.2rem; }
+  .tl-org { font-size: 0.82rem; color: var(--muted); font-weight: 300; margin-bottom: 0.4rem; }
+  .tl-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-  /* TIMELINE */
-  .timeline { position: relative; max-width: 700px; margin: 0 auto 5rem; }
-  .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--gold); }
-  .tl-item { position: relative; padding-left: 2.5rem; margin-bottom: 2rem; }
-  .tl-item::before { content: ""; position: absolute; left: 0; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); border: 3px solid var(--cream); }
-  .tl-date { font-size: 0.8rem; color: var(--gold); font-weight: 600; letter-spacing: 1px; }
-  .tl-title { font-size: 1.1rem; font-weight: 700; margin: 0.2rem 0; }
-  .tl-org { color: var(--text-muted); font-size: 0.9rem; }
-  .tl-desc { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem; }
+  /* ─── SKILLS ─── */
+  .skills-section { background: var(--dark-2); padding: 7rem 3rem; }
+  .skills-inner { max-width: 1000px; margin: 0 auto; }
+  .skills-section .label { color: var(--gold); }
+  .skills-section h2.display { color: #fff; margin-bottom: 3.5rem; }
+  .skills-section h2.display em { color: var(--gold-light); }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .skill-row { margin-bottom: 1.5rem; }
+  .skill-label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: rgba(255,255,255,0.7);
+    font-weight: 400; margin-bottom: 0.6rem;
+  }
+  .skill-label span:last-child { color: var(--gold); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; }
+  .skill-bar { height: 2px; background: rgba(255,255,255,0.1); }
+  .skill-fill { height: 100%; background: var(--gold); }
+  .lang-list { display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(255,255,255,0.08); }
+  .lang-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.88rem; color: rgba(255,255,255,0.7); font-weight: 300;
+  }
+  .lang-item:last-child { border-bottom: none; }
+  .lang-level {
+    font-family: var(--serif); font-size: 1.2rem; font-weight: 300; color: var(--gold-light);
+  }
 
-  /* SKILLS */
-  .dark-section { background: var(--dark); color: #fff; padding: 4rem 1.5rem; }
-  .dark-inner { max-width: 1000px; margin: 0 auto; }
-  .dark-section .section-title { color: #fff; }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .skill-row { margin-bottom: 1.2rem; }
-  .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.4rem; color: #fff; }
-  .skill-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
-  .skill-fill { height: 100%; background: var(--gold); border-radius: 10px; }
-  .lang-item { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; }
-  .lang-level { color: var(--gold-light); font-weight: 700; }
+  /* ─── SOCIAL ─── */
+  .social-section { background: var(--dark); padding: 6rem 3rem; }
+  .social-inner { max-width: 1000px; margin: 0 auto; }
+  .social-section .label { color: var(--gold); }
+  .social-box {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 3rem; flex-wrap: wrap; margin-top: 3rem;
+    border: 1px solid rgba(255,255,255,0.07); padding: 3rem;
+  }
+  .social-box-text h3 {
+    font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: #fff; margin-bottom: 0.5rem;
+  }
+  .social-box-text h3 em { font-style: italic; color: var(--gold-light); }
+  .social-box-text p { font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; }
+  .social-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.65); text-decoration: none;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold-light); }
+  .social-btn.insta:hover {
+    background: linear-gradient(45deg, #f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    border-color: transparent; color: #fff;
+  }
 
-  /* SOCIAL */
-  .social-section { background: var(--dark-soft); border-radius: 16px; padding: 2.5rem; text-align: center; margin-bottom: 3rem; }
-  .social-section h2 { color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .social-section h2 span { color: var(--gold-light); }
-  .social-section p { color: #b0aea6; margin-bottom: 1.8rem; font-size: 0.95rem; }
-  .social-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .social-btn { display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1.5rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
-  .social-btn:hover { background: rgba(198,154,58,0.15); border-color: var(--gold); transform: translateY(-2px); }
-  .social-btn svg { flex-shrink: 0; }
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark); padding: 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(184,145,46,0.1);
+  }
+  .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
+  .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; margin-bottom: 0.5rem; justify-content: flex-end; }
+  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
 
-  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); }
-  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
-
-  @media (max-width: 768px) {
-    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
-    nav ul.open { display: flex; }
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; min-height: 60vh; }
+    .section { padding: 5rem 1.5rem; }
+    .training-section, .skills-section, .social-section, .quote-section { padding: 5rem 1.5rem; }
+    .nav-links {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; height: auto;
+      background: rgba(16,15,14,0.98); border-bottom: 1px solid rgba(184,145,46,0.1);
+      padding: 1.5rem; gap: 0.5rem;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { height: auto; }
+    .nav-links li a { height: auto; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-cta a { border: none !important; padding: 0.8rem 0.5rem !important; }
     .menu-toggle { display: block; }
-    .about-grid { grid-template-columns: 1fr; }
-    .pillars { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-    .week-grid { grid-template-columns: 1fr 1fr; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .mot-list { grid-template-columns: 1fr; }
+    .intro-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .intro-img { aspect-ratio: 4/3; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid var(--border); }
+    .pillar:last-child { border-bottom: none; }
+    .week-grid { grid-template-columns: repeat(4, 1fr); }
+    .day:nth-child(4) { border-right: none; }
+    .hl-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    .skills-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .social-box { flex-direction: column; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { justify-content: center; }
   }
 </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav>
-  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
-  <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
-  <ul id="nl">
-    <li><a href="uebermich.html">Über mich</a></li>
+  <a href="index.html" class="logo">
+    <img src="logo_nav_final.png" alt="Nico Rüttimann">
+  </a>
+  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <ul class="nav-links" id="navlinks">
+    <li><a href="uebermich.html" class="active">Über mich</a></li>
     <li><a href="wettkampfe.html">Wettkämpfe</a></li>
     <li><a href="sponsoring.html">Sponsoring</a></li>
     <li><a href="unterstuetzen.html">Unterstützen</a></li>
-    <li><a href="kontakt.html">Kontakt</a></li>
+    <li class="nav-cta"><a href="kontakt.html">Kontakt</a></li>
   </ul>
 </nav>
 
-<div class="page-hero">
-  <h1>Über <span>mich</span></h1>
-  <p>Triathlet, Student & Abenteurer</p>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="label">Über mich</p>
+    <h1>Nico<br><em>Rüttimann.</em></h1>
+    <p class="hero-sub">Triathlet · Student · Fribourg/Bern</p>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="section intro-section">
+  <div class="section-inner">
+    <div class="intro-grid">
+      <div class="intro-img">
+        <img src="VeloBild.jpg" alt="Nico Rüttimann am Wettkampf">
+      </div>
+      <div>
+        <p class="label">Wer ich bin</p>
+        <h2 class="display">Athlet &amp;<br><em>Student.</em></h2>
+        <p>Ich bin Nico, 22 Jahre alt, aus der Region Freiburg/Bern. Seit ich mit dem Triathlon begonnen habe, ist dieser Sport ein fester Bestandteil meines Alltags geworden — nicht nur als Training, sondern als Lebensweise.</p>
+        <p>Neben dem Sport studiere ich Betriebsökonomie mit Fokus Informatik an der BFH Bern. Die Kombination aus Disziplin im Sport und strukturiertem Denken im Studium gibt mir viel Energie.</p>
+        <p>Meine KV-Ausbildung bei der Freiburger Kantonalbank, eine sechsmonatige Weltreise und mein Engagement in der Jubla haben mich geprägt und machen mich zu dem, der ich heute bin.</p>
+        <div class="intro-nums">
+          <div class="intro-num">
+            <div class="intro-num-val">3</div>
+            <div class="intro-num-label">Disziplinen</div>
+          </div>
+          <div class="intro-num">
+            <div class="intro-num-val">14+</div>
+            <div class="intro-num-label">Jahre Sport</div>
+          </div>
+          <div class="intro-num">
+            <div class="intro-num-val">2026</div>
+            <div class="intro-num-label">Aktive Saison</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-inner">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">Erfolg kommt nicht über Nacht — er ist das Ergebnis von tausenden kleinen Schritten, jeden einzelnen Tag.</p>
+    <div class="quote-author">Nico Rüttimann</div>
+  </div>
 </div>
 
-<div class="container">
-
-  <!-- ABOUT -->
-  <div class="about-grid">
-    <div class="about-photo">
-      <img src="Bild2.jpg" alt="Nico Rüttimann">
-    </div>
-    <div class="about-text">
-      <h2 class="section-title">Wer bin <span>ich?</span></h2>
-      <p>Ich bin Nico, 22 Jahre jung, Triathlet und Student der Betriebsökonomie mit Fokus Informatik an der BFH Bern. Sport und Ehrgeiz prägen mein Leben – ob auf der Laufstrecke, im Wasser oder auf dem Rad.</p>
-      <p>Meine KV-Ausbildung mit Berufsmatura bei der Freiburger Kantonalbank, eine sechsmonatige Weltreise und der Triathlon haben mich zu einem offenen, selbstständigen und zielstrebigen Menschen gemacht.</p>
-      <div class="about-stats">
-        <div class="stat"><div class="num">3</div><div class="label">Sportarten</div></div>
-        <div class="stat"><div class="num">14+</div><div class="label">Jahre Sport</div></div>
-        <div class="stat"><div class="num">100%</div><div class="label">Motivation</div></div>
+<!-- DREI SÄULEN -->
+<section class="section pillars-section">
+  <div class="section-inner">
+    <p class="label">Was mich ausmacht</p>
+    <h2 class="display">Drei<br><em>Säulen.</em></h2>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>Sport</h3>
+        <p>Triathlon strukturiert meinen Alltag. Schwimmen, Radfahren, Laufen — täglich, konsequent, mit Freude.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>Studium</h3>
+        <p>Bachelor in Betriebsökonomie mit Fokus Informatik an der BFH Bern. Wirtschaft und Technologie verbinden.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>Leben</h3>
+        <p>Reisen, Freunde, Familie — und die Erkenntnis, dass Leistung und Lebensfreude sich nicht ausschliessen.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- QUOTE -->
-  <div class="quote-box">
-    <p class="quote-text">Erfolg kommt nicht über Nacht – er ist das Ergebnis von tausenden kleinen Schritten, jeden einzelnen Tag.</p>
-    <div class="quote-author">— Nico Rüttimann</div>
-  </div>
-
-  <!-- DREI SÄULEN -->
-  <h2 class="section-title">Meine drei <span>Säulen</span></h2>
-  <p class="section-sub">Was mein Leben definiert.</p>
-  <div class="pillars">
-    <div class="pillar">
-      <div class="p-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-      </div>
-      <h3>Sport</h3>
-      <p>Triathlon, Laufen und Radsport prägen meinen Alltag. Disziplin und Ehrgeiz auf höchstem Niveau.</p>
-    </div>
-    <div class="pillar">
-      <div class="p-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-      </div>
-      <h3>Studium</h3>
-      <p>Bachelor in Betriebsökonomie mit Fokus Informatik – Wirtschaft trifft Technologie.</p>
-    </div>
-    <div class="pillar">
-      <div class="p-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <h3>Leben</h3>
-      <p>Reisen, Freunde, Familie und neue Erfahrungen – Sport ist nicht alles, was zählt.</p>
-    </div>
-  </div>
-
-  <!-- STATISTIKEN -->
-  <h2 class="section-title">Meine <span>Zahlen</span></h2>
-  <p class="section-sub">Was hinter den Kulissen passiert.</p>
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div class="stat-num">12</div>
-      <div class="stat-unit">Std / Woche</div>
-    </div>
-    <div class="stat-card">
-      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2"/><path d="M22 12c0 5.52-4.48 10-10 10"/><path d="M2 12c0 5.52 4.48 10 10 10"/><path d="M22 12C22 6.48 17.52 2 12 2"/></svg></div>
-      <div class="stat-num">~15</div>
-      <div class="stat-unit">km Swim / W</div>
-    </div>
-    <div class="stat-card">
-      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/><path d="M12 17.5V9"/></svg></div>
-      <div class="stat-num">~200</div>
-      <div class="stat-unit">km Velo / W</div>
-    </div>
-    <div class="stat-card">
-      <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M7.5 13.5c.83 1 2 2 4 2s3.5-1.5 3.5-3-1.5-2.5-3-3-3-1.5-3-3 1.5-3 3.5-3 3.17 1 4 2"/><path d="M12 19v-6.5"/></svg></div>
-      <div class="stat-num">~50</div>
-      <div class="stat-unit">km Lauf / W</div>
-    </div>
-  </div>
-
-  <!-- TRAININGSPLAN -->
-  <div class="training-week">
-    <h2>Meine typische <span>Woche</span></h2>
-    <p class="sub">10–15 Stunden Training pro Woche, kombiniert mit Studium und Leben.</p>
+<!-- TRAINING WOCHE -->
+<section class="training-section">
+  <div class="training-inner">
+    <p class="label">Trainingsalltag</p>
+    <h2 class="display">Eine typische<br><em>Woche.</em></h2>
+    <p class="training-sub">10–15 Stunden Training pro Woche — neben Studium und allem anderen.</p>
     <div class="week-grid">
       <div class="day">
         <div class="day-name">Mo</div>
-        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2"/><path d="M22 12c0 5.52-4.48 10-10 10"/></svg></div>
+        <div class="day-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/><path d="M2 17c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>
+        </div>
         <div class="day-act">Schwimmen</div>
         <div class="day-time">1.5h</div>
       </div>
       <div class="day">
         <div class="day-name">Di</div>
-        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg></div>
+        <div class="day-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/><path d="m9 9 3 2 3-2"/></svg>
+        </div>
         <div class="day-act">Laufen</div>
         <div class="day-time">1h</div>
       </div>
       <div class="day">
         <div class="day-name">Mi</div>
-        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/></svg></div>
+        <div class="day-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>
+        </div>
         <div class="day-act">Velo</div>
         <div class="day-time">2h</div>
       </div>
       <div class="day">
         <div class="day-name">Do</div>
-        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2"/><path d="M22 12c0 5.52-4.48 10-10 10"/></svg></div>
+        <div class="day-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>
+        </div>
         <div class="day-act">Schwimmen</div>
         <div class="day-time">1h</div>
       </div>
       <div class="day">
         <div class="day-name">Fr</div>
-        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg></div>
+        <div class="day-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>
+        </div>
         <div class="day-act">Laufen</div>
         <div class="day-time">1.5h</div>
       </div>
       <div class="day">
         <div class="day-name">Sa</div>
-        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/></svg></div>
+        <div class="day-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>
+        </div>
         <div class="day-act">Lange Velo</div>
-        <div class="day-time">3-4h</div>
+        <div class="day-time">3–4h</div>
       </div>
       <div class="day rest">
         <div class="day-name">So</div>
-        <div class="day-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></div>
+        <div class="day-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+        </div>
         <div class="day-act">Ruhetag</div>
         <div class="day-time">Erholung</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- HIGHLIGHTS -->
-  <div class="highlights">
-    <h2>Meine <span>Highlights</span></h2>
-    <p class="sub">Meilensteine, auf die ich stolz bin.</p>
-    <div class="highlight-item">
-      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
-      <div class="h-text"><strong>KV-Ausbildung mit Berufsmatura</strong><span>Erfolgreich abgeschlossen bei der Freiburger Kantonalbank, 2023.</span></div>
-    </div>
-    <div class="highlight-item">
-      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <div class="h-text"><strong>Sechs Monate Weltreise</strong><span>Eine prägende Erfahrung, die meinen Horizont erweitert hat (2023–2024).</span></div>
-    </div>
-    <div class="highlight-item">
-      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-      <div class="h-text"><strong>Mehrere Triathlon-Finishes</strong><span>Aarau 2025, Wallisellen 2026, Kerzerslauf 2026 – jedes Rennen ein Schritt weiter.</span></div>
-    </div>
-    <div class="highlight-item">
-      <div class="h-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <div class="h-text"><strong>Ehrenamtliche Führung Jubla Heitenried</strong><span>4 Jahre als Leiter, Kassier und Scharleiter – Verantwortung für Organisation und Finanzen.</span></div>
+<!-- HIGHLIGHTS -->
+<section class="section highlights-section">
+  <div class="section-inner">
+    <p class="label">Meilensteine</p>
+    <h2 class="display">Bisherige<br><em>Highlights.</em></h2>
+    <div class="highlights-list">
+      <div class="hl-item">
+        <div class="hl-year">2026</div>
+        <div>
+          <div class="hl-title">Sprint Triathlon Wallisellen</div>
+          <div class="hl-desc">Wallisellen · 1h 03min · Finisher</div>
+        </div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-year">2026</div>
+        <div>
+          <div class="hl-title">Kerzerslauf</div>
+          <div class="hl-desc">Kerzers · 1h 11min · Finisher</div>
+        </div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-year">2025</div>
+        <div>
+          <div class="hl-title">Sprint Triathlon Aarau</div>
+          <div class="hl-desc">Aarau · 1h 17min · Finisher</div>
+        </div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-year">2024</div>
+        <div>
+          <div class="hl-title">Weltreise — 6 Monate</div>
+          <div class="hl-desc">Reise rund um die Welt — eine der prägendsten Erfahrungen meines Lebens.</div>
+        </div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-year">2023</div>
+        <div>
+          <div class="hl-title">KV-Ausbildung mit Berufsmatura</div>
+          <div class="hl-desc">Freiburger Kantonalbank — erfolgreich abgeschlossen.</div>
+        </div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-year">4 J.</div>
+        <div>
+          <div class="hl-title">Jubla Heitenried — Leiter & Kassier</div>
+          <div class="hl-desc">Ehrenamtliches Engagement als Scharleiter, Kassier und Gruppenleiter.</div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- WAS MICH ANTREIBT -->
-  <div class="motivation">
-    <h2>Was mich <span>antreibt</span></h2>
-    <div class="mot-list">
-      <div class="mot-item">
-        <div class="check">✓</div>
-        <p><strong>Persönliches Wachstum</strong> – Jeden Tag eine bessere Version meiner selbst werden.</p>
+<!-- WERDEGANG -->
+<section class="section timeline-section">
+  <div class="section-inner">
+    <p class="label">Werdegang</p>
+    <h2 class="display">Wo ich<br><em>herkomme.</em></h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">Sep 2024 – heute</div>
+        <div>
+          <div class="tl-title">Bachelor Betriebsökonomie — Fokus Informatik</div>
+          <div class="tl-org">Berner Fachhochschule (BFH), Bern</div>
+          <div class="tl-desc">Digitalität, Projektmanagement, BWL, VWL, Rechnungswesen, Recht.</div>
+        </div>
       </div>
-      <div class="mot-item">
-        <div class="check">✓</div>
-        <p><strong>Grenzen verschieben</strong> – Mental und körperlich über mich hinauswachsen.</p>
+      <div class="tl-item">
+        <div class="tl-date">Sep 2024 – Mai 2025</div>
+        <div>
+          <div class="tl-title">Verkauf / Schalterbetrieb</div>
+          <div class="tl-org">Freiburger Kantonalbank, Düdingen</div>
+          <div class="tl-desc">Kundenberatung, Bankprodukte, Ein- und Auszahlungen.</div>
+        </div>
       </div>
-      <div class="mot-item">
-        <div class="check">✓</div>
-        <p><strong>Disziplin & Routine</strong> – Erfolg ist das Ergebnis täglicher Konsistenz.</p>
+      <div class="tl-item">
+        <div class="tl-date">Jul – Sep 2024</div>
+        <div>
+          <div class="tl-title">Assistent Kredite</div>
+          <div class="tl-org">Freiburger Kantonalbank, Fribourg</div>
+          <div class="tl-desc">Bilanz- und Finanzanalyse, Kundenkontakt.</div>
+        </div>
       </div>
-      <div class="mot-item">
-        <div class="check">✓</div>
-        <p><strong>Inspirieren</strong> – Andere motivieren, ihre eigenen Ziele zu verfolgen.</p>
+      <div class="tl-item">
+        <div class="tl-date">Nov 2023 – Jun 2024</div>
+        <div>
+          <div class="tl-title">Weltreise</div>
+          <div class="tl-org">Auslandserfahrung</div>
+          <div class="tl-desc">Sechsmonatige Reise — Offenheit, Selbstständigkeit, neue Perspektiven.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Aug 2020 – Aug 2023</div>
+        <div>
+          <div class="tl-title">KV-Ausbildung + Berufsmatura</div>
+          <div class="tl-org">Freiburger Kantonalbank, Fribourg</div>
+          <div class="tl-desc">Schalter, Anlageberatung, Kreditwesen, Kundenbetreuung.</div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- SOCIAL -->
-  <div class="social-section">
-    <h2>Folge meiner <span>Reise</span></h2>
-    <p>Verfolge meine Trainings und Wettkämpfe live mit – auf Instagram und Strava.</p>
-    <div class="social-grid">
-      <a href="https://instagram.com/" target="_blank" class="social-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        Instagram
-      </a>
-      <a href="https://strava.com/" target="_blank" class="social-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
-        Strava
-      </a>
-    </div>
-    <p style="font-size:0.75rem; color:#666; margin-top:1rem;">Tipp: Tausche die Links mit deinen echten Profilen aus.</p>
-  </div>
-
-  <!-- WERDEGANG -->
-  <h2 class="section-title">Mein <span>Werdegang</span></h2>
-  <p class="section-sub">Wo ich war, wo ich hingehe.</p>
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-date">SEP 2024 – HEUTE</div>
-      <div class="tl-title">Bachelor Betriebsökonomie – Fokus Informatik</div>
-      <div class="tl-org">Berner Fachhochschule (BFH), Bern</div>
-      <div class="tl-desc">Schwerpunkte: Digitalität/Informatik, Projektmanagement, BWL, VWL, Rechnungswesen, Recht.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">SEP 2024 – MAI 2025</div>
-      <div class="tl-title">Verkaufserfahrung / Schalterbetrieb</div>
-      <div class="tl-org">Freiburger Kantonalbank, Düdingen</div>
-      <div class="tl-desc">Beratung von Privatkunden, Verkauf von Bankprodukten, Ein- und Auszahlungen.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">JUL 2024 – SEP 2024</div>
-      <div class="tl-title">Assistent Kredite</div>
-      <div class="tl-org">Freiburger Kantonalbank, Fribourg</div>
-      <div class="tl-desc">Bilanz- und Finanzanalyse, Kundenkontakt, administrative Aufgaben.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">NOV 2023 – JUN 2024</div>
-      <div class="tl-title">Weltreise</div>
-      <div class="tl-org">Auslandserfahrung</div>
-      <div class="tl-desc">Sechsmonatige Reise rund um die Welt – Offenheit und Selbstständigkeit gestärkt.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">AUG 2020 – AUG 2023</div>
-      <div class="tl-title">Kaufmännische Ausbildung (KV Bank) + Berufsmatura</div>
-      <div class="tl-org">Freiburger Kantonalbank, Fribourg</div>
-      <div class="tl-desc">Schalterbereich, Anlageberatung, Kreditwesen, Betreuung von Kunden.</div>
-    </div>
-  </div>
-
-</div>
-
-<div class="dark-section">
-  <div class="dark-inner">
-    <h2 class="section-title">Fähigkeiten & <span>Sprachen</span></h2>
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="skills-inner">
+    <p class="label">Fähigkeiten</p>
+    <h2 class="display" style="color:#fff;">Stärken &amp;<br><em>Sprachen.</em></h2>
     <div class="skills-grid">
       <div>
-        <div class="skill-row"><div class="skill-label"><span>Lösungsorientiert</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
-        <div class="skill-row"><div class="skill-label"><span>Teamfähigkeit</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
-        <div class="skill-row"><div class="skill-label"><span>Kommunikation</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
-        <div class="skill-row"><div class="skill-label"><span>Selbstständigkeit</span><span>Erfahren</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Selbstständigkeit</span><span>Stark</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Teamfähigkeit</span><span>Stark</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Kommunikation</span><span>Gut</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label"><span>Lösungsorientiert</span><span>Stark</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
       </div>
       <div>
-        <div class="lang-item"><span>Deutsch</span><span class="lang-level">C2</span></div>
-        <div class="lang-item"><span>Französisch</span><span class="lang-level">B2</span></div>
-        <div class="lang-item"><span>Englisch</span><span class="lang-level">B1</span></div>
+        <div class="lang-list">
+          <div class="lang-item"><span>Deutsch</span><span class="lang-level">C2</span></div>
+          <div class="lang-item"><span>Französisch</span><span class="lang-level">B2</span></div>
+          <div class="lang-item"><span>Englisch</span><span class="lang-level">B1</span></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
+<!-- SOCIAL -->
+<section class="social-section">
+  <div class="social-inner">
+    <p class="label">Social Media</p>
+    <div class="social-box">
+      <div class="social-box-text">
+        <h3>Folge meiner<br><em>Reise.</em></h3>
+        <p>Trainingseinblicke, Wettkampf-Updates und Alltag auf Instagram.</p>
+      </div>
+      <div class="social-btns">
+        <a href="https://www.instagram.com/nicoo.rue7/" target="_blank" class="social-btn insta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="motto-foot">"One step further every day."</div>
-  <div>© 2026 Nico Rüttimann · Triathlet & Student</div>
+  <div class="footer-left">„One step further every day."</div>
+  <div class="footer-right">
+    <ul class="footer-links">
+      <li><a href="uebermich.html">Über mich</a></li>
+      <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+      <li><a href="sponsoring.html">Sponsoring</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div>© 2026 Nico Rüttimann</div>
+  </div>
 </footer>
-<script>document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));</script>
+
+<script>
+  document.querySelectorAll('#navlinks a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'))
+  );
+</script>
 </body>
 </html>
