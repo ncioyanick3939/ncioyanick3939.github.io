@@ -4,264 +4,604 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wettkämpfe – Nico Rüttimann</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --gold: #c69a3a; --gold-light: #d9b556; --dark: #2b2b29; --dark-soft: #34332f; --cream: #faf8f3; --text: #2b2b29; --text-muted: #6b6a64; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(43,43,41,0.97); }
-  nav .logo { color: #fff; font-weight: 700; font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; }
-  nav .logo span { color: var(--gold-light); }
-  nav ul { display: flex; gap: 1.6rem; list-style: none; }
-  nav a { color: #e8e6df; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-  nav a:hover { color: var(--gold-light); }
-  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
-
-  .page-hero { padding: 8rem 1.5rem 4rem; background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%); color: #fff; text-align: center; }
-  .page-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
-  .page-hero h1 span { color: var(--gold-light); }
-  .page-hero p { color: #cfcdc5; margin-top: 0.5rem; font-size: 1.1rem; }
-
-  .container { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
-  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .section-title span { color: var(--gold); }
-  .section-sub { color: var(--text-muted); margin-bottom: 2.5rem; }
-
-  /* RACE CARDS */
-  .race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-
-  .race-card {
-    background: var(--dark);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(198,154,58,0.15);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  :root {
+    --gold: #b8912e;
+    --gold-light: #d4aa52;
+    --dark: #161614;
+    --dark-2: #1e1d1a;
+    --dark-3: #28261f;
+    --mid: #5a5850;
+    --muted: #9a9890;
+    --light: #f5f3ee;
+    --border: #e4e0d8;
+    --white: #fefefe;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
   }
-  .race-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
 
-  .race-card-top { padding: 1.5rem 1.5rem 0; }
-  .race-tag { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(198,154,58,0.12); color: var(--gold-light); padding: 0.25rem 0.8rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 1rem; }
-  .race-name { font-size: 1.35rem; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 0.8rem; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-  .race-meta { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1rem; }
-  .race-meta-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #b0aea6; }
-  .race-meta-row svg { flex-shrink: 0; color: var(--gold); }
-  .race-meta-row a { color: #b0aea6; text-decoration: none; border-bottom: 1px dashed rgba(176,174,166,0.35); transition: color 0.2s; }
-  .race-meta-row a:hover { color: var(--gold-light); }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 3rem; height: 68px;
+    background: rgba(22,22,20,0.96);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(184,145,46,0.12);
+  }
+  nav .logo { text-decoration: none; display: flex; align-items: center; height: 100%; }
+  nav .logo img { height: 42px; width: auto; object-fit: contain; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 0; list-style: none; height: 100%; }
+  .nav-links li { height: 100%; display: flex; align-items: center; }
+  .nav-links li a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
+    padding: 0 1.1rem; height: 100%; display: flex; align-items: center;
+    border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-links li a:hover, .nav-links li a.active { color: #fff; border-bottom-color: var(--gold); }
+  .nav-cta a {
+    background: transparent !important; border: 1px solid rgba(184,145,46,0.5) !important;
+    border-bottom: 1px solid rgba(184,145,46,0.5) !important;
+    color: var(--gold-light) !important; padding: 0 1.1rem !important;
+    height: 100% !important; letter-spacing: 1.8px; transition: all 0.2s !important;
+  }
+  .nav-cta a:hover { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
+  .menu-toggle { display: none; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.4rem; cursor: pointer; padding: 0.3rem; }
 
-  .race-dist-bar { background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.06); padding: 1rem 1.5rem; }
-  .race-dist-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
-  .race-dist-items { display: flex; gap: 1rem; }
-  .dist-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; color: #cfcdc5; font-weight: 500; }
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 80vh;
+    background: var(--dark-2);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('Rad.png');
+    background-size: cover; background-position: center center;
+    opacity: 0.4;
+    animation: heroZoom 18s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.06); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(22,22,20,0.15) 0%, rgba(22,22,20,0.9) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300; line-height: 0.92; letter-spacing: -1px;
+    color: #fff; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: #fff; }
+  .hero-sub {
+    font-size: 0.88rem; color: rgba(255,255,255,0.55);
+    font-weight: 300; letter-spacing: 0.3px;
+  }
+
+  /* ─── SHARED ─── */
+  .section { padding: 7rem 3rem; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  h2.display {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.3px;
+    margin-bottom: 1.5rem;
+  }
+  h2.display em { font-style: italic; color: var(--gold); }
+
+  /* ─── RAD SECTION ─── */
+  .rad-section {
+    background: var(--dark-3);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    min-height: 480px;
+    display: flex; align-items: stretch;
+  }
+  .rad-img-wrap {
+    position: relative;
+    width: 55%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .rad-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+    filter: grayscale(15%) contrast(1.08);
+    transition: transform 8s ease;
+  }
+  .rad-section:hover .rad-img-wrap img { transform: scale(1.04); }
+  .rad-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 60%, var(--dark-3) 100%);
+  }
+  .rad-text {
+    flex: 1;
+    padding: 5rem 4rem 5rem 3rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+  }
+  .rad-text .label { color: var(--gold); }
+  .rad-text h2.display { color: #fff; }
+  .rad-text h2.display em { color: var(--gold-light); }
+  .rad-text p {
+    font-size: 0.88rem; color: rgba(255,255,255,0.45);
+    font-weight: 300; line-height: 1.9; margin-bottom: 1rem;
+  }
+  .rad-stats {
+    display: flex; gap: 2.5rem; margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07); padding-top: 2rem;
+  }
+  .rad-stat-val {
+    font-family: var(--serif); font-size: 2.2rem; font-weight: 300;
+    color: var(--gold); line-height: 1; margin-bottom: 0.25rem;
+  }
+  .rad-stat-label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+  }
+
+  /* spinning wheel decoration */
+  .wheel-deco {
+    position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+    width: 280px; height: 280px;
+    border: 1px solid rgba(184,145,46,0.08);
+    border-radius: 50%;
+    animation: spinWheel 30s linear infinite;
+    pointer-events: none;
+  }
+  .wheel-deco::before {
+    content: ''; position: absolute; inset: 20px;
+    border: 1px solid rgba(184,145,46,0.05);
+    border-radius: 50%;
+  }
+  .wheel-deco::after {
+    content: ''; position: absolute; inset: 50%;
+    width: 8px; height: 8px; margin: -4px;
+    background: rgba(184,145,46,0.2); border-radius: 50%;
+  }
+  @keyframes spinWheel {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  /* ─── RACE CARDS ─── */
+  .races-section { background: var(--white); }
+  .race-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 1px solid var(--border); margin-top: 3rem;
+  }
+  .race-card {
+    padding: 2.5rem 2rem; border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; transition: background 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .race-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .race-card:hover::before { transform: scaleX(1); }
+  .race-card:last-child { border-right: none; }
+  .race-card:hover { background: var(--light); }
+
+  .race-tag {
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
+  }
+  .race-name {
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 300;
+    color: var(--dark); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .race-meta-row {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; color: var(--muted); font-weight: 300; margin-bottom: 0.4rem;
+  }
+  .race-meta-row svg { color: var(--gold); flex-shrink: 0; }
+  .race-meta-row a { color: var(--muted); text-decoration: none; border-bottom: 1px dashed rgba(154,152,144,0.4); transition: color 0.2s; }
+  .race-meta-row a:hover { color: var(--gold); }
+
+  .race-dist-bar {
+    margin: 1.5rem -2rem 0; padding: 1rem 2rem;
+    background: var(--light); border-top: 1px solid var(--border);
+  }
+  .race-dist-label {
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;
+  }
+  .race-dist-items { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .dist-item {
+    display: flex; align-items: center; gap: 0.35rem;
+    font-size: 0.8rem; color: var(--mid); font-weight: 400;
+  }
   .dist-item svg { color: var(--gold); }
 
-  .race-countdown { background: rgba(0,0,0,0.25); padding: 1rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
-  .cd-label-top { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.6rem; }
-  .countdown { display: flex; gap: 0.5rem; }
-  .cd-box { flex: 1; background: rgba(198,154,58,0.08); border: 1px solid rgba(198,154,58,0.15); border-radius: 8px; padding: 0.5rem 0.3rem; text-align: center; }
-  .cd-num { font-size: 1.4rem; font-weight: 800; color: var(--gold-light); line-height: 1; font-variant-numeric: tabular-nums; }
-  .cd-unit { font-size: 0.62rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+  .race-countdown {
+    margin: 1.5rem 0 0;
+    padding: 1.2rem 1.5rem;
+    background: var(--light);
+    border: 1px solid var(--border);
+  }
+  .cd-label-top {
+    font-size: 0.6rem; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .cd-label-top::before {
+    content: ''; display: inline-block; width: 6px; height: 6px;
+    background: var(--gold); border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  .countdown { display: flex; gap: 0.6rem; }
+  .cd-box {
+    flex: 1; text-align: center;
+    padding: 0.7rem 0.3rem;
+    border-bottom: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .cd-box:hover { border-bottom-color: var(--gold); }
+  .cd-num {
+    font-family: var(--serif); font-size: 1.8rem; font-weight: 300;
+    color: var(--dark); line-height: 1; font-variant-numeric: tabular-nums;
+    letter-spacing: -0.5px;
+  }
+  .cd-unit {
+    font-size: 0.58rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;
+    font-weight: 500;
+  }
 
-  .race-card-bottom { padding: 1.2rem 1.5rem 1.5rem; margin-top: auto; }
-  .btn { padding: 0.85rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; display: block; text-align: center; }
-  .btn-primary { background: var(--gold); color: #fff; }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .race-card-bottom { margin-top: auto; padding-top: 1.5rem; }
+  .btn {
+    display: block; text-align: center;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+    border: 1px solid var(--gold); color: var(--gold); background: transparent;
+  }
+  .btn:hover { background: var(--gold); color: #fff; }
 
-  /* PAST */
-  .past-section { background: #fff; border-radius: 16px; border: 0.5px solid #e0ddd4; padding: 2rem; }
-  .past-section h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text); }
-  .past-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 0.5px solid #e8e6df; }
+  /* ─── PAST ─── */
+  .past-section-wrap { background: var(--light); }
+  .past-grid {
+    border: 1px solid var(--border); margin-top: 3rem;
+  }
+  .past-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 2rem; border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
   .past-item:last-child { border-bottom: none; }
-  .past-left { display: flex; align-items: center; gap: 1rem; }
-  .past-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(198,154,58,0.1); border: 1px solid rgba(198,154,58,0.2); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
-  .past-name { font-weight: 600; font-size: 0.95rem; color: var(--text); }
-  .past-info { font-size: 0.82rem; color: var(--text-muted); }
-  .past-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
-  .past-time { font-size: 1rem; font-weight: 700; color: var(--gold); }
-  .past-badge { background: rgba(198,154,58,0.1); color: var(--gold); padding: 0.15rem 0.7rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
+  .past-item:hover { background: var(--white); }
+  .past-left { display: flex; align-items: center; gap: 1.2rem; }
+  .past-icon {
+    width: 38px; height: 38px;
+    border: 1px solid rgba(184,145,46,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); flex-shrink: 0;
+  }
+  .past-name { font-size: 0.92rem; font-weight: 500; color: var(--dark); }
+  .past-info { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
+  .past-right { display: flex; align-items: center; gap: 1rem; }
+  .past-time {
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--gold);
+  }
+  .past-badge {
+    font-size: 0.6rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(184,145,46,0.35); padding: 0.2rem 0.6rem;
+  }
 
-  footer { background: var(--dark); color: #888; text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; margin-top: 4rem; }
-  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; }
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark); padding: 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(184,145,46,0.1);
+  }
+  .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
+  .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; margin-bottom: 0.5rem; justify-content: flex-end; }
+  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
 
-  @media (max-width: 768px) {
-    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1rem 2rem; gap: 1rem; }
-    nav ul.open { display: flex; }
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; min-height: 65vh; }
+    .section { padding: 5rem 1.5rem; }
+    .nav-links {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; height: auto;
+      background: rgba(16,15,14,0.98); border-bottom: 1px solid rgba(184,145,46,0.1);
+      padding: 1.5rem; gap: 0.5rem;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { height: auto; }
+    .nav-links li a { height: auto; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-cta a { border: none !important; padding: 0.8rem 0.5rem !important; }
     .menu-toggle { display: block; }
-    .past-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .race-grid { grid-template-columns: 1fr; }
+    .race-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .race-card:last-child { border-bottom: none; }
+    .rad-section { flex-direction: column; }
+    .rad-img-wrap { width: 100%; height: 300px; }
+    .rad-img-overlay { background: linear-gradient(to bottom, transparent 60%, var(--dark-3) 100%); }
+    .rad-text { padding: 3rem 1.5rem; }
+    .rad-stats { gap: 1.5rem; }
+    .wheel-deco { display: none; }
+    .past-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem 1.5rem; }
     .past-right { align-items: flex-start; }
-    .dist-item span { display: none; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { justify-content: center; }
   }
 </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav>
-  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
-  <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
-  <ul id="nl">
+  <a href="index.html" class="logo">
+    <img src="logo_nav_final.png" alt="Nico Rüttimann">
+  </a>
+  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <ul class="nav-links" id="navlinks">
     <li><a href="uebermich.html">Über mich</a></li>
-    <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+    <li><a href="wettkampfe.html" class="active">Wettkämpfe</a></li>
     <li><a href="sponsoring.html">Sponsoring</a></li>
     <li><a href="unterstuetzen.html">Unterstützen</a></li>
-    <li><a href="kontakt.html">Kontakt</a></li>
+    <li class="nav-cta"><a href="kontakt.html">Kontakt</a></li>
   </ul>
 </nav>
 
-<div class="page-hero">
-  <h1>Nächste <span>Wettkämpfe</span></h1>
-  <p>Unterstütze mich gezielt für ein bestimmtes Rennen</p>
+<!-- HERO mit Rad.png als Hintergrund -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="label">Wettkämpfe</p>
+    <h1>Rennen &amp;<br><em>Resultate.</em></h1>
+    <p class="hero-sub">Ironman 70.3 · Sprint Triathlon · Challenge</p>
+  </div>
+</header>
+
+<!-- RAD SECTION mit Rad.png als Bild + Animation -->
+<div class="rad-section">
+  <div class="rad-img-wrap">
+    <img src="Rad.png" alt="Nico Rüttimann auf dem Rad">
+    <div class="rad-img-overlay"></div>
+  </div>
+  <div class="rad-text">
+    <div class="wheel-deco"></div>
+    <p class="label">Die Velo-Disziplin</p>
+    <h2 class="display">Kraft auf<br><em>zwei Rädern.</em></h2>
+    <p>Das Radfahren ist meine stärkste Disziplin. Lange Ausfahrten auf den Strassen rund um Freiburg und Bern bilden das Fundament meiner Wettkampfvorbereitung.</p>
+    <p>Beim Ironman 70.3 warten 90 km Velo — hier will ich Zeit gutmachen und stark in den Lauf gehen.</p>
+    <div class="rad-stats">
+      <div>
+        <div class="rad-stat-val">90</div>
+        <div class="rad-stat-label">km Ironman Velo</div>
+      </div>
+      <div>
+        <div class="rad-stat-val">3–4h</div>
+        <div class="rad-stat-label">Lange Ausfahrt Sa</div>
+      </div>
+      <div>
+        <div class="rad-stat-val">~200</div>
+        <div class="rad-stat-label">km / Woche</div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="container">
-  <h2 class="section-title">Kommende <span>Rennen</span></h2>
-  <p class="section-sub">Jeder Beitrag hilft mir – ob Startgeld, Ausrüstung oder Reisekosten.</p>
+<!-- KOMMENDE RENNEN -->
+<section class="section races-section">
+  <div class="section-inner">
+    <p class="label">Saison 2026</p>
+    <h2 class="display">Kommende<br><em>Rennen.</em></h2>
+    <div class="race-grid">
 
-  <div class="race-grid">
-
-    <!-- IRONMAN -->
-    <div class="race-card">
-      <div class="race-card-top">
+      <!-- IRONMAN -->
+      <div class="race-card">
         <div class="race-tag">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           7. Juni 2026
         </div>
         <div class="race-name">Ironman 70.3 Rapperswil</div>
-        <div class="race-meta">
-          <div class="race-meta-row">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank">Rapperswil, Schweiz</a>
-          </div>
-          <div class="race-meta-row">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            <a href="https://www.ironman.com/races/im703-switzerland" target="_blank">Offizielle Rennseite</a>
+        <div class="race-meta-row">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank">Rapperswil, Schweiz</a>
+        </div>
+        <div class="race-meta-row" style="margin-bottom:0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <a href="https://www.ironman.com/races/im703-switzerland" target="_blank">Offizielle Rennseite</a>
+        </div>
+        <div class="race-dist-bar">
+          <div class="race-dist-label">Mitteldistanz</div>
+          <div class="race-dist-items">
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>1.9 km</div>
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>90 km</div>
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>21.1 km</div>
           </div>
         </div>
-      </div>
-      <div class="race-dist-bar">
-        <div class="race-dist-label">Mitteldistanz</div>
-        <div class="race-dist-items">
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/><path d="M12 8v4l3 3"/></svg><span>1.9 km Swim</span></div>
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/><path d="M12 17.5V9"/></svg><span>90 km Velo</span></div>
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M7.5 13.5c.83 1 2 2 4 2s3.5-1.5 3.5-3-1.5-2.5-3-3-3-1.5-3-3 1.5-3 3.5-3 3.17 1 4 2"/><path d="M12 19v-6.5"/></svg><span>21.1 km Laufen</span></div>
+        <div class="race-countdown">
+          <div class="cd-label-top">Countdown zum Rennen</div>
+          <div class="countdown" id="cd-ironman"></div>
+        </div>
+        <div class="race-card-bottom">
+          <a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a>
         </div>
       </div>
-      <div class="race-countdown">
-        <div class="cd-label-top">Countdown zum Rennen</div>
-        <div class="countdown" id="cd-ironman"></div>
-      </div>
-      <div class="race-card-bottom">
-        <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
-      </div>
-    </div>
 
-    <!-- USTER -->
-    <div class="race-card">
-      <div class="race-card-top">
+      <!-- USTER -->
+
+      <div class="race-card">
         <div class="race-tag">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Sommer 2026
         </div>
         <div class="race-name">Sprint Triathlon Uster</div>
-        <div class="race-meta">
-          <div class="race-meta-row">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <a href="https://maps.google.com/?q=Uster,Zürich,Schweiz" target="_blank">Uster, Zürich</a>
+        <div class="race-meta-row" style="margin-bottom:0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <a href="https://maps.google.com/?q=Uster,Zürich,Schweiz" target="_blank">Uster, Zürich</a>
+        </div>
+        <div class="race-dist-bar">
+          <div class="race-dist-label">Sprint Distanz</div>
+          <div class="race-dist-items">
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>750 m</div>
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>20 km</div>
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>5 km</div>
           </div>
         </div>
-      </div>
-      <div class="race-dist-bar">
-        <div class="race-dist-label">Sprint Distanz</div>
-        <div class="race-dist-items">
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/></svg><span>Swim</span></div>
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/></svg><span>Velo</span></div>
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg><span>Laufen</span></div>
+        <div class="race-card-bottom" style="margin-top:auto;">
+          <a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a>
         </div>
       </div>
-      <div class="race-card-bottom" style="margin-top:auto;">
-        <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
-      </div>
-    </div>
 
-    <!-- SAN REMO -->
-    <div class="race-card">
-      <div class="race-card-top">
+      <!-- SAN REMO -->
+      <div class="race-card">
         <div class="race-tag">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           4. Oktober 2026
         </div>
         <div class="race-name">Challenge San Remo</div>
-        <div class="race-meta">
-          <div class="race-meta-row">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank">San Remo, Italien</a>
-          </div>
-          <div class="race-meta-row">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            <a href="https://challenge-sanremo.com/" target="_blank">Offizielle Rennseite</a>
+        <div class="race-meta-row">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank">San Remo, Italien</a>
+        </div>
+        <div class="race-meta-row" style="margin-bottom:0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <a href="https://challenge-sanremo.com/" target="_blank">Offizielle Rennseite</a>
+        </div>
+        <div class="race-dist-bar">
+          <div class="race-dist-label">Challenge Distanz</div>
+          <div class="race-dist-items">
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>1.9 km</div>
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>80 km</div>
+            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>21 km</div>
           </div>
         </div>
-      </div>
-      <div class="race-dist-bar">
-        <div class="race-dist-label">Challenge Distanz</div>
-        <div class="race-dist-items">
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/></svg><span>1.9 km Swim</span></div>
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 0 0 0-2H9l-1 4h8l-1-2z"/></svg><span>80 km Velo</span></div>
-          <div class="dist-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12 19v-6.5"/></svg><span>21 km Laufen</span></div>
+        <div class="race-countdown">
+          <div class="cd-label-top">Countdown zum Rennen</div>
+          <div class="countdown" id="cd-sanremo"></div>
+        </div>
+        <div class="race-card-bottom">
+          <a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a>
         </div>
       </div>
-      <div class="race-countdown">
-        <div class="cd-label-top">Countdown zum Rennen</div>
-        <div class="countdown" id="cd-sanremo"></div>
-      </div>
-      <div class="race-card-bottom">
-        <a href="unterstuetzen.html" class="btn btn-primary">Für dieses Rennen unterstützen</a>
-      </div>
-    </div>
 
-  </div>
-
-  <!-- VERGANGENE -->
-  <h2 class="section-title">Vergangene <span>Wettkämpfe</span></h2>
-  <p class="section-sub">Meine bisherigen Resultate.</p>
-  <div class="past-section">
-    <div class="past-item">
-      <div class="past-left">
-        <div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-        <div><div class="past-name">Kerzerslauf</div><div class="past-info">Kerzers · März 2026</div></div>
-      </div>
-      <div class="past-right"><div class="past-time">1h 11min</div><span class="past-badge">Finisher</span></div>
-    </div>
-    <div class="past-item">
-      <div class="past-left">
-        <div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-        <div><div class="past-name">Sprint Triathlon Wallisellen</div><div class="past-info">Wallisellen · April 2026</div></div>
-      </div>
-      <div class="past-right"><div class="past-time">1h 03min</div><span class="past-badge">Finisher</span></div>
-    </div>
-    <div class="past-item">
-      <div class="past-left">
-        <div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
-        <div><div class="past-name">Sprint Triathlon Aarau</div><div class="past-info">Aarau · September 2025</div></div>
-      </div>
-      <div class="past-right"><div class="past-time">1h 17min</div><span class="past-badge">Finisher</span></div>
     </div>
   </div>
-</div>
+</section>
 
+<!-- VERGANGENE WETTKÄMPFE -->
+<section class="section past-section-wrap">
+  <div class="section-inner">
+    <p class="label">Bisherige Resultate</p>
+    <h2 class="display">Vergangene<br><em>Wettkämpfe.</em></h2>
+    <div class="past-grid">
+      <div class="past-item">
+        <div class="past-left">
+          <div class="past-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div>
+            <div class="past-name">Sprint Triathlon Wallisellen</div>
+            <div class="past-info">Wallisellen · April 2026 · 750m / 20km / 5km</div>
+          </div>
+        </div>
+        <div class="past-right">
+          <div class="past-time">1:03</div>
+          <span class="past-badge">Finisher</span>
+        </div>
+      </div>
+      <div class="past-item">
+        <div class="past-left">
+          <div class="past-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div>
+            <div class="past-name">Kerzerslauf</div>
+            <div class="past-info">Kerzers · März 2026 · Laufevent</div>
+          </div>
+        </div>
+        <div class="past-right">
+          <div class="past-time">1:11</div>
+          <span class="past-badge">Finisher</span>
+        </div>
+      </div>
+      <div class="past-item">
+        <div class="past-left">
+          <div class="past-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div>
+            <div class="past-name">Sprint Triathlon Aarau</div>
+            <div class="past-info">Aarau · September 2025 · 750m / 20km / 5km</div>
+          </div>
+        </div>
+        <div class="past-right">
+          <div class="past-time">1:17</div>
+          <span class="past-badge">Finisher</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="motto-foot">"One step further every day."</div>
-  <div>© 2026 Nico Rüttimann · Triathlet & Student</div>
+  <div class="footer-left">„One step further every day."</div>
+  <div class="footer-right">
+    <ul class="footer-links">
+      <li><a href="uebermich.html">Über mich</a></li>
+      <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+      <li><a href="sponsoring.html">Sponsoring</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div>© 2026 Nico Rüttimann</div>
+  </div>
 </footer>
 
 <script>
-  document.querySelectorAll('#nl a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));
+  document.querySelectorAll('#navlinks a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'))
+  );
 
   function buildCountdown(id, targetDate) {
     const el = document.getElementById(id);
     if (!el) return;
     function update() {
       const diff = new Date(targetDate) - new Date();
-      if (diff <= 0) { el.innerHTML = '<span style="color:var(--gold-light);font-size:0.85rem;font-weight:600;">Rennen hat stattgefunden</span>'; return; }
+      if (diff <= 0) {
+        el.innerHTML = '<span style="color:var(--gold-light);font-size:0.82rem;font-weight:500;letter-spacing:1px;">Rennen hat stattgefunden</span>';
+        return;
+      }
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
@@ -275,6 +615,7 @@
     update();
     setInterval(update, 1000);
   }
+
   buildCountdown('cd-ironman', '2026-06-07T07:00:00');
   buildCountdown('cd-sanremo', '2026-10-04T07:00:00');
 </script>
