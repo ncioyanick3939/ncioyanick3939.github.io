@@ -27,7 +27,7 @@
   html { scroll-behavior: smooth; }
   body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-  /* ─── NAV ─── */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; justify-content: space-between; align-items: center;
@@ -56,7 +56,7 @@
   .nav-cta a:hover { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
   .menu-toggle { display: none; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.4rem; cursor: pointer; padding: 0.3rem; }
 
-  /* ─── HERO ─── */
+  /* HERO – kein Hintergrundbild, nur dunkel */
   .hero {
     min-height: 80vh;
     background: var(--dark-2);
@@ -64,20 +64,9 @@
     padding: 0 3rem 5rem;
     position: relative; overflow: hidden;
   }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background-image: url('Rad.png');
-    background-size: cover; background-position: center center;
-    opacity: 0.4;
-    animation: heroZoom 18s ease-in-out infinite alternate;
-  }
-  @keyframes heroZoom {
-    from { transform: scale(1); }
-    to   { transform: scale(1.06); }
-  }
   .hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(22,22,20,0.15) 0%, rgba(22,22,20,0.9) 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-3) 100%);
   }
   .hero-content { position: relative; z-index: 2; max-width: 700px; }
   .label {
@@ -98,7 +87,7 @@
     font-weight: 300; letter-spacing: 0.3px;
   }
 
-  /* ─── SHARED ─── */
+  /* SHARED */
   .section { padding: 7rem 3rem; }
   .section-inner { max-width: 1000px; margin: 0 auto; }
   h2.display {
@@ -109,39 +98,13 @@
   }
   h2.display em { font-style: italic; color: var(--gold); }
 
-  /* ─── RAD SECTION ─── */
+  /* RAD SECTION – nur Text, kein Bild */
   .rad-section {
     background: var(--dark-3);
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    min-height: 480px;
-    display: flex; align-items: stretch;
+    padding: 6rem 3rem;
+    position: relative; overflow: hidden;
   }
-  .rad-img-wrap {
-    position: relative;
-    width: 55%;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .rad-img-wrap img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    display: block;
-    filter: grayscale(15%) contrast(1.08);
-    transition: transform 8s ease;
-  }
-  .rad-section:hover .rad-img-wrap img { transform: scale(1.04); }
-  .rad-img-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to right, transparent 60%, var(--dark-3) 100%);
-  }
-  .rad-text {
-    flex: 1;
-    padding: 5rem 4rem 5rem 3rem;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative; z-index: 2;
-  }
+  .rad-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
   .rad-text .label { color: var(--gold); }
   .rad-text h2.display { color: #fff; }
   .rad-text h2.display em { color: var(--gold-light); }
@@ -161,32 +124,34 @@
     font-size: 0.65rem; font-weight: 500; letter-spacing: 1.5px;
     text-transform: uppercase; color: rgba(255,255,255,0.3);
   }
-
-  /* spinning wheel decoration */
-  .wheel-deco {
-    position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
-    width: 280px; height: 280px;
-    border: 1px solid rgba(184,145,46,0.08);
-    border-radius: 50%;
+  /* decorative gold lines panel */
+  .rad-deco {
+    position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .rad-deco-inner {
+    width: 280px; height: 280px; position: relative;
+    border: 1px solid rgba(184,145,46,0.15); border-radius: 50%;
     animation: spinWheel 30s linear infinite;
-    pointer-events: none;
   }
-  .wheel-deco::before {
+  .rad-deco-inner::before {
     content: ''; position: absolute; inset: 20px;
-    border: 1px solid rgba(184,145,46,0.05);
-    border-radius: 50%;
+    border: 1px solid rgba(184,145,46,0.08); border-radius: 50%;
   }
-  .wheel-deco::after {
+  .rad-deco-inner::after {
     content: ''; position: absolute; inset: 50%;
-    width: 8px; height: 8px; margin: -4px;
-    background: rgba(184,145,46,0.2); border-radius: 50%;
+    width: 10px; height: 10px; margin: -5px;
+    background: rgba(184,145,46,0.3); border-radius: 50%;
   }
-  @keyframes spinWheel {
-    from { transform: translateY(-50%) rotate(0deg); }
-    to   { transform: translateY(-50%) rotate(360deg); }
+  @keyframes spinWheel { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  /* spokes */
+  .spoke {
+    position: absolute; top: 50%; left: 50%;
+    width: 48%; height: 1px;
+    background: rgba(184,145,46,0.1);
+    transform-origin: left center;
   }
 
-  /* ─── RACE CARDS ─── */
+  /* RACE CARDS */
   .races-section { background: var(--white); }
   .race-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -206,7 +171,6 @@
   .race-card:hover::before { transform: scaleX(1); }
   .race-card:last-child { border-right: none; }
   .race-card:hover { background: var(--light); }
-
   .race-tag {
     font-size: 0.62rem; font-weight: 500; letter-spacing: 2px;
     text-transform: uppercase; color: var(--gold);
@@ -223,7 +187,6 @@
   .race-meta-row svg { color: var(--gold); flex-shrink: 0; }
   .race-meta-row a { color: var(--muted); text-decoration: none; border-bottom: 1px dashed rgba(154,152,144,0.4); transition: color 0.2s; }
   .race-meta-row a:hover { color: var(--gold); }
-
   .race-dist-bar {
     margin: 1.5rem -2rem 0; padding: 1rem 2rem;
     background: var(--light); border-top: 1px solid var(--border);
@@ -238,12 +201,9 @@
     font-size: 0.8rem; color: var(--mid); font-weight: 400;
   }
   .dist-item svg { color: var(--gold); }
-
   .race-countdown {
-    margin: 1.5rem 0 0;
-    padding: 1.2rem 1.5rem;
-    background: var(--light);
-    border: 1px solid var(--border);
+    margin: 1.5rem 0 0; padding: 1.2rem 1.5rem;
+    background: var(--light); border: 1px solid var(--border);
   }
   .cd-label-top {
     font-size: 0.6rem; font-weight: 500; letter-spacing: 2px;
@@ -255,92 +215,52 @@
     background: var(--gold); border-radius: 50%;
     animation: pulse 1.5s ease-in-out infinite;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.7); }
-  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
   .countdown { display: flex; gap: 0.6rem; }
-  .cd-box {
-    flex: 1; text-align: center;
-    padding: 0.7rem 0.3rem;
-    border-bottom: 2px solid var(--border);
-    transition: border-color 0.2s;
-  }
+  .cd-box { flex: 1; text-align: center; padding: 0.7rem 0.3rem; border-bottom: 2px solid var(--border); transition: border-color 0.2s; }
   .cd-box:hover { border-bottom-color: var(--gold); }
-  .cd-num {
-    font-family: var(--serif); font-size: 1.8rem; font-weight: 300;
-    color: var(--dark); line-height: 1; font-variant-numeric: tabular-nums;
-    letter-spacing: -0.5px;
-  }
-  .cd-unit {
-    font-size: 0.58rem; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;
-    font-weight: 500;
-  }
-
+  .cd-num { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--dark); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
+  .cd-unit { font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; font-weight: 500; }
   .race-card-bottom { margin-top: auto; padding-top: 1.5rem; }
   .btn {
-    display: block; text-align: center;
-    padding: 0.85rem 1.5rem;
+    display: block; text-align: center; padding: 0.85rem 1.5rem;
     font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
     text-decoration: none; transition: all 0.2s;
     border: 1px solid var(--gold); color: var(--gold); background: transparent;
   }
   .btn:hover { background: var(--gold); color: #fff; }
 
-  /* ─── PAST ─── */
+  /* PAST */
   .past-section-wrap { background: var(--light); }
-  .past-grid {
-    border: 1px solid var(--border); margin-top: 3rem;
-  }
+  .past-grid { border: 1px solid var(--border); margin-top: 3rem; }
   .past-item {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 2rem; border-bottom: 1px solid var(--border);
-    transition: background 0.2s;
+    padding: 1.5rem 2rem; border-bottom: 1px solid var(--border); transition: background 0.2s;
   }
   .past-item:last-child { border-bottom: none; }
   .past-item:hover { background: var(--white); }
   .past-left { display: flex; align-items: center; gap: 1.2rem; }
-  .past-icon {
-    width: 38px; height: 38px;
-    border: 1px solid rgba(184,145,46,0.3);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold); flex-shrink: 0;
-  }
+  .past-icon { width: 38px; height: 38px; border: 1px solid rgba(184,145,46,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
   .past-name { font-size: 0.92rem; font-weight: 500; color: var(--dark); }
   .past-info { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
   .past-right { display: flex; align-items: center; gap: 1rem; }
-  .past-time {
-    font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--gold);
-  }
-  .past-badge {
-    font-size: 0.6rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--gold); border: 1px solid rgba(184,145,46,0.35); padding: 0.2rem 0.6rem;
-  }
+  .past-time { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--gold); }
+  .past-badge { font-size: 0.6rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,145,46,0.35); padding: 0.2rem 0.6rem; }
 
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--dark); padding: 3rem;
-    display: flex; justify-content: space-between; align-items: center;
-    border-top: 1px solid rgba(184,145,46,0.1);
-  }
+  /* FOOTER */
+  footer { background: var(--dark); padding: 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,145,46,0.1); }
   .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
   .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
   .footer-links { display: flex; gap: 2rem; list-style: none; margin-bottom: 0.5rem; justify-content: flex-end; }
   .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
   .footer-links a:hover { color: var(--gold-light); }
 
-  /* ─── MOBILE ─── */
+  /* MOBILE */
   @media (max-width: 900px) {
     nav { padding: 0 1.5rem; }
     .hero { padding: 0 1.5rem 4rem; min-height: 65vh; }
-    .section { padding: 5rem 1.5rem; }
-    .nav-links {
-      display: none; position: fixed; top: 68px; left: 0; right: 0;
-      flex-direction: column; align-items: stretch; height: auto;
-      background: rgba(16,15,14,0.98); border-bottom: 1px solid rgba(184,145,46,0.1);
-      padding: 1.5rem; gap: 0.5rem;
-    }
+    .section, .rad-section { padding: 5rem 1.5rem; }
+    .nav-links { display: none; position: fixed; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch; height: auto; background: rgba(16,15,14,0.98); border-bottom: 1px solid rgba(184,145,46,0.1); padding: 1.5rem; gap: 0.5rem; }
     .nav-links.open { display: flex; }
     .nav-links li { height: auto; }
     .nav-links li a { height: auto; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -349,12 +269,9 @@
     .race-grid { grid-template-columns: 1fr; }
     .race-card { border-right: none; border-bottom: 1px solid var(--border); }
     .race-card:last-child { border-bottom: none; }
-    .rad-section { flex-direction: column; }
-    .rad-img-wrap { width: 100%; height: 300px; }
-    .rad-img-overlay { background: linear-gradient(to bottom, transparent 60%, var(--dark-3) 100%); }
-    .rad-text { padding: 3rem 1.5rem; }
+    .rad-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .rad-deco { display: none; }
     .rad-stats { gap: 1.5rem; }
-    .wheel-deco { display: none; }
     .past-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem 1.5rem; }
     .past-right { align-items: flex-start; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
@@ -379,9 +296,8 @@
   </ul>
 </nav>
 
-<!-- HERO mit Rad.png als Hintergrund -->
+<!-- HERO – kein Hintergrundbild -->
 <header class="hero">
-  <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="label">Wettkämpfe</p>
@@ -390,30 +306,43 @@
   </div>
 </header>
 
-<!-- RAD SECTION mit Rad.png als Bild + Animation -->
+<!-- RAD SECTION – nur Text + dekoratives Element -->
 <div class="rad-section">
-  <div class="rad-img-wrap">
-    <img src="Rad.png" alt="Nico Rüttimann auf dem Rad">
-    <div class="rad-img-overlay"></div>
-  </div>
-  <div class="rad-text">
-    <div class="wheel-deco"></div>
-    <p class="label">Die Velo-Disziplin</p>
-    <h2 class="display">Kraft auf<br><em>zwei Rädern.</em></h2>
-    <p>Das Radfahren ist meine stärkste Disziplin. Lange Ausfahrten auf den Strassen rund um Freiburg und Bern bilden das Fundament meiner Wettkampfvorbereitung.</p>
-    <p>Beim Ironman 70.3 warten 90 km Velo — hier will ich Zeit gutmachen und stark in den Lauf gehen.</p>
-    <div class="rad-stats">
-      <div>
-        <div class="rad-stat-val">90</div>
-        <div class="rad-stat-label">km Ironman Velo</div>
+  <div class="rad-inner">
+    <div class="rad-text">
+      <p class="label">Die Velo-Disziplin</p>
+      <h2 class="display">Kraft auf<br><em>zwei Rädern.</em></h2>
+      <p>Das Radfahren ist meine stärkste Disziplin. Lange Ausfahrten auf den Strassen rund um Freiburg und Bern bilden das Fundament meiner Wettkampfvorbereitung.</p>
+      <p>Beim Ironman 70.3 warten 90 km Velo — hier will ich Zeit gutmachen und stark in den Lauf gehen.</p>
+      <div class="rad-stats">
+        <div>
+          <div class="rad-stat-val">90</div>
+          <div class="rad-stat-label">km Ironman Velo</div>
+        </div>
+        <div>
+          <div class="rad-stat-val">3–4h</div>
+          <div class="rad-stat-label">Lange Ausfahrt Sa</div>
+        </div>
+        <div>
+          <div class="rad-stat-val">~200</div>
+          <div class="rad-stat-label">km / Woche</div>
+        </div>
       </div>
-      <div>
-        <div class="rad-stat-val">3–4h</div>
-        <div class="rad-stat-label">Lange Ausfahrt Sa</div>
-      </div>
-      <div>
-        <div class="rad-stat-val">~200</div>
-        <div class="rad-stat-label">km / Woche</div>
+    </div>
+    <div class="rad-deco">
+      <div class="rad-deco-inner">
+        <div class="spoke" style="transform:rotate(0deg)"></div>
+        <div class="spoke" style="transform:rotate(30deg)"></div>
+        <div class="spoke" style="transform:rotate(60deg)"></div>
+        <div class="spoke" style="transform:rotate(90deg)"></div>
+        <div class="spoke" style="transform:rotate(120deg)"></div>
+        <div class="spoke" style="transform:rotate(150deg)"></div>
+        <div class="spoke" style="transform:rotate(180deg)"></div>
+        <div class="spoke" style="transform:rotate(210deg)"></div>
+        <div class="spoke" style="transform:rotate(240deg)"></div>
+        <div class="spoke" style="transform:rotate(270deg)"></div>
+        <div class="spoke" style="transform:rotate(300deg)"></div>
+        <div class="spoke" style="transform:rotate(330deg)"></div>
       </div>
     </div>
   </div>
@@ -459,7 +388,6 @@
       </div>
 
       <!-- USTER -->
-
       <div class="race-card">
         <div class="race-tag">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -592,7 +520,6 @@
   document.querySelectorAll('#navlinks a').forEach(a =>
     a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'))
   );
-
   function buildCountdown(id, targetDate) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -615,7 +542,6 @@
     update();
     setInterval(update, 1000);
   }
-
   buildCountdown('cd-ironman', '2026-06-07T07:00:00');
   buildCountdown('cd-sanremo', '2026-10-04T07:00:00');
 </script>
