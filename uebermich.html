@@ -66,7 +66,7 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background-image: url('foto.jpeg');
+    background-image: url('B2.png');
     background-size: cover; background-position: center top;
     opacity: 0.35;
   }
@@ -298,6 +298,37 @@
   .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
   .footer-links a:hover { color: var(--gold-light); }
 
+  /* ─── ERLEBNISSE SPLIT ─── */
+  .erlebnisse-section { padding: 0 !important; overflow: hidden; }
+  .erlebnisse-grid {
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 520px;
+  }
+  .erlebnisse-img {
+    position: relative; overflow: hidden;
+  }
+  .erlebnisse-img img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    display: block; filter: grayscale(10%) contrast(1.05);
+    transition: transform 8s ease;
+  }
+  .erlebnisse-img:hover img { transform: scale(1.04); }
+  .erlebnisse-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 65%, var(--dark-2) 100%);
+  }
+  .erlebnisse-img-label {
+    position: absolute; bottom: 2rem; left: 2rem;
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .erlebnisse-img-label span {
+    display: block; width: 20px; height: 1px; background: var(--gold);
+  }
+  .erlebnisse-text {
+    padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center;
+  }
+
   /* ─── MOBILE ─── */
   @media (max-width: 900px) {
     nav { padding: 0 1.5rem; }
@@ -326,6 +357,10 @@
     .race-grid { grid-template-columns: 1fr; }
     .race-card { border-right: none; border-bottom: 1px solid var(--border); }
     .race-card:last-child { border-bottom: none; }
+    .erlebnisse-grid { grid-template-columns: 1fr; }
+    .erlebnisse-img { height: 280px; }
+    .erlebnisse-img-overlay { background: linear-gradient(to bottom, transparent 60%, var(--dark-2) 100%); }
+    .erlebnisse-text { padding: 3rem 1.5rem; }
     .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
     .social-box { flex-direction: column; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
@@ -366,7 +401,7 @@
   <div class="section-inner">
     <div class="intro-grid">
       <div class="intro-img">
-        <img src="B2.png" alt="Nico Rüttimann am Wettkampf">
+        <img src="Sonnenaufgang bild.jpg" alt="Nico Rüttimann am Wettkampf">
       </div>
       <div>
         <p class="label">Wer ich bin</p>
@@ -568,17 +603,26 @@
 </section>
 
 <!-- ERLEBNISSE -->
-<section class="werdegang-section dark section">
-  <div class="section-inner">
-    <p class="label">Persönliches</p>
-    <h2 class="display">Erlebnisse &amp;<br><em>Meilensteine.</em></h2>
-    <div class="timeline">
-      <div class="tl-item dark-line">
-        <div class="tl-date">Nov 2023 – Jun 2024</div>
-        <div>
-          <div class="tl-title">Weltreise — 6 Monate</div>
-          <div class="tl-org">Auslandserfahrung</div>
-          <div class="tl-desc">Sechsmonatige Reise rund um die Welt — eine der prägendsten Erfahrungen meines Lebens. Offenheit, Selbstständigkeit, neue Perspektiven.</div>
+<section class="werdegang-section dark erlebnisse-section">
+  <div class="erlebnisse-grid">
+    <div class="erlebnisse-img">
+      <img src="Sonnenaufgang bild.jpg" alt="Sonnenaufgang Weltreise">
+      <div class="erlebnisse-img-overlay"></div>
+      <div class="erlebnisse-img-label">
+        <span></span>Weltreise 2023–2024
+      </div>
+    </div>
+    <div class="erlebnisse-text">
+      <p class="label">Persönliches</p>
+      <h2 class="display" style="color:#fff;">Erlebnisse &amp;<br><em>Meilensteine.</em></h2>
+      <div class="timeline" style="margin-top:2rem;">
+        <div class="tl-item dark-line">
+          <div class="tl-date">Nov 2023 – Jun 2024</div>
+          <div>
+            <div class="tl-title">Weltreise — 6 Monate</div>
+            <div class="tl-org">Auslandserfahrung</div>
+            <div class="tl-desc">Sechsmonatige Reise rund um die Welt — eine der prägendsten Erfahrungen meines Lebens. Offenheit, Selbstständigkeit, neue Perspektiven.</div>
+          </div>
         </div>
       </div>
     </div>
