@@ -110,9 +110,7 @@
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 5rem; align-items: center;
   }
-  .intro-img {
-    aspect-ratio: 3/4; overflow: hidden;
-  }
+  .intro-img { aspect-ratio: 3/4; overflow: hidden; }
   .intro-img img {
     width: 100%; height: 100%; object-fit: cover;
     object-position: center top;
@@ -143,23 +141,16 @@
   }
 
   /* ─── QUOTE ─── */
-  .quote-section {
-    background: var(--dark);
-    padding: 6rem 3rem;
-  }
-  .quote-inner {
-    max-width: 700px; margin: 0 auto; text-align: center;
-  }
+  .quote-section { background: var(--dark); padding: 6rem 3rem; }
+  .quote-inner { max-width: 700px; margin: 0 auto; text-align: center; }
   .quote-mark {
     font-family: var(--serif); font-size: 6rem; font-weight: 300;
-    color: rgba(184,145,46,0.2); line-height: 0.5; display: block;
-    margin-bottom: 2rem;
+    color: rgba(184,145,46,0.2); line-height: 0.5; display: block; margin-bottom: 2rem;
   }
   .quote-text {
     font-family: var(--serif); font-style: italic;
     font-size: clamp(1.3rem, 3vw, 2rem);
-    font-weight: 300; color: #fff; line-height: 1.4;
-    margin-bottom: 1.5rem;
+    font-weight: 300; color: #fff; line-height: 1.4; margin-bottom: 1.5rem;
   }
   .quote-author {
     font-size: 0.68rem; font-weight: 500; letter-spacing: 3px;
@@ -173,9 +164,7 @@
     gap: 0; border: 1px solid var(--border); margin-top: 3rem;
   }
   .pillar {
-    padding: 2.5rem 2rem;
-    border-right: 1px solid var(--border);
-    transition: background 0.25s;
+    padding: 2.5rem 2rem; border-right: 1px solid var(--border); transition: background 0.25s;
   }
   .pillar:last-child { border-right: none; }
   .pillar:hover { background: var(--white); }
@@ -195,97 +184,78 @@
   .training-section .label { color: var(--gold); }
   .training-section h2.display { color: #fff; }
   .training-section h2.display em { color: var(--gold-light); }
-  .training-sub {
-    font-size: 0.85rem; color: rgba(255,255,255,0.45);
-    font-weight: 300; margin-bottom: 3rem;
-  }
+  .training-sub { font-size: 0.85rem; color: rgba(255,255,255,0.45); font-weight: 300; margin-bottom: 3rem; }
   .week-grid {
     display: grid; grid-template-columns: repeat(7, 1fr); gap: 0;
     border: 1px solid rgba(255,255,255,0.1);
   }
   .day {
     padding: 1.8rem 1rem; text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    transition: background 0.2s;
+    border-right: 1px solid rgba(255,255,255,0.1); transition: background 0.2s;
   }
   .day:last-child { border-right: none; }
   .day:hover { background: rgba(184,145,46,0.06); }
-  .day-name {
-    font-size: 0.62rem; color: rgba(255,255,255,0.3);
-    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem;
-  }
+  .day-name { font-size: 0.62rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; }
   .day-icon { color: var(--gold); margin: 0 auto 0.8rem; display: flex; justify-content: center; }
   .day.rest .day-icon { color: rgba(255,255,255,0.2); }
-  .day-act {
-    font-size: 0.75rem; color: rgba(255,255,255,0.75);
-    font-weight: 500; margin-bottom: 0.3rem;
-  }
+  .day-act { font-size: 0.75rem; color: rgba(255,255,255,0.75); font-weight: 500; margin-bottom: 0.3rem; }
   .day-time { font-size: 0.68rem; color: rgba(255,255,255,0.3); }
 
-  /* ─── HIGHLIGHTS ─── */
-  .highlights-section { background: var(--white); }
-  .highlights-list { margin-top: 3rem; }
-  .hl-item {
-    display: grid; grid-template-columns: 120px 1fr;
-    gap: 2.5rem; align-items: start;
-    padding: 2rem 0; border-bottom: 1px solid var(--border);
-  }
-  .hl-item:first-child { border-top: 1px solid var(--border); }
-  .hl-year {
-    font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
-    color: var(--gold); padding-top: 0.15rem;
-  }
-  .hl-title {
-    font-size: 0.95rem; font-weight: 500; color: var(--dark);
-    margin-bottom: 0.3rem;
-  }
-  .hl-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+  /* ─── WERDEGANG (3 Kategorien) ─── */
+  .werdegang-section { background: var(--white); }
+  .werdegang-section.alt { background: var(--light); }
+  .werdegang-section.dark { background: var(--dark-2); padding: 7rem 3rem; }
+  .werdegang-section.dark .label { color: var(--gold); }
+  .werdegang-section.dark h2.display { color: #fff; }
+  .werdegang-section.dark h2.display em { color: var(--gold-light); }
 
-  /* ─── WERDEGANG ─── */
-  .timeline-section { background: var(--light); }
-  .timeline { max-width: 680px; margin-top: 3rem; }
+  /* Wettkämpfe — Karten */
+  .race-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 1px solid var(--border); margin-top: 3rem;
+  }
+  .race-card {
+    padding: 2rem 1.8rem; border-right: 1px solid var(--border);
+    transition: background 0.2s; position: relative;
+  }
+  .race-card:last-child { border-right: none; }
+  .race-card:hover { background: var(--light); }
+  .race-year {
+    font-family: var(--serif); font-size: 0.85rem; font-weight: 300;
+    color: var(--gold); letter-spacing: 1px; margin-bottom: 0.6rem;
+  }
+  .race-name {
+    font-size: 0.95rem; font-weight: 500; color: var(--dark); margin-bottom: 0.4rem; line-height: 1.3;
+  }
+  .race-meta { font-size: 0.78rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+  .race-badge {
+    display: inline-block; margin-top: 0.8rem;
+    font-size: 0.6rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(184,145,46,0.35);
+    padding: 0.2rem 0.6rem;
+  }
+
+  /* Ausbildung & Erlebnisse — Timeline */
+  .timeline { max-width: 780px; margin-top: 3rem; }
   .tl-item {
-    display: grid; grid-template-columns: 160px 1fr;
+    display: grid; grid-template-columns: 180px 1fr;
     gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border);
-    position: relative;
   }
   .tl-item:first-child { border-top: 1px solid var(--border); }
   .tl-date {
     font-size: 0.68rem; font-weight: 500; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--gold); padding-top: 0.2rem;
-    line-height: 1.5;
+    text-transform: uppercase; color: var(--gold); padding-top: 0.2rem; line-height: 1.6;
   }
   .tl-title { font-size: 0.95rem; font-weight: 500; color: var(--dark); margin-bottom: 0.2rem; }
   .tl-org { font-size: 0.82rem; color: var(--muted); font-weight: 300; margin-bottom: 0.4rem; }
   .tl-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-  /* ─── SKILLS ─── */
-  .skills-section { background: var(--dark-2); padding: 7rem 3rem; }
-  .skills-inner { max-width: 1000px; margin: 0 auto; }
-  .skills-section .label { color: var(--gold); }
-  .skills-section h2.display { color: #fff; margin-bottom: 3.5rem; }
-  .skills-section h2.display em { color: var(--gold-light); }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
-  .skill-row { margin-bottom: 1.5rem; }
-  .skill-label {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.78rem; color: rgba(255,255,255,0.7);
-    font-weight: 400; margin-bottom: 0.6rem;
-  }
-  .skill-label span:last-child { color: var(--gold); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; }
-  .skill-bar { height: 2px; background: rgba(255,255,255,0.1); }
-  .skill-fill { height: 100%; background: var(--gold); }
-  .lang-list { display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(255,255,255,0.08); }
-  .lang-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    font-size: 0.88rem; color: rgba(255,255,255,0.7); font-weight: 300;
-  }
-  .lang-item:last-child { border-bottom: none; }
-  .lang-level {
-    font-family: var(--serif); font-size: 1.2rem; font-weight: 300; color: var(--gold-light);
-  }
+  /* Dark timeline (Erlebnisse) */
+  .tl-item.dark-line { border-bottom-color: rgba(255,255,255,0.08); }
+  .tl-item.dark-line:first-child { border-top-color: rgba(255,255,255,0.08); }
+  .tl-item.dark-line .tl-title { color: rgba(255,255,255,0.85); }
+  .tl-item.dark-line .tl-org { color: rgba(255,255,255,0.35); }
+  .tl-item.dark-line .tl-desc { color: rgba(255,255,255,0.4); }
 
   /* ─── SOCIAL ─── */
   .social-section { background: var(--dark); padding: 6rem 3rem; }
@@ -333,7 +303,8 @@
     nav { padding: 0 1.5rem; }
     .hero { padding: 0 1.5rem 4rem; min-height: 60vh; }
     .section { padding: 5rem 1.5rem; }
-    .training-section, .skills-section, .social-section, .quote-section { padding: 5rem 1.5rem; }
+    .training-section, .social-section, .quote-section { padding: 5rem 1.5rem; }
+    .werdegang-section.dark { padding: 5rem 1.5rem; }
     .nav-links {
       display: none; position: fixed; top: 68px; left: 0; right: 0;
       flex-direction: column; align-items: stretch; height: auto;
@@ -352,9 +323,10 @@
     .pillar:last-child { border-bottom: none; }
     .week-grid { grid-template-columns: repeat(4, 1fr); }
     .day:nth-child(4) { border-right: none; }
-    .hl-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .race-grid { grid-template-columns: 1fr; }
+    .race-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .race-card:last-child { border-bottom: none; }
     .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
-    .skills-grid { grid-template-columns: 1fr; gap: 3rem; }
     .social-box { flex-direction: column; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
     .footer-links { justify-content: center; }
@@ -394,14 +366,14 @@
   <div class="section-inner">
     <div class="intro-grid">
       <div class="intro-img">
-        <img src="VeloBild.jpg" alt="Nico Rüttimann am Wettkampf">
+        <img src="Sonnenaufgang_bild.jpg" alt="Nico Rüttimann am Wettkampf">
       </div>
       <div>
         <p class="label">Wer ich bin</p>
         <h2 class="display">Athlet &amp;<br><em>Student.</em></h2>
         <p>Ich bin Nico, 22 Jahre alt, aus der Region Freiburg/Bern. Seit ich mit dem Triathlon begonnen habe, ist dieser Sport ein fester Bestandteil meines Alltags geworden — nicht nur als Training, sondern als Lebensweise.</p>
         <p>Neben dem Sport studiere ich Betriebsökonomie mit Fokus Informatik an der BFH Bern. Die Kombination aus Disziplin im Sport und strukturiertem Denken im Studium gibt mir viel Energie.</p>
-        <p>Meine KV-Ausbildung bei der Freiburger Kantonalbank, eine sechsmonatige Weltreise und mein Engagement in der Jubla haben mich geprägt und machen mich zu dem, der ich heute bin.</p>
+        <p>Meine KV-Ausbildung bei der Freiburger Kantonalbank und eine sechsmonatige Weltreise haben mich geprägt und machen mich zu dem, der ich heute bin.</p>
         <div class="intro-nums">
           <div class="intro-num">
             <div class="intro-num-val">3</div>
@@ -522,63 +494,42 @@
   </div>
 </section>
 
-<!-- HIGHLIGHTS -->
-<section class="section highlights-section">
+<!-- WETTKÄMPFE -->
+<section class="section werdegang-section">
   <div class="section-inner">
-    <p class="label">Meilensteine</p>
-    <h2 class="display">Bisherige<br><em>Highlights.</em></h2>
-    <div class="highlights-list">
-      <div class="hl-item">
-        <div class="hl-year">2026</div>
-        <div>
-          <div class="hl-title">Sprint Triathlon Wallisellen</div>
-          <div class="hl-desc">Wallisellen · 1h 03min · Finisher</div>
-        </div>
+    <p class="label">Sportevents</p>
+    <h2 class="display">Wettkämpfe &amp;<br><em>Rennen.</em></h2>
+    <div class="race-grid">
+      <div class="race-card">
+        <div class="race-year">2026</div>
+        <div class="race-name">Sprint Triathlon Wallisellen</div>
+        <div class="race-meta">Wallisellen<br>750m Schwimmen · 20km Velo · 5km Laufen</div>
+        <div class="race-meta" style="margin-top:0.4rem; font-weight:500; color: var(--mid);">1h 03min</div>
+        <span class="race-badge">Finisher</span>
       </div>
-      <div class="hl-item">
-        <div class="hl-year">2026</div>
-        <div>
-          <div class="hl-title">Kerzerslauf</div>
-          <div class="hl-desc">Kerzers · 1h 11min · Finisher</div>
-        </div>
+      <div class="race-card">
+        <div class="race-year">2026</div>
+        <div class="race-name">Kerzerslauf</div>
+        <div class="race-meta">Kerzers<br>Laufevent</div>
+        <div class="race-meta" style="margin-top:0.4rem; font-weight:500; color: var(--mid);">1h 11min</div>
+        <span class="race-badge">Finisher</span>
       </div>
-      <div class="hl-item">
-        <div class="hl-year">2025</div>
-        <div>
-          <div class="hl-title">Sprint Triathlon Aarau</div>
-          <div class="hl-desc">Aarau · 1h 17min · Finisher</div>
-        </div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-year">2024</div>
-        <div>
-          <div class="hl-title">Weltreise — 6 Monate</div>
-          <div class="hl-desc">Reise rund um die Welt — eine der prägendsten Erfahrungen meines Lebens.</div>
-        </div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-year">2023</div>
-        <div>
-          <div class="hl-title">KV-Ausbildung mit Berufsmatura</div>
-          <div class="hl-desc">Freiburger Kantonalbank — erfolgreich abgeschlossen.</div>
-        </div>
-      </div>
-      <div class="hl-item">
-        <div class="hl-year">4 J.</div>
-        <div>
-          <div class="hl-title">Jubla Heitenried — Leiter & Kassier</div>
-          <div class="hl-desc">Ehrenamtliches Engagement als Scharleiter, Kassier und Gruppenleiter.</div>
-        </div>
+      <div class="race-card">
+        <div class="race-year">2025</div>
+        <div class="race-name">Sprint Triathlon Aarau</div>
+        <div class="race-meta">Aarau<br>750m Schwimmen · 20km Velo · 5km Laufen</div>
+        <div class="race-meta" style="margin-top:0.4rem; font-weight:500; color: var(--mid);">1h 17min</div>
+        <span class="race-badge">Finisher</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WERDEGANG -->
-<section class="section timeline-section">
+<!-- AUSBILDUNG -->
+<section class="section werdegang-section alt">
   <div class="section-inner">
     <p class="label">Werdegang</p>
-    <h2 class="display">Wo ich<br><em>herkomme.</em></h2>
+    <h2 class="display">Ausbildung &amp;<br><em>Beruf.</em></h2>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-date">Sep 2024 – heute</div>
@@ -605,14 +556,6 @@
         </div>
       </div>
       <div class="tl-item">
-        <div class="tl-date">Nov 2023 – Jun 2024</div>
-        <div>
-          <div class="tl-title">Weltreise</div>
-          <div class="tl-org">Auslandserfahrung</div>
-          <div class="tl-desc">Sechsmonatige Reise — Offenheit, Selbstständigkeit, neue Perspektiven.</div>
-        </div>
-      </div>
-      <div class="tl-item">
         <div class="tl-date">Aug 2020 – Aug 2023</div>
         <div>
           <div class="tl-title">KV-Ausbildung + Berufsmatura</div>
@@ -624,35 +567,18 @@
   </div>
 </section>
 
-<!-- SKILLS -->
-<section class="skills-section">
-  <div class="skills-inner">
-    <p class="label">Fähigkeiten</p>
-    <h2 class="display" style="color:#fff;">Stärken &amp;<br><em>Sprachen.</em></h2>
-    <div class="skills-grid">
-      <div>
-        <div class="skill-row">
-          <div class="skill-label"><span>Selbstständigkeit</span><span>Stark</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-label"><span>Teamfähigkeit</span><span>Stark</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-label"><span>Kommunikation</span><span>Gut</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-label"><span>Lösungsorientiert</span><span>Stark</span></div>
-          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-        </div>
-      </div>
-      <div>
-        <div class="lang-list">
-          <div class="lang-item"><span>Deutsch</span><span class="lang-level">C2</span></div>
-          <div class="lang-item"><span>Französisch</span><span class="lang-level">B2</span></div>
-          <div class="lang-item"><span>Englisch</span><span class="lang-level">B1</span></div>
+<!-- ERLEBNISSE -->
+<section class="werdegang-section dark section">
+  <div class="section-inner">
+    <p class="label">Persönliches</p>
+    <h2 class="display">Erlebnisse &amp;<br><em>Meilensteine.</em></h2>
+    <div class="timeline">
+      <div class="tl-item dark-line">
+        <div class="tl-date">Nov 2023 – Jun 2024</div>
+        <div>
+          <div class="tl-title">Weltreise — 6 Monate</div>
+          <div class="tl-org">Auslandserfahrung</div>
+          <div class="tl-desc">Sechsmonatige Reise rund um die Welt — eine der prägendsten Erfahrungen meines Lebens. Offenheit, Selbstständigkeit, neue Perspektiven.</div>
         </div>
       </div>
     </div>
