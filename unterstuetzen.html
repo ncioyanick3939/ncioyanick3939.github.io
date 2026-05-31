@@ -4,284 +4,540 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unterstützen – Nico Rüttimann</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #c69a3a;
-    --gold-light: #d9b556;
-    --dark: #2b2b29;
-    --dark-soft: #34332f;
-    --cream: #faf8f3;
-    --text: #2b2b29;
-    --text-muted: #6b6a64;
+    --gold: #b8912e;
+    --gold-light: #d4aa52;
+    --dark: #161614;
+    --dark-2: #1e1d1a;
+    --dark-3: #28261f;
+    --mid: #5a5850;
+    --muted: #9a9890;
+    --light: #f5f3ee;
+    --border: #e4e0d8;
+    --white: #fefefe;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--cream); line-height: 1.7; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-  /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; background: rgba(43,43,41,0.97); backdrop-filter: blur(8px); }
-  nav .logo { color: #fff; font-weight: 700; font-size: 1.15rem; letter-spacing: 1.5px; text-decoration: none; }
-  nav .logo span { color: var(--gold-light); }
-  nav ul { display: flex; gap: 1.8rem; list-style: none; }
-  nav a { color: #ccc9bf; text-decoration: none; font-size: 0.88rem; letter-spacing: 0.3px; transition: color 0.2s; }
-  nav a:hover, nav a.active { color: var(--gold-light); }
-  .menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 3rem; height: 68px;
+    background: rgba(22,22,20,0.96);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(184,145,46,0.12);
+  }
+  nav .logo { text-decoration: none; display: flex; align-items: center; height: 100%; }
+  nav .logo img { height: 42px; width: auto; object-fit: contain; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 0; list-style: none; height: 100%; }
+  .nav-links li { height: 100%; display: flex; align-items: center; }
+  .nav-links li a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
+    padding: 0 1.1rem; height: 100%; display: flex; align-items: center;
+    border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-links li a:hover, .nav-links li a.active { color: #fff; border-bottom-color: var(--gold); }
+  .nav-cta a {
+    background: transparent !important; border: 1px solid rgba(184,145,46,0.5) !important;
+    border-bottom: 1px solid rgba(184,145,46,0.5) !important;
+    color: var(--gold-light) !important; padding: 0 1.1rem !important;
+    height: 100% !important; letter-spacing: 1.8px; transition: all 0.2s !important;
+  }
+  .nav-cta a:hover { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
+  .menu-toggle { display: none; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.4rem; cursor: pointer; padding: 0.3rem; }
 
-  /* HERO */
-  .page-hero { padding: 9rem 1.5rem 5rem; background: linear-gradient(160deg, var(--dark) 0%, #3a3830 100%); color: #fff; text-align: center; position: relative; overflow: hidden; }
-  .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(198,154,58,0.12) 0%, transparent 70%); pointer-events: none; }
-  .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -0.5px; position: relative; }
-  .page-hero h1 span { color: var(--gold-light); }
-  .page-hero p { color: #a8a598; margin-top: 0.6rem; font-size: 1.05rem; position: relative; }
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 50vh;
+    background: var(--dark-2);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('foto.jpeg');
+    background-size: cover; background-position: center 30%;
+    opacity: 0.2;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(22,22,20,0.3) 0%, rgba(22,22,20,0.9) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 300; line-height: 0.92; letter-spacing: -1px;
+    color: #fff; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: #fff; }
+  .hero-sub { font-size: 0.88rem; color: rgba(255,255,255,0.45); font-weight: 300; }
 
-  /* LAYOUT */
-  .container { max-width: 820px; margin: 0 auto; padding: 4.5rem 1.5rem 5rem; }
-  .section { margin-bottom: 4rem; }
-  .section-header { text-align: center; margin-bottom: 2rem; }
-  .section-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem; }
-  .section-title span { color: var(--gold); }
-  .section-sub { color: var(--text-muted); font-size: 0.9rem; }
+  /* ─── SHARED ─── */
+  .section { padding: 7rem 3rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  h2.display {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.1; letter-spacing: -0.3px;
+    margin-bottom: 0.6rem;
+  }
+  h2.display em { font-style: italic; color: var(--gold); }
+  .section-intro { font-size: 0.88rem; color: var(--muted); font-weight: 300; margin-bottom: 3rem; }
 
-  /* BETRAG */
-  .amounts { display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center; }
-  .amount-btn { padding: 0.55rem 1.4rem; border-radius: 99px; border: 1.5px solid var(--gold); background: transparent; color: var(--gold); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-  .amount-btn:hover, .amount-btn.active { background: var(--gold); color: #fff; }
+  /* ─── BETRAGSAUSWAHL ─── */
+  .amounts-section { background: var(--light); }
+  .amounts-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    gap: 0; border: 1px solid var(--border); margin-bottom: 3rem;
+  }
+  .amount-btn {
+    padding: 1.6rem 1rem; text-align: center;
+    border-right: 1px solid var(--border);
+    background: transparent; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: var(--serif); font-size: 1.3rem; font-weight: 300;
+    color: var(--mid); border-top: none; border-left: none; border-bottom: none;
+  }
+  .amount-btn:last-child { border-right: none; }
+  .amount-btn:hover { background: var(--white); color: var(--dark); }
+  .amount-btn.active {
+    background: var(--dark); color: var(--gold-light);
+  }
+  .amount-sub { font-size: 0.6rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); display: block; margin-top: 0.3rem; }
+  .amount-btn.active .amount-sub { color: rgba(255,255,255,0.35); }
 
-  /* ZAHLUNG GRID */
-  .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .pay-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.9rem; background: #fff; border-radius: 16px; border: 1.5px solid #e0ddd4; padding: 2rem 1.5rem; text-align: center; cursor: pointer; transition: all 0.22s; text-decoration: none; color: var(--text); }
-  .pay-card:hover { border-color: var(--gold); box-shadow: 0 8px 28px rgba(198,154,58,0.13); transform: translateY(-3px); }
-  .pay-card.featured { border-color: var(--gold); position: relative; }
-  .pay-card.featured::before { content: 'Empfohlen'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 0.2rem 0.8rem; border-radius: 99px; white-space: nowrap; }
-  .pay-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
-  .pay-name { font-size: 1rem; font-weight: 700; }
-  .pay-desc { font-size: 0.82rem; color: var(--text-muted); }
-  .pay-arrow { font-size: 0.8rem; color: var(--gold); font-weight: 600; margin-top: 0.2rem; }
+  /* ─── ZAHLUNGSMETHODEN ─── */
+  .pay-section { background: var(--white); }
+  .pay-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; border: 1px solid var(--border); margin-bottom: 3rem;
+  }
+  .pay-card {
+    padding: 3rem 2.5rem;
+    border-right: 1px solid var(--border);
+    cursor: pointer; text-decoration: none; color: var(--dark);
+    display: flex; flex-direction: column; gap: 1rem;
+    transition: background 0.2s; position: relative;
+  }
+  .pay-card:last-child { border-right: none; }
+  .pay-card:hover { background: var(--light); }
+  .pay-card.featured { background: var(--dark); color: #fff; }
+  .pay-card.featured:hover { background: var(--dark-3); }
+  .pay-badge {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-size: 0.6rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(184,145,46,0.4);
+    padding: 0.2rem 0.6rem;
+  }
+  .pay-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(184,145,46,0.25);
+  }
+  .pay-card.featured .pay-icon { border-color: rgba(184,145,46,0.3); }
+  .pay-name {
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 300;
+    line-height: 1.1;
+  }
+  .pay-card.featured .pay-name { color: #fff; }
+  .pay-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; }
+  .pay-card.featured .pay-desc { color: rgba(255,255,255,0.4); }
+  .pay-arrow {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-top: auto;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .pay-arrow::after { content: '→'; }
 
-  /* STRIPE CTA */
-  .stripe-cta { background: var(--dark); border-radius: 18px; padding: 2.5rem 2rem; text-align: center; color: #fff; margin-bottom: 1rem; }
-  .stripe-cta h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .stripe-cta p { color: #a8a598; font-size: 0.9rem; margin-bottom: 1.5rem; }
-  .badge-row { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
-  .badge { display: inline-flex; align-items: center; gap: 0.35rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #ccc9bf; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.8rem; border-radius: 99px; }
-  .btn-stripe { display: inline-block; background: var(--gold); color: #fff; padding: 0.9rem 2.5rem; border-radius: 10px; font-size: 1rem; font-weight: 700; text-decoration: none; letter-spacing: 0.3px; transition: all 0.2s; }
-  .btn-stripe:hover { background: var(--gold-light); transform: translateY(-1px); }
+  /* TRUST */
+  .trust-bar {
+    display: flex; gap: 0; border: 1px solid var(--border);
+    border-top: none; margin-bottom: 3rem;
+  }
+  .trust-item {
+    flex: 1; padding: 1rem 1.5rem; text-align: center;
+    border-right: 1px solid var(--border);
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .trust-item:last-child { border-right: none; }
+  .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
-  /* DIVIDER */
-  .or-divider { text-align: center; position: relative; margin: 2rem 0; }
-  .or-divider::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #e0ddd4; }
-  .or-divider span { position: relative; background: var(--cream); padding: 0 1rem; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  /* ─── DIVIDER ─── */
+  .or-divider {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 0 0 4rem;
+  }
+  .or-divider::before, .or-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .or-divider span {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--muted); white-space: nowrap;
+  }
 
-  /* RECHNUNG */
-  .invoice-box { background: #fff; border-radius: 18px; border: 1px solid #e8e5dc; padding: 2.5rem 2rem; }
-  .invoice-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; }
-  .invoice-box > p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 2rem; }
-  form { display: grid; gap: 1rem; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; }
-  label { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  input, textarea, select { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #e0ddd4; border-radius: 9px; font-size: 0.92rem; font-family: inherit; background: #faf8f3; color: var(--text); transition: border-color 0.2s; }
-  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); background: #fff; }
-  .btn-primary { background: var(--gold); color: #fff; padding: 0.9rem 2rem; border-radius: 9px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; width: 100%; transition: all 0.2s; letter-spacing: 0.3px; }
-  .btn-primary:hover { background: var(--gold-light); }
-  .form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+  /* ─── RECHNUNG ─── */
+  .invoice-section { background: var(--light); }
+  .invoice-grid {
+    display: grid; grid-template-columns: 1fr 1.6fr;
+    gap: 5rem; align-items: start;
+  }
+  .invoice-info h3 {
+    font-family: var(--serif); font-size: 2rem; font-weight: 300;
+    color: var(--dark); margin-bottom: 1rem; line-height: 1.1;
+  }
+  .invoice-info h3 em { font-style: italic; color: var(--gold); }
+  .invoice-info p {
+    font-size: 0.85rem; color: var(--mid); font-weight: 300; line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+  .invoice-steps { margin-top: 2rem; }
+  .invoice-step {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1rem 0; border-bottom: 1px solid var(--border);
+  }
+  .invoice-step:first-child { border-top: 1px solid var(--border); }
+  .step-num {
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 300;
+    color: rgba(184,145,46,0.3); line-height: 1; min-width: 2rem;
+  }
+  .step-text { font-size: 0.82rem; color: var(--mid); font-weight: 300; line-height: 1.7; padding-top: 0.1rem; }
+  .step-text strong { color: var(--dark); font-weight: 500; display: block; margin-bottom: 0.1rem; }
 
-  /* TRUST BAR */
-  .trust-bar { display: flex; justify-content: center; gap: 1.8rem; flex-wrap: wrap; margin: 2rem 0; }
-  .trust-item { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
-  .trust-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  /* FORM */
+  .invoice-form { background: var(--white); padding: 3rem; border: 1px solid var(--border); }
+  .form-grid { display: grid; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  label {
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  input, textarea, select {
+    width: 100%; padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    font-size: 0.88rem; font-family: var(--sans);
+    background: var(--light); color: var(--dark);
+    transition: border-color 0.2s, background 0.2s;
+    border-radius: 0;
+    -webkit-appearance: none; appearance: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none; border-color: var(--gold); background: var(--white);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+  .btn-primary {
+    background: var(--dark); color: #fff;
+    padding: 1rem 2rem; font-family: var(--sans);
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    border: none; cursor: pointer; width: 100%;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold); }
+  .form-note { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 0.5rem; }
 
-  /* SPONSORING */
-  .sponsor-box { border: 2px dashed rgba(198,154,58,0.35); border-radius: 18px; padding: 2.5rem 2rem; text-align: center; background: rgba(198,154,58,0.03); }
-  .sponsor-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .sponsor-box p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
-  .btn-outline { display: inline-block; background: transparent; color: var(--gold); border: 1.5px solid var(--gold); padding: 0.8rem 2rem; border-radius: 9px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-  .btn-outline:hover { background: var(--gold); color: #fff; }
+  /* ─── SPONSORING BOX ─── */
+  .sponsor-section { background: var(--dark); padding: 7rem 3rem; }
+  .sponsor-inner { max-width: 900px; margin: 0 auto; }
+  .sponsor-section .label { color: var(--gold); }
+  .sponsor-box {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 3rem; flex-wrap: wrap;
+    border: 1px solid rgba(255,255,255,0.07); padding: 3.5rem;
+    margin-top: 3rem;
+  }
+  .sponsor-box-text h3 {
+    font-family: var(--serif); font-size: 2rem; font-weight: 300;
+    color: #fff; margin-bottom: 0.6rem; line-height: 1.1;
+  }
+  .sponsor-box-text h3 em { font-style: italic; color: var(--gold-light); }
+  .sponsor-box-text p { font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; max-width: 420px; }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.9rem 1.8rem;
+    border: 1px solid rgba(184,145,46,0.5);
+    color: var(--gold-light); text-decoration: none;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .btn-outline:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
 
-  /* FOOTER */
-  footer { background: var(--dark); color: #666; text-align: center; padding: 2.5rem 1.5rem; font-size: 0.83rem; }
-  footer .motto-foot { color: var(--gold-light); font-style: italic; margin-bottom: 0.5rem; font-size: 0.9rem; }
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark); padding: 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(184,145,46,0.1);
+  }
+  .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
+  .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; margin-bottom: 0.5rem; justify-content: flex-end; }
+  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
 
-  /* MOBILE */
-  @media (max-width: 680px) {
-    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--dark); padding: 1.5rem 2rem; gap: 1.2rem; }
-    nav ul.open { display: flex; }
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; min-height: 45vh; }
+    .section { padding: 5rem 1.5rem; }
+    .sponsor-section { padding: 5rem 1.5rem; }
+    .nav-links {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; height: auto;
+      background: rgba(16,15,14,0.98); border-bottom: 1px solid rgba(184,145,46,0.1);
+      padding: 1.5rem; gap: 0.5rem;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { height: auto; }
+    .nav-links li a { height: auto; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .nav-cta a { border: none !important; padding: 0.8rem 0.5rem !important; }
     .menu-toggle { display: block; }
+    .amounts-grid { grid-template-columns: repeat(3, 1fr); }
+    .amount-btn:nth-child(3) { border-right: none; }
+    .amount-btn:nth-child(4) { border-right: 1px solid var(--border); }
+    .amount-btn:nth-child(4), .amount-btn:nth-child(5), .amount-btn:nth-child(6) { border-top: 1px solid var(--border); }
     .pay-grid { grid-template-columns: 1fr; }
+    .pay-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .pay-card.featured { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .trust-bar { flex-wrap: wrap; }
+    .trust-item { flex: 1 1 45%; }
+    .invoice-grid { grid-template-columns: 1fr; gap: 3rem; }
     .form-row { grid-template-columns: 1fr; }
-    .page-hero { padding: 7rem 1.5rem 3.5rem; }
+    .sponsor-box { flex-direction: column; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { justify-content: center; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="index.html" class="logo">NICO <span>RÜTTIMANN</span></a>
-  <button class="menu-toggle" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
-  <ul id="nl">
+  <a href="index.html" class="logo">
+    <img src="logo_nav_final.png" alt="Nico Rüttimann">
+  </a>
+  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <ul class="nav-links" id="navlinks">
     <li><a href="uebermich.html">Über mich</a></li>
     <li><a href="wettkampfe.html">Wettkämpfe</a></li>
     <li><a href="sponsoring.html">Sponsoring</a></li>
     <li><a href="unterstuetzen.html" class="active">Unterstützen</a></li>
-    <li><a href="kontakt.html">Kontakt</a></li>
+    <li class="nav-cta"><a href="kontakt.html">Kontakt</a></li>
   </ul>
 </nav>
 
-<div class="page-hero">
-  <h1>Mich <span>unterstützen</span></h1>
-  <p>Jeder Beitrag zählt – danke von Herzen ♥</p>
-</div>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="label">Unterstützen</p>
+    <h1>Mich<br><em>unterstützen.</em></h1>
+    <p class="hero-sub">Jeder Beitrag zählt — danke von Herzen.</p>
+  </div>
+</header>
 
-<div class="container">
-
-  <!-- BETRAG -->
-  <div class="section">
-    <div class="section-header">
-      <h2 class="section-title">Wähle einen <span>Betrag</span></h2>
-      <p class="section-sub">Wähle einen Betrag oder gib deinen eigenen ein.</p>
-    </div>
-    <div class="amounts">
-      <button class="amount-btn">CHF 10</button>
-      <button class="amount-btn">CHF 20</button>
-      <button class="amount-btn active">CHF 50</button>
-      <button class="amount-btn">CHF 100</button>
-      <button class="amount-btn">CHF 200</button>
-      <button class="amount-btn">Frei wählen</button>
+<!-- BETRAGSAUSWAHL -->
+<section class="section amounts-section">
+  <div class="section-inner">
+    <p class="label">Betrag wählen</p>
+    <h2 class="display">Wie viel möchtest<br><em>du beitragen?</em></h2>
+    <p class="section-intro">Wähle einen Betrag oder gib deinen eigenen ein.</p>
+    <div class="amounts-grid">
+      <button class="amount-btn" onclick="selectAmount(this)">
+        CHF 10
+        <span class="amount-sub">Kleiner Boost</span>
+      </button>
+      <button class="amount-btn" onclick="selectAmount(this)">
+        CHF 20
+        <span class="amount-sub">Danke!</span>
+      </button>
+      <button class="amount-btn active" onclick="selectAmount(this)">
+        CHF 50
+        <span class="amount-sub">Beliebt</span>
+      </button>
+      <button class="amount-btn" onclick="selectAmount(this)">
+        CHF 100
+        <span class="amount-sub">Grossartig</span>
+      </button>
+      <button class="amount-btn" onclick="selectAmount(this)">
+        CHF 200
+        <span class="amount-sub">Top-Support</span>
+      </button>
+      <button class="amount-btn" onclick="selectAmount(this)">
+        Frei
+        <span class="amount-sub">Eigener Betrag</span>
+      </button>
     </div>
   </div>
+</section>
 
-  <!-- ZAHLUNGSMETHODEN -->
-  <div class="section">
-    <div class="section-header">
-      <h2 class="section-title">Zahlungs<span>methoden</span></h2>
-      <p class="section-sub">Wähle deine bevorzugte Zahlungsart.</p>
-    </div>
-
+<!-- ZAHLUNGSMETHODEN -->
+<section class="section pay-section">
+  <div class="section-inner">
+    <p class="label">Zahlungsart</p>
+    <h2 class="display">Sicher &amp;<br><em>einfach zahlen.</em></h2>
+    <p class="section-intro">Wähle deine bevorzugte Zahlungsmethode.</p>
     <div class="pay-grid">
-      <div class="pay-card featured" onclick="window.open('https://buy.stripe.com/eVq9AU8Hc7FC0BS61z73G01','_blank')">
-        <div class="pay-icon" style="background:#EEEDFE;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#635BFF" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <a class="pay-card featured" href="https://buy.stripe.com/eVq9AU8Hc7FC0BS61z73G01" target="_blank">
+        <span class="pay-badge">Empfohlen</span>
+        <div class="pay-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b8912e" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
         </div>
-        <div>
-          <div class="pay-name">Kreditkarte</div>
-          <div class="pay-desc">Visa, Mastercard &amp; Apple Pay</div>
+        <div class="pay-name">Kreditkarte</div>
+        <div class="pay-desc">Visa, Mastercard &amp; Apple Pay — sicher über Stripe abgewickelt.</div>
+        <div class="pay-arrow">Jetzt unterstützen</div>
+      </a>
+      <a class="pay-card" href="https://buymeacoffee.com/nicoruettimann" target="_blank">
+        <div class="pay-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b8912e" stroke-width="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
-        <div class="pay-arrow">Jetzt unterstützen →</div>
-      </div>
-
-      <div class="pay-card" onclick="window.open('https://buymeacoffee.com/nicoruettimann','_blank')">
-        <div class="pay-icon" style="background:#FFF8E1;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        </div>
-        <div>
-          <div class="pay-name">Buy Me a Coffee</div>
-          <div class="pay-desc">Apple Pay &amp; mehr</div>
-        </div>
-        <div class="pay-arrow">Unterstützen →</div>
-      </div>
+        <div class="pay-name">Buy Me a Coffee</div>
+        <div class="pay-desc">Unterstütze mich unkompliziert über Buy Me a Coffee.</div>
+        <div class="pay-arrow">Unterstützen</div>
+      </a>
     </div>
 
-    <!-- TRUST -->
     <div class="trust-bar">
-      <span class="trust-item"><span class="trust-dot"></span> SSL-verschlüsselt</span>
-      <span class="trust-item"><span class="trust-dot"></span> Powered by Stripe</span>
-      <span class="trust-item"><span class="trust-dot"></span> Keine Registrierung</span>
-      <span class="trust-item"><span class="trust-dot"></span> Sicher &amp; schnell</span>
+      <div class="trust-item"><span class="trust-dot"></span>SSL-verschlüsselt</div>
+      <div class="trust-item"><span class="trust-dot"></span>Powered by Stripe</div>
+      <div class="trust-item"><span class="trust-dot"></span>Keine Registrierung</div>
+      <div class="trust-item"><span class="trust-dot"></span>Sicher &amp; schnell</div>
     </div>
 
-    <!-- STRIPE CTA -->
-    <div class="stripe-cta">
-      <h3>Sicher &amp; schnell bezahlen</h3>
-      <p>Deine Zahlung wird verschlüsselt über Stripe abgewickelt – dem weltweit führenden Zahlungsanbieter.</p>
-      <div class="badge-row">
-        <span class="badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          SSL verschlüsselt
-        </span>
-        <span class="badge">Visa</span>
-        <span class="badge">Mastercard</span>
-        <span class="badge">Apple Pay</span>
+    <div class="or-divider"><span>oder Rechnung anfordern</span></div>
+  </div>
+</section>
+
+<!-- RECHNUNG -->
+<section class="section invoice-section">
+  <div class="section-inner">
+    <div class="invoice-grid">
+      <div class="invoice-info">
+        <p class="label">Rechnung</p>
+        <h3>Offizielle<br><em>Rechnung</em><br>anfordern.</h3>
+        <p>Du möchtest eine offizielle Rechnung? Kein Problem — füll das Formular aus und ich schicke dir alles innerhalb von 24 Stunden per E-Mail.</p>
+        <div class="invoice-steps">
+          <div class="invoice-step">
+            <div class="step-num">01</div>
+            <div class="step-text"><strong>Formular ausfüllen</strong>Angaben und gewünschten Betrag eintragen.</div>
+          </div>
+          <div class="invoice-step">
+            <div class="step-num">02</div>
+            <div class="step-text"><strong>Rechnung erhalten</strong>Ich schicke dir die Rechnung innert 24h per Mail.</div>
+          </div>
+          <div class="invoice-step">
+            <div class="step-num">03</div>
+            <div class="step-text"><strong>Überweisen</strong>Zahlung bequem per Banküberweisung.</div>
+          </div>
+        </div>
       </div>
-      <a href="https://buy.stripe.com/eVq9AU8Hc7FC0BS61z73G01" target="_blank" class="btn-stripe">Jetzt unterstützen →</a>
+
+      <div class="invoice-form">
+        <form action="https://formspree.io/f/mykvlznn" method="POST">
+          <input type="hidden" name="_subject" value="Rechnungsanfrage von der Webseite">
+          <div class="form-grid">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Vorname *</label>
+                <input type="text" name="vorname" required placeholder="Max">
+              </div>
+              <div class="form-group">
+                <label>Nachname *</label>
+                <input type="text" name="nachname" required placeholder="Mustermann">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>E-Mail *</label>
+              <input type="email" name="email" required placeholder="max@beispiel.ch">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Telefon (optional)</label>
+                <input type="tel" name="telefon" placeholder="+41 77 000 00 00">
+              </div>
+              <div class="form-group">
+                <label>Betrag CHF *</label>
+                <input type="number" name="betrag" required placeholder="50" min="1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Verwendungszweck</label>
+              <select name="verwendungszweck">
+                <option>Allgemeine Unterstützung</option>
+                <option>Ironman 70.3 Rapperswil</option>
+                <option>Sprint Triathlon Uster</option>
+                <option>Challenge San Remo</option>
+                <option>Ausrüstung</option>
+                <option>Trainingslager</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Bemerkung (optional)</label>
+              <textarea name="bemerkung" rows="3" placeholder="Weitere Angaben…"></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Rechnung anfordern</button>
+            <p class="form-note">Ich melde mich innerhalb von 24 Stunden bei dir.</p>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- OR DIVIDER -->
-  <div class="or-divider"><span>oder Rechnung anfordern</span></div>
-
-  <!-- RECHNUNG -->
-  <div class="section">
-    <div class="invoice-box">
-      <h3>Rechnung anfordern</h3>
-      <p>Du möchtest eine offizielle Rechnung? Füll das Formular aus – ich schicke dir die Rechnung innerhalb von 24 Stunden per E-Mail.</p>
-      <form action="https://formspree.io/f/mykvlznn" method="POST">
-        <input type="hidden" name="_subject" value="Rechnungsanfrage von der Webseite">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Vorname *</label>
-            <input type="text" name="vorname" required placeholder="Max">
-          </div>
-          <div class="form-group">
-            <label>Nachname *</label>
-            <input type="text" name="nachname" required placeholder="Mustermann">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>E-Mail *</label>
-          <input type="email" name="email" required placeholder="max@beispiel.ch">
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Telefonnummer (optional)</label>
-            <input type="tel" name="telefon" placeholder="+41 77 000 00 00">
-          </div>
-          <div class="form-group">
-            <label>Betrag in CHF *</label>
-            <input type="number" name="betrag" required placeholder="z.B. 50" min="1">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Verwendungszweck</label>
-          <select name="verwendungszweck">
-            <option>Allgemeine Unterstützung</option>
-            <option>Ironman 70.3 Rapperswil</option>
-            <option>Sprint Triathlon Uster</option>
-            <option>Challenge San Remo</option>
-            <option>Ausrüstung</option>
-            <option>Trainingslager</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Bemerkung (optional)</label>
-          <textarea name="bemerkung" rows="3" placeholder="Weitere Angaben…"></textarea>
-        </div>
-        <button type="submit" class="btn-primary">Rechnung anfordern</button>
-        <p class="form-note">Ich melde mich innerhalb von 24 Stunden bei dir.</p>
-      </form>
+<!-- SPONSORING -->
+<section class="sponsor-section">
+  <div class="sponsor-inner">
+    <p class="label">Langfristig</p>
+    <div class="sponsor-box">
+      <div class="sponsor-box-text">
+        <h3>Lieber langfristig<br><em>unterstützen?</em></h3>
+        <p>Werde offizieller Sponsor und profitiere von Sichtbarkeit auf Trikot, Webseite und Social Media — ab CHF 100 pro Jahr.</p>
+      </div>
+      <a href="sponsoring.html" class="btn-outline">Sponsoring-Pakete ansehen</a>
     </div>
   </div>
+</section>
 
-  <!-- SPONSORING LINK -->
-  <div class="sponsor-box">
-    <h3>Lieber langfristig unterstützen?</h3>
-    <p>Werde offizieller Sponsor und profitiere von Sichtbarkeit auf Trikot, Webseite und Social Media – ab CHF 100 pro Jahr.</p>
-    <a href="sponsoring.html" class="btn-outline">Sponsoring-Pakete ansehen</a>
-  </div>
-
-</div>
-
+<!-- FOOTER -->
 <footer>
-  <div class="motto-foot">"One step further every day."</div>
-  <div>© 2026 Nico Rüttimann · Triathlet &amp; Student</div>
+  <div class="footer-left">„One step further every day."</div>
+  <div class="footer-right">
+    <ul class="footer-links">
+      <li><a href="uebermich.html">Über mich</a></li>
+      <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+      <li><a href="sponsoring.html">Sponsoring</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div>© 2026 Nico Rüttimann</div>
+  </div>
 </footer>
 
 <script>
-  document.querySelectorAll('#nl a').forEach(a => a.addEventListener('click', () => document.getElementById('nl').classList.remove('open')));
-  document.querySelectorAll('.amount-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
+  document.querySelectorAll('#navlinks a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'))
+  );
+  function selectAmount(btn) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
 </script>
 </body>
 </html>
