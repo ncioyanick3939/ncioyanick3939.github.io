@@ -277,36 +277,59 @@
     margin-bottom: 1.2rem;
     font-weight: 300;
   }
-  .about-nums {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
+
+  /* ─── SAISON-ZIELE (ersetzt about-nums) ─── */
+  .season-goals {
     margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     border: 1px solid #e0ddd5;
   }
-  .about-num {
-    padding: 1.8rem 1.5rem;
-    border-right: 1px solid #e0ddd5;
+  .season-goal-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.1rem 1.5rem;
     border-bottom: 1px solid #e0ddd5;
-    text-align: center;
+    transition: background 0.2s;
   }
-  .about-num:nth-child(2n) { border-right: none; }
-  .about-num:nth-child(3), .about-num:nth-child(4) { border-bottom: none; }
-  .about-num-val {
-    font-family: var(--serif);
-    font-size: 2.4rem;
+  .season-goal-item:last-child { border-bottom: none; }
+  .season-goal-item:hover { background: rgba(184,145,46,0.04); }
+  a.season-goal-item { text-decoration: none; color: inherit; cursor: pointer; }
+  a.season-goal-item:hover .goal-text { color: var(--dark); }
+  a.season-goal-item:hover .goal-dot { background: var(--gold-light); }
+  .goal-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+  .goal-text {
+    font-size: 0.85rem;
+    color: var(--mid);
     font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 0.4rem;
+    line-height: 1.5;
+    flex: 1;
   }
-  .about-num-label {
-    font-size: 0.68rem;
+  .goal-text strong {
+    color: var(--dark);
     font-weight: 500;
+  }
+  .goal-badge {
+    font-size: 0.62rem;
+    font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--gold);
+    background: rgba(184,145,46,0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 1px;
+    flex-shrink: 0;
   }
+  .goal-badge.highlight {
+    background: var(--gold);
+    color: #fff;
+  }
+
   .about-visual {
     position: relative;
   }
@@ -389,9 +412,7 @@
 
   /* ─── RENNEN ─── */
   .races-section { background: var(--white); }
-  .race-list {
-    margin-top: 3.5rem;
-  }
+  .race-list { margin-top: 3.5rem; }
   .race-row {
     display: grid;
     grid-template-columns: 160px 1fr auto;
@@ -402,10 +423,29 @@
     text-decoration: none;
     color: var(--dark);
     transition: all 0.2s;
+    position: relative;
   }
   .race-row:first-child { border-top: 1px solid #eeebe3; }
   .race-row:hover { padding-left: 0.5rem; }
   .race-row:hover .race-arrow { color: var(--gold); transform: translateX(4px); }
+
+  /* Highlight für San Remo */
+  .race-row.featured {
+    background: linear-gradient(to right, rgba(184,145,46,0.06), transparent);
+    border-bottom-color: rgba(184,145,46,0.25);
+    padding-left: 1rem;
+  }
+  .race-row.featured:first-child { border-top-color: rgba(184,145,46,0.25); }
+  .race-row.featured .race-title { color: var(--gold); }
+  .race-row.featured::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+  .race-row.featured:hover { padding-left: 1.5rem; }
+
   .race-date {
     font-family: var(--serif);
     font-size: 0.82rem;
@@ -413,7 +453,6 @@
     letter-spacing: 0.5px;
     font-weight: 400;
   }
-  .race-name-col { }
   .race-title {
     font-family: var(--serif);
     font-size: 1.35rem;
@@ -442,6 +481,10 @@
     text-transform: uppercase;
     border-radius: 1px;
     margin-top: 0.3rem;
+  }
+  .race-tag-pill.pill-main {
+    background: var(--gold);
+    color: #fff;
   }
 
   /* ─── INSTAGRAM ─── */
@@ -595,6 +638,7 @@
     .disc-item:last-child { border-bottom: none; }
 
     .race-row { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.5rem 0; }
+    .race-row.featured { padding-left: 1rem; }
     .race-date { font-size: 0.75rem; }
     .race-arrow { display: none; }
 
@@ -605,7 +649,6 @@
     .footer-links { justify-content: center; }
 
     .hero h1 { font-size: clamp(3.2rem, 12vw, 5rem); }
-    .about-nums { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -649,14 +692,14 @@
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track" id="tickerTrack">
     <span class="ticker-item"><span class="ticker-dot"></span>Saison 2026</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Ironman 70.3 Rapperswil</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Challenge San Remo</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Sprint Triathlon Uster</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Sprint Gruyerz – 12. Juli</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Valais Triathlon – August</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Challenge San Remo – Oktober</span>
     <span class="ticker-item"><span class="ticker-dot"></span>One step further every day</span>
     <span class="ticker-item"><span class="ticker-dot"></span>Saison 2026</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Ironman 70.3 Rapperswil</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Challenge San Remo</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Sprint Triathlon Uster</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Sprint Gruyerz – 12. Juli</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Valais Triathlon – August</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Challenge San Remo – Oktober</span>
     <span class="ticker-item"><span class="ticker-dot"></span>One step further every day</span>
   </div>
 </div>
@@ -670,24 +713,7 @@
         <h2 class="display">Athlet &amp;<br><em>Student</em></h2>
         <p>Ich bin Nico Rüttimann – Triathlet aus der Region Freiburg/Bern und Student der Betriebsökonomie an der BFH. Sport ist für mich nicht nur Training, sondern Antrieb, Ausgleich und Lebensphilosophie.</p>
         <p>Täglich 1–2 Stunden im Wasser, auf dem Velo oder beim Laufen – neben Studium und Engagement in der Jubla. Ich glaube daran, dass man jeden Tag ein kleines Stück besser werden kann.</p>
-        <div class="about-nums">
-          <div class="about-num">
-            <div class="about-num-val">2026</div>
-            <div class="about-num-label">Aktuelle Saison</div>
-          </div>
-          <div class="about-num">
-            <div class="about-num-val">BFH</div>
-            <div class="about-num-label">Betriebsökonomie</div>
-          </div>
-          <div class="about-num">
-            <div class="about-num-val">FR/BE</div>
-            <div class="about-num-label">Region</div>
-          </div>
-          <div class="about-num">
-            <div class="about-num-val">Daily</div>
-            <div class="about-num-label">Training</div>
-          </div>
-        </div>
+
         <div style="margin-top: 2.5rem;">
           <a href="uebermich.html" class="btn btn-gold">Mehr erfahren →</a>
         </div>
@@ -735,26 +761,29 @@
     <p class="label">Rennen 2026</p>
     <h2 class="display">Nächste<br><em>Wettkämpfe</em></h2>
     <div class="race-list">
-      <a href="wettkampfe.html" class="race-row">
-        <div class="race-date">07. Juni 2026</div>
+
+      <a href="https://gruyere-triathlon.wixsite.com/home/inscriptions2" target="_blank" class="race-row">
+        <div class="race-date">12. Juli 2026</div>
         <div class="race-name-col">
-          <div class="race-title">Ironman 70.3 Rapperswil</div>
-          <div class="race-location">Rapperswil, Schweiz</div>
-          <span class="race-tag-pill">Mitteldistanz</span>
-        </div>
-        <div class="race-arrow">→</div>
-      </a>
-      <a href="wettkampfe.html" class="race-row">
-        <div class="race-date">Sommer 2026</div>
-        <div class="race-name-col">
-          <div class="race-title">Sprint Triathlon Uster</div>
-          <div class="race-location">Uster, Zürich</div>
+          <div class="race-title">Sprint Gruyerz</div>
+          <div class="race-location">Gruyères, Freiburg</div>
           <span class="race-tag-pill">Sprint</span>
         </div>
         <div class="race-arrow">→</div>
       </a>
-      <a href="wettkampfe.html" class="race-row">
-        <div class="race-date">04. Oktober 2026</div>
+
+      <a href="https://valaistriathlon.ch/de/" target="_blank" class="race-row">
+        <div class="race-date">August 2026</div>
+        <div class="race-name-col">
+          <div class="race-title">Valais Triathlon</div>
+          <div class="race-location">Wallis, Schweiz</div>
+          <span class="race-tag-pill">Olympisch</span>
+        </div>
+        <div class="race-arrow">→</div>
+      </a>
+
+      <a href="https://challenge-sanremo.com" target="_blank" class="race-row featured">
+        <div class="race-date">3./4. Oktober 2026</div>
         <div class="race-name-col">
           <div class="race-title">Challenge San Remo</div>
           <div class="race-location">San Remo, Italien</div>
@@ -762,6 +791,7 @@
         </div>
         <div class="race-arrow">→</div>
       </a>
+
     </div>
   </div>
 </section>
