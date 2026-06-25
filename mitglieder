@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitgliederbereich – Nico Rüttimann</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #b8912e;
+    --gold-light: #d4aa52;
+    --dark: #161614;
+    --dark-2: #1e1d1a;
+    --dark-3: #28261f;
+    --mid: #5a5850;
+    --muted: #9a9890;
+    --light: #f5f3ee;
+    --border: #e4e0d8;
+    --white: #fefefe;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+  /* Inhalt erst zeigen, wenn Login geprüft ist (verhindert Aufblitzen) */
+  #content { display: none; }
+  #gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.85rem; letter-spacing: 1px; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 3rem; height: 68px;
+    background: rgba(22,22,20,0.96);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(184,145,46,0.12);
+  }
+  nav .logo { text-decoration: none; display: flex; align-items: center; height: 100%; }
+  nav .logo img { height: 42px; width: auto; object-fit: contain; display: block; }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-user { color: rgba(255,255,255,0.55); font-size: 0.72rem; letter-spacing: 1px; }
+  .nav-logout {
+    background: transparent; border: 1px solid rgba(184,145,46,0.5); color: var(--gold-light);
+    padding: 0.5rem 1.1rem; font-family: var(--sans); font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  }
+  .nav-logout:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+  .page-hero { padding: 10rem 3rem 5rem; background: var(--dark-2); position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 40%, rgba(184,145,46,0.08) 0%, transparent 60%); }
+  .page-hero-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+  .label { font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .page-hero h1 { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.5px; color: #fff; }
+  .page-hero h1 em { font-style: italic; color: var(--gold-light); }
+  .page-hero-sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); font-weight: 300; margin-top: 1.2rem; max-width: 560px; line-height: 1.8; }
+
+  .section { padding: 6rem 3rem; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  h2.display { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+  h2.display em { font-style: italic; color: var(--gold); }
+  .section-intro { font-size: 0.9rem; color: var(--muted); font-weight: 300; max-width: 560px; margin-bottom: 1rem; }
+
+  /* DATEIEN */
+  .files-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--border); margin-top: 3rem; }
+  .file-item {
+    display: flex; align-items: center; gap: 1.2rem; padding: 1.8rem 2rem;
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    text-decoration: none; color: inherit; cursor: pointer; transition: background 0.2s;
+  }
+  .file-item:nth-child(2n) { border-right: none; }
+  .file-item:hover { background: var(--light); }
+  .file-icon { width: 44px; height: 44px; flex-shrink: 0; border: 1px solid rgba(184,145,46,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); }
+  .file-name { font-size: 0.95rem; font-weight: 500; color: var(--dark); }
+  .file-meta { font-size: 0.76rem; color: var(--muted); font-weight: 300; }
+  .file-dl { margin-left: auto; color: var(--gold); }
+
+  /* EXKLUSIVE INHALTE */
+  .excl-section { background: var(--light); }
+  .excl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); margin-top: 3rem; }
+  .excl { padding: 2.5rem 2rem; border-right: 1px solid var(--border); transition: background 0.25s; }
+  .excl:last-child { border-right: none; }
+  .excl:hover { background: var(--white); }
+  .excl-num { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: rgba(184,145,46,0.25); line-height: 1; margin-bottom: 1rem; }
+  .excl h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--dark); margin-bottom: 0.6rem; }
+  .excl p { font-size: 0.84rem; color: var(--mid); font-weight: 300; line-height: 1.7; }
+
+  footer { background: var(--dark); padding: 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,145,46,0.1); }
+  .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
+  .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-right { gap: 0.8rem; }
+    .nav-user { display: none; }
+    .page-hero { padding: 8rem 1.5rem 4rem; }
+    .section { padding: 4.5rem 1.5rem; }
+    .files-grid { grid-template-columns: 1fr; }
+    .file-item { border-right: none; }
+    .excl-grid { grid-template-columns: 1fr; }
+    .excl { border-right: none; border-bottom: 1px solid var(--border); }
+    .excl:last-child { border-bottom: none; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Ladezustand während Login-Prüfung -->
+<div id="gate">Zugriff wird geprüft …</div>
+
+<!-- Geschützter Inhalt (erst nach Login sichtbar) -->
+<div id="content">
+  <nav>
+    <a href="index.html" class="logo">
+      <img src="logo_nav_final.png" alt="Nico Rüttimann">
+    </a>
+    <div class="nav-right">
+      <span class="nav-user" id="navUser"></span>
+      <button class="nav-logout" id="logoutBtn">Abmelden</button>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <p class="label">Mitgliederbereich</p>
+      <h1 id="welcome">Willkommen,<br><em>Mitglied.</em></h1>
+      <p class="page-hero-sub">Schön, dass du dabei bist. Hier findest du alle exklusiven Inhalte und Dateien — nur für angemeldete Community-Mitglieder.</p>
+    </div>
+  </div>
+
+  <!-- DATEIEN -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="label">Downloads</p>
+      <h2 class="display">Exklusive<br><em>Dateien.</em></h2>
+      <p class="section-intro">Trainingspläne, Checklisten und mehr — zum Herunterladen.</p>
+      <div class="files-grid" id="filesGrid">
+        <!-- Platzhalter-Dateien. Echte Dateien siehe Hinweis unten im Code. -->
+        <a class="file-item" data-file="trainingsplan-einsteiger.pdf">
+          <div class="file-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <div class="file-name">Trainingsplan Einsteiger</div>
+            <div class="file-meta">PDF · 8 Wochen Aufbau</div>
+          </div>
+          <span class="file-dl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </span>
+        </a>
+        <a class="file-item" data-file="ernaehrung-wettkampf.pdf">
+          <div class="file-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <div class="file-name">Ernährung am Wettkampftag</div>
+            <div class="file-meta">PDF · Checkliste</div>
+          </div>
+          <span class="file-dl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXKLUSIVE INHALTE -->
+  <section class="section excl-section">
+    <div class="section-inner">
+      <p class="label">Nur für Mitglieder</p>
+      <h2 class="display">Was dich hier<br><em>erwartet.</em></h2>
+      <div class="excl-grid">
+        <div class="excl">
+          <div class="excl-num">01</div>
+          <h3>Trainingstipps</h3>
+          <p>Detaillierte Pläne, Ernährung und Regeneration aus meinem eigenen Alltag.</p>
+        </div>
+        <div class="excl">
+          <div class="excl-num">02</div>
+          <h3>Rennanalysen</h3>
+          <p>Tiefe Einblicke in Wettkampfstrategie und Ergebnisse — was funktioniert hat und was nicht.</p>
+        </div>
+        <div class="excl">
+          <div class="excl-num">03</div>
+          <h3>Vorab-Einblicke</h3>
+          <p>Hinter-den-Kulissen und Updates, bevor sie irgendwo anders erscheinen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-left">„One step further every day."</div>
+    <div class="footer-right">© 2026 Nico Rüttimann</div>
+  </footer>
+</div>
+
+<!-- Supabase Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  /* WICHTIG: Dieselben Zugangsdaten wie in login.html eintragen! */
+  const SUPABASE_URL = "DEINE_SUPABASE_URL_HIER";
+  const SUPABASE_ANON_KEY = "DEIN_ANON_KEY_HIER";
+
+  const configured = !SUPABASE_URL.includes("HIER") && !SUPABASE_ANON_KEY.includes("HIER");
+
+  if (!configured) {
+    document.getElementById("gate").textContent = "Supabase noch nicht eingerichtet — siehe Code.";
+  } else {
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // TÜRSTEHER: ohne gültige Session → zurück zum Login
+    (async () => {
+      const { data } = await sb.auth.getSession();
+      if (!data.session) {
+        window.location.href = "login.html";
+        return;
+      }
+      // Eingeloggt → Inhalt zeigen, Begrüssung personalisieren
+      const user = data.session.user;
+      const vorname = (user.user_metadata && user.user_metadata.vorname) || "";
+      const name = (user.user_metadata && user.user_metadata.name) || "";
+      if (vorname) {
+        document.getElementById("welcome").innerHTML = "Willkommen,<br><em>" + escapeHtml(vorname) + ".</em>";
+        document.getElementById("navUser").textContent = (vorname + " " + name).trim();
+      }
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    })();
+
+    // Abmelden
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await sb.auth.signOut();
+      window.location.href = "login.html";
+    });
+
+    /* ============================================================
+       ECHTE DATEIEN SCHÜTZEN (so werden Downloads wirklich privat):
+       1. In Supabase: Storage → "New bucket" → Name z.B. "mitglieder"
+          → "Private bucket" wählen (NICHT public!)
+       2. Deine PDFs in den Bucket hochladen
+       3. Die Funktion unten holt beim Klick einen signierten Link,
+          der nur kurz gültig ist und nur für eingeloggte Nutzer geht.
+       ============================================================ */
+    document.querySelectorAll(".file-item").forEach((el) => {
+      el.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const filePath = el.getAttribute("data-file");
+        const { data: signed, error } = await sb
+          .storage.from("mitglieder")              // Bucket-Name
+          .createSignedUrl(filePath, 60);          // 60 Sekunden gültig
+        if (error) {
+          alert("Datei noch nicht verfügbar. (Bucket/Datei in Supabase anlegen.)");
+        } else {
+          window.open(signed.signedUrl, "_blank");
+        }
+      });
+    });
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+</script>
+</body>
+</html>
