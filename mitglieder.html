@@ -26,7 +26,6 @@
   html { scroll-behavior: smooth; }
   body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-  /* Inhalt erst zeigen, wenn Login geprüft ist (verhindert Aufblitzen) */
   #content { display: none; }
   #gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.85rem; letter-spacing: 1px; }
 
@@ -64,7 +63,6 @@
   h2.display em { font-style: italic; color: var(--gold); }
   .section-intro { font-size: 0.9rem; color: var(--muted); font-weight: 300; max-width: 560px; margin-bottom: 1rem; }
 
-  /* DATEIEN */
   .files-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--border); margin-top: 3rem; }
   .file-item {
     display: flex; align-items: center; gap: 1.2rem; padding: 1.8rem 2rem;
@@ -78,7 +76,6 @@
   .file-meta { font-size: 0.76rem; color: var(--muted); font-weight: 300; }
   .file-dl { margin-left: auto; color: var(--gold); }
 
-  /* EXKLUSIVE INHALTE */
   .excl-section { background: var(--light); }
   .excl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); margin-top: 3rem; }
   .excl { padding: 2.5rem 2rem; border-right: 1px solid var(--border); transition: background 0.25s; }
@@ -91,6 +88,9 @@
   footer { background: var(--dark); padding: 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,145,46,0.1); }
   .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
   .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; margin-bottom: 0.5rem; justify-content: flex-end; }
+  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
 
   @media (max-width: 900px) {
     nav { padding: 0 1.5rem; }
@@ -104,15 +104,14 @@
     .excl { border-right: none; border-bottom: 1px solid var(--border); }
     .excl:last-child { border-bottom: none; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { justify-content: center; }
   }
 </style>
 </head>
 <body>
 
-<!-- Ladezustand während Login-Prüfung -->
 <div id="gate">Zugriff wird geprüft …</div>
 
-<!-- Geschützter Inhalt (erst nach Login sichtbar) -->
 <div id="content">
   <nav>
     <a href="index.html" class="logo">
@@ -132,14 +131,12 @@
     </div>
   </div>
 
-  <!-- DATEIEN -->
   <section class="section">
     <div class="section-inner">
       <p class="label">Downloads</p>
       <h2 class="display">Exklusive<br><em>Dateien.</em></h2>
       <p class="section-intro">Trainingspläne, Checklisten und mehr — zum Herunterladen.</p>
-      <div class="files-grid" id="filesGrid">
-        <!-- Platzhalter-Dateien. Echte Dateien siehe Hinweis unten im Code. -->
+      <div class="files-grid">
         <a class="file-item" data-file="trainingsplan-einsteiger.pdf">
           <div class="file-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -168,7 +165,6 @@
     </div>
   </section>
 
-  <!-- EXKLUSIVE INHALTE -->
   <section class="section excl-section">
     <div class="section-inner">
       <p class="label">Nur für Mitglieder</p>
@@ -195,72 +191,61 @@
 
   <footer>
     <div class="footer-left">„One step further every day."</div>
-    <div class="footer-right">© 2026 Nico Rüttimann</div>
+    <div class="footer-right">
+      <ul class="footer-links">
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+      <div>© 2026 Nico Rüttimann</div>
+    </div>
   </footer>
 </div>
 
-<!-- Supabase Client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  /* WICHTIG: Dieselben Zugangsdaten wie in login.html eintragen! */
-  const SUPABASE_URL = "DEINE_SUPABASE_URL_HIER";
-  const SUPABASE_ANON_KEY = "DEIN_ANON_KEY_HIER";
+  const { createClient } = supabase;
+  const sb = createClient(
+    'https://qzetjamugzvqlajrfxsc.supabase.co',
+    'sb_publishable_IAqHAuB5MxQ7EzadazBYXg_8m_oObIK'
+  );
 
-  const configured = !SUPABASE_URL.includes("HIER") && !SUPABASE_ANON_KEY.includes("HIER");
-
-  if (!configured) {
-    document.getElementById("gate").textContent = "Supabase noch nicht eingerichtet — siehe Code.";
-  } else {
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // TÜRSTEHER: ohne gültige Session → zurück zum Login
-    (async () => {
-      const { data } = await sb.auth.getSession();
-      if (!data.session) {
-        window.location.href = "login.html";
-        return;
-      }
-      // Eingeloggt → Inhalt zeigen, Begrüssung personalisieren
-      const user = data.session.user;
-      const vorname = (user.user_metadata && user.user_metadata.vorname) || "";
-      const name = (user.user_metadata && user.user_metadata.name) || "";
-      if (vorname) {
-        document.getElementById("welcome").innerHTML = "Willkommen,<br><em>" + escapeHtml(vorname) + ".</em>";
-        document.getElementById("navUser").textContent = (vorname + " " + name).trim();
-      }
-      document.getElementById("gate").style.display = "none";
-      document.getElementById("content").style.display = "block";
-    })();
-
-    // Abmelden
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      await sb.auth.signOut();
+  (async () => {
+    const { data } = await sb.auth.getSession();
+    if (!data.session) {
       window.location.href = "login.html";
-    });
+      return;
+    }
+    const user = data.session.user;
+    const vorname = (user.user_metadata && user.user_metadata.vorname) || "";
+    const name = (user.user_metadata && user.user_metadata.name) || "";
+    if (vorname) {
+      document.getElementById("welcome").innerHTML = "Willkommen,<br><em>" + escapeHtml(vorname) + ".</em>";
+      document.getElementById("navUser").textContent = (vorname + " " + name).trim();
+    }
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("content").style.display = "block";
+  })();
 
-    /* ============================================================
-       ECHTE DATEIEN SCHÜTZEN (so werden Downloads wirklich privat):
-       1. In Supabase: Storage → "New bucket" → Name z.B. "mitglieder"
-          → "Private bucket" wählen (NICHT public!)
-       2. Deine PDFs in den Bucket hochladen
-       3. Die Funktion unten holt beim Klick einen signierten Link,
-          der nur kurz gültig ist und nur für eingeloggte Nutzer geht.
-       ============================================================ */
-    document.querySelectorAll(".file-item").forEach((el) => {
-      el.addEventListener("click", async (e) => {
-        e.preventDefault();
-        const filePath = el.getAttribute("data-file");
-        const { data: signed, error } = await sb
-          .storage.from("mitglieder")              // Bucket-Name
-          .createSignedUrl(filePath, 60);          // 60 Sekunden gültig
-        if (error) {
-          alert("Datei noch nicht verfügbar. (Bucket/Datei in Supabase anlegen.)");
-        } else {
-          window.open(signed.signedUrl, "_blank");
-        }
-      });
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await sb.auth.signOut();
+    window.location.href = "index.html";
+  });
+
+  document.querySelectorAll(".file-item").forEach((el) => {
+    el.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const filePath = el.getAttribute("data-file");
+      const { data: signed, error } = await sb
+        .storage.from("mitglieder")
+        .createSignedUrl(filePath, 60);
+      if (error) {
+        alert("Datei noch nicht verfügbar. Bitte später nochmals versuchen.");
+      } else {
+        window.open(signed.signedUrl, "_blank");
+      }
     });
-  }
+  });
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
