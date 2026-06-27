@@ -8,332 +8,101 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold: #b8912e;
-    --gold-light: #d4aa52;
-    --dark: #161614;
-    --dark-2: #1e1d1a;
-    --dark-3: #28261f;
-    --mid: #5a5850;
-    --muted: #9a9890;
-    --light: #f5f3ee;
-    --border: #e4e0d8;
-    --white: #fefefe;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0 3rem; height: 68px;
-    background: rgba(22,22,20,0.96);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(184,145,46,0.12);
-  }
-  nav .logo { text-decoration: none; display: flex; align-items: center; height: 100%; }
-  nav .logo img { height: 42px; width: auto; object-fit: contain; display: block; }
-  .nav-links { display: flex; align-items: center; gap: 0; list-style: none; height: 100%; }
-  .nav-links li { height: 100%; display: flex; align-items: center; }
-  .nav-links li a {
-    color: rgba(255,255,255,0.5); text-decoration: none;
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
-    padding: 0 1.1rem; height: 100%; display: flex; align-items: center;
-    border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s;
-  }
-  .nav-links li a:hover, .nav-links li a.active { color: #fff; border-bottom-color: var(--gold); }
-  .nav-cta a {
-    background: transparent !important; border: 1px solid rgba(184,145,46,0.5) !important;
-    border-bottom: 1px solid rgba(184,145,46,0.5) !important;
-    color: var(--gold-light) !important; padding: 0 1.1rem !important;
-    height: 100% !important; letter-spacing: 1.8px; transition: all 0.2s !important;
-  }
-  .nav-cta a:hover { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
-  .menu-toggle { display: none; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.4rem; cursor: pointer; padding: 0.3rem; }
-
-  /* HERO – kein Hintergrundbild, nur dunkel */
-  .hero {
-    min-height: 80vh;
-    background: var(--dark-2);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 3rem 5rem;
-    position: relative; overflow: hidden;
-  }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-3) 100%);
-  }
-  .hero-content { position: relative; z-index: 2; max-width: 700px; }
-  .label {
-    font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.8rem;
-  }
-  .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 300; line-height: 0.92; letter-spacing: -1px;
-    color: #fff; margin-bottom: 1.5rem;
-  }
-  .hero h1 em { font-style: italic; color: #fff; }
-  .hero-sub {
-    font-size: 0.88rem; color: rgba(255,255,255,0.55);
-    font-weight: 300; letter-spacing: 0.3px;
-  }
-
-  /* SHARED */
-  .section { padding: 7rem 3rem; }
-  .section-inner { max-width: 1000px; margin: 0 auto; }
-  h2.display {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 300; line-height: 1.1; letter-spacing: -0.3px;
-    margin-bottom: 1.5rem;
-  }
-  h2.display em { font-style: italic; color: var(--gold); }
-
-  /* RAD SECTION – nur Text, kein Bild */
-  .rad-section {
-    background: var(--dark-3);
-    padding: 6rem 3rem;
-    position: relative; overflow: hidden;
-  }
-  .rad-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-  .rad-text .label { color: var(--gold); }
-  .rad-text h2.display { color: #fff; }
-  .rad-text h2.display em { color: var(--gold-light); }
-  .rad-text p {
-    font-size: 0.88rem; color: rgba(255,255,255,0.45);
-    font-weight: 300; line-height: 1.9; margin-bottom: 1rem;
-  }
-  .rad-stats {
-    display: flex; gap: 2.5rem; margin-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.07); padding-top: 2rem;
-  }
-  .rad-stat-val {
-    font-family: var(--serif); font-size: 2.2rem; font-weight: 300;
-    color: var(--gold); line-height: 1; margin-bottom: 0.25rem;
-  }
-  .rad-stat-label {
-    font-size: 0.65rem; font-weight: 500; letter-spacing: 1.5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.3);
-  }
-  /* RAD PHOTO */
-  .rad-deco {
-    position: relative; display: flex; align-items: center; justify-content: center;
-  }
-  .rad-photo-wrap {
-    position: relative; width: 100%; max-width: 440px;
-    opacity: 0; transform: translateX(40px);
-    transition: opacity 1s ease, transform 1s ease;
-  }
-  .rad-photo-wrap.visible { opacity: 1; transform: translateX(0); }
-
-  /* diagonal clip shape */
-  .rad-photo-clip {
-    position: relative; overflow: hidden;
-    clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
-    aspect-ratio: 3/4;
-  }
-  .rad-photo-clip img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center;
-    filter: brightness(1.25) contrast(1.08) saturate(1.15);
-    transition: transform 8s ease, filter 0.5s ease;
-    display: block;
-  }
-  .rad-photo-wrap:hover .rad-photo-clip img {
-    transform: scale(1.06);
-    filter: brightness(1.35) contrast(1.1) saturate(1.25);
-  }
-
-  /* gold shimmer sweep on hover */
-  .rad-photo-clip::after {
-    content: '';
-    position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(120deg, transparent 20%, rgba(212,170,82,0.22) 50%, transparent 80%);
-    transform: translateX(-100%); transition: transform 0s;
-  }
-  .rad-photo-wrap:hover .rad-photo-clip::after {
-    transform: translateX(100%);
-    transition: transform 1s ease;
-  }
-
-  /* gold border frame offset */
-  .rad-photo-border {
-    position: absolute;
-    top: 14px; right: -14px; bottom: -14px; left: 14px;
-    border: 1px solid rgba(184,145,46,0.35);
-    clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
-    pointer-events: none;
-    transition: border-color 0.4s;
-  }
-  .rad-photo-wrap:hover .rad-photo-border { border-color: rgba(184,145,46,0.7); }
-
-  /* small label tag */
-  .rad-photo-tag {
-    position: absolute; bottom: -24px; left: 14px;
-    font-size: 0.6rem; font-weight: 500; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--gold);
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .rad-photo-tag::before {
-    content: ''; display: block; width: 18px; height: 1px; background: var(--gold);
-  }
-
-  /* RACE CARDS */
-  .races-section { background: var(--white); }
-  .race-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 0; border: 1px solid var(--border); margin-top: 3rem;
-  }
-  .race-card {
-    padding: 2.5rem 2rem; border-right: 1px solid var(--border);
-    display: flex; flex-direction: column; transition: background 0.2s;
-    position: relative; overflow: hidden;
-  }
-  .race-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 2px; background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.35s ease;
-  }
-  .race-card:hover::before { transform: scaleX(1); }
-  .race-card:last-child { border-right: none; }
-  .race-card:hover { background: var(--light); }
-  .race-tag {
-    font-size: 0.62rem; font-weight: 500; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--gold);
-    display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
-  }
-  .race-name {
-    font-family: var(--serif); font-size: 1.5rem; font-weight: 300;
-    color: var(--dark); line-height: 1.2; margin-bottom: 1rem;
-  }
-  .race-meta-row {
-    display: flex; align-items: center; gap: 0.5rem;
-    font-size: 0.8rem; color: var(--muted); font-weight: 300; margin-bottom: 0.4rem;
-  }
-  .race-meta-row svg { color: var(--gold); flex-shrink: 0; }
-  .race-meta-row a { color: var(--muted); text-decoration: none; border-bottom: 1px dashed rgba(154,152,144,0.4); transition: color 0.2s; }
-  .race-meta-row a:hover { color: var(--gold); }
-  .race-dist-bar {
-    margin: 1.5rem -2rem 0; padding: 1rem 2rem;
-    background: var(--light); border-top: 1px solid var(--border);
-  }
-  .race-dist-label {
-    font-size: 0.62rem; font-weight: 500; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;
-  }
-  .race-dist-items { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .dist-item {
-    display: flex; align-items: center; gap: 0.35rem;
-    font-size: 0.8rem; color: var(--mid); font-weight: 400;
-  }
-  .dist-item svg { color: var(--gold); }
-  .race-countdown {
-    margin: 1.5rem 0 0; padding: 1.2rem 1.5rem;
-    background: var(--light); border: 1px solid var(--border);
-  }
-  .cd-label-top {
-    font-size: 0.6rem; font-weight: 500; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .cd-label-top::before {
-    content: ''; display: inline-block; width: 6px; height: 6px;
-    background: var(--gold); border-radius: 50%;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
-  .countdown { display: flex; gap: 0.6rem; }
-  .cd-box { flex: 1; text-align: center; padding: 0.7rem 0.3rem; border-bottom: 2px solid var(--border); transition: border-color 0.2s; }
-  .cd-box:hover { border-bottom-color: var(--gold); }
-  .cd-num { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--dark); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
-  .cd-unit { font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; font-weight: 500; }
-  .race-card-bottom { margin-top: auto; padding-top: 1.5rem; }
-  .btn {
-    display: block; text-align: center; padding: 0.85rem 1.5rem;
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
-    text-decoration: none; transition: all 0.2s;
-    border: 1px solid var(--gold); color: var(--gold); background: transparent;
-  }
-  .btn:hover { background: var(--gold); color: #fff; }
-
-  /* PAST */
-  .past-section-wrap { background: var(--light); }
-  .past-grid { border: 1px solid var(--border); margin-top: 3rem; }
-  .past-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 2rem; border-bottom: 1px solid var(--border); transition: background 0.2s;
-  }
-  .past-item:last-child { border-bottom: none; }
-  .past-item:hover { background: var(--white); }
-  .past-left { display: flex; align-items: center; gap: 1.2rem; }
-  .past-icon { width: 38px; height: 38px; border: 1px solid rgba(184,145,46,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
-  .past-name { font-size: 0.92rem; font-weight: 500; color: var(--dark); }
-  .past-info { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
-  .past-right { display: flex; align-items: center; gap: 1rem; }
-  .past-time { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--gold); }
-  .past-badge { font-size: 0.6rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,145,46,0.35); padding: 0.2rem 0.6rem; }
-
-  /* FOOTER */
-  footer { background: var(--dark); padding: 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,145,46,0.1); }
-  .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
-  .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
-  .footer-links { display: flex; gap: 2rem; list-style: none; margin-bottom: 0.5rem; justify-content: flex-end; }
-  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold-light); }
-
-  /* MOBILE */
-  @media (max-width: 900px) {
-    nav { padding: 0 1.5rem; }
-    .hero { padding: 0 1.5rem 4rem; min-height: 65vh; }
-    .section, .rad-section { padding: 5rem 1.5rem; }
-    .nav-links { display: none; position: fixed; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch; height: auto; background: rgba(16,15,14,0.98); border-bottom: 1px solid rgba(184,145,46,0.1); padding: 1.5rem; gap: 0.5rem; }
-    .nav-links.open { display: flex; }
-    .nav-links li { height: auto; }
-    .nav-links li a { height: auto; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .nav-cta a { border: none !important; padding: 0.8rem 0.5rem !important; }
-    .menu-toggle { display: block; }
-    .race-grid { grid-template-columns: 1fr; }
-    .race-card { border-right: none; border-bottom: 1px solid var(--border); }
-    .race-card:last-child { border-bottom: none; }
-    .rad-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .rad-deco { display: none; }
-    .rad-stats { gap: 1.5rem; }
-    .past-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 1.2rem 1.5rem; }
-    .past-right { align-items: flex-start; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
-    .footer-links { justify-content: center; }
+  :root{--gold:#b8912e;--gold-light:#d4aa52;--dark:#161614;--dark-2:#1e1d1a;--dark-3:#28261f;--mid:#5a5850;--muted:#9a9890;--light:#f5f3ee;--border:#e4e0d8;--white:#fefefe;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;}
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}body{font-family:var(--sans);color:var(--dark);background:var(--white);line-height:1.6;overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:0 3rem;height:68px;background:rgba(22,22,20,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(184,145,46,0.12);}
+  nav .logo{text-decoration:none;display:flex;align-items:center;height:100%;}nav .logo img{height:42px;width:auto;object-fit:contain;display:block;}
+  .nav-links{display:flex;align-items:center;gap:0;list-style:none;height:100%;}.nav-links li{height:100%;display:flex;align-items:center;}
+  .nav-links li a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;padding:0 1.1rem;height:100%;display:flex;align-items:center;border-bottom:1.5px solid transparent;transition:color 0.2s,border-color 0.2s;}
+  .nav-links li a:hover,.nav-links li a.active{color:#fff;border-bottom-color:var(--gold);}
+  .nav-login a{background:transparent!important;border:1px solid rgba(184,145,46,0.5)!important;border-bottom:1px solid rgba(184,145,46,0.5)!important;color:var(--gold-light)!important;padding:0 1.1rem!important;height:100%!important;transition:all 0.2s!important;}.nav-login a:hover{background:var(--gold)!important;color:#fff!important;border-color:var(--gold)!important;}
+  .nav-member{display:none;}.nav-member a{background:var(--gold)!important;border:none!important;color:#fff!important;padding:0 1.1rem!important;height:100%!important;}.nav-member a:hover{background:var(--gold-light)!important;}
+  .nav-cta a{background:transparent!important;border:1px solid rgba(184,145,46,0.5)!important;border-bottom:1px solid rgba(184,145,46,0.5)!important;color:var(--gold-light)!important;padding:0 1.1rem!important;height:100%!important;transition:all 0.2s!important;}.nav-cta a:hover{background:var(--gold)!important;color:#fff!important;border-color:var(--gold)!important;}
+  .menu-toggle{display:none;background:none;border:none;color:rgba(255,255,255,0.7);font-size:1.4rem;cursor:pointer;padding:0.3rem;}
+  .hero{min-height:80vh;background:var(--dark-2);display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;overflow:hidden;}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,var(--dark) 0%,var(--dark-3) 100%);}
+  .hero-content{position:relative;z-index:2;max-width:700px;}
+  .label{font-size:0.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.8rem;}.label::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+  .hero h1{font-family:var(--serif);font-size:clamp(3rem,8vw,6rem);font-weight:300;line-height:0.92;letter-spacing:-1px;color:#fff;margin-bottom:1.5rem;}.hero h1 em{font-style:italic;color:#fff;}
+  .hero-sub{font-size:0.88rem;color:rgba(255,255,255,0.55);font-weight:300;letter-spacing:0.3px;}
+  .section{padding:7rem 3rem;}.section-inner{max-width:1000px;margin:0 auto;}
+  h2.display{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1;letter-spacing:-0.3px;margin-bottom:1.5rem;}h2.display em{font-style:italic;color:var(--gold);}
+  .rad-section{background:var(--dark-3);padding:6rem 3rem;position:relative;overflow:hidden;}
+  .rad-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+  .rad-text .label{color:var(--gold);}.rad-text h2.display{color:#fff;}.rad-text h2.display em{color:var(--gold-light);}
+  .rad-text p{font-size:0.88rem;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.9;margin-bottom:1rem;}
+  .rad-stats{display:flex;gap:2.5rem;margin-top:2rem;border-top:1px solid rgba(255,255,255,0.07);padding-top:2rem;}
+  .rad-stat-val{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:0.25rem;}
+  .rad-stat-label{font-size:0.65rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+  .rad-deco{position:relative;display:flex;align-items:center;justify-content:center;}
+  .rad-photo-wrap{position:relative;width:100%;max-width:440px;opacity:0;transform:translateX(40px);transition:opacity 1s ease,transform 1s ease;}.rad-photo-wrap.visible{opacity:1;transform:translateX(0);}
+  .rad-photo-clip{position:relative;overflow:hidden;clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);aspect-ratio:3/4;}
+  .rad-photo-clip img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(1.25) contrast(1.08) saturate(1.15);transition:transform 8s ease,filter 0.5s ease;display:block;}
+  .rad-photo-wrap:hover .rad-photo-clip img{transform:scale(1.06);}
+  .rad-photo-border{position:absolute;top:14px;right:-14px;bottom:-14px;left:14px;border:1px solid rgba(184,145,46,0.35);clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);pointer-events:none;}
+  .races-section{background:var(--white);}
+  .race-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);margin-top:3rem;}
+  .race-card{padding:2.5rem 2rem;border-right:1px solid var(--border);display:flex;flex-direction:column;transition:background 0.2s;position:relative;overflow:hidden;}
+  .race-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.35s ease;}
+  .race-card:hover::before{transform:scaleX(1);}.race-card:last-child{border-right:none;}.race-card:hover{background:var(--light);}
+  .race-tag{font-size:0.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;}
+  .race-name{font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--dark);line-height:1.2;margin-bottom:1rem;}
+  .race-meta-row{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--muted);font-weight:300;margin-bottom:0.4rem;}
+  .race-meta-row svg{color:var(--gold);flex-shrink:0;}.race-meta-row a{color:var(--muted);text-decoration:none;border-bottom:1px dashed rgba(154,152,144,0.4);transition:color 0.2s;}.race-meta-row a:hover{color:var(--gold);}
+  .race-dist-bar{margin:1.5rem -2rem 0;padding:1rem 2rem;background:var(--light);border-top:1px solid var(--border);}
+  .race-dist-label{font-size:0.62rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;}
+  .race-dist-items{display:flex;gap:1rem;flex-wrap:wrap;}.dist-item{display:flex;align-items:center;gap:0.35rem;font-size:0.8rem;color:var(--mid);font-weight:400;}.dist-item svg{color:var(--gold);}
+  .race-countdown{margin:1.5rem 0 0;padding:1.2rem 1.5rem;background:var(--light);border:1px solid var(--border);}
+  .cd-label-top{font-size:0.6rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;}
+  .cd-label-top::before{content:'';display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.5s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.7);}}
+  .countdown{display:flex;gap:0.6rem;}.cd-box{flex:1;text-align:center;padding:0.7rem 0.3rem;border-bottom:2px solid var(--border);transition:border-color 0.2s;}.cd-box:hover{border-bottom-color:var(--gold);}
+  .cd-num{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--dark);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-0.5px;}
+  .cd-unit{font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;font-weight:500;}
+  .race-card-bottom{margin-top:auto;padding-top:1.5rem;}
+  .btn{display:block;text-align:center;padding:0.85rem 1.5rem;font-size:0.72rem;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;text-decoration:none;transition:all 0.2s;border:1px solid var(--gold);color:var(--gold);background:transparent;}.btn:hover{background:var(--gold);color:#fff;}
+  .past-section-wrap{background:var(--light);}
+  .past-grid{border:1px solid var(--border);margin-top:3rem;}
+  .past-item{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;border-bottom:1px solid var(--border);transition:background 0.2s;}.past-item:last-child{border-bottom:none;}.past-item:hover{background:var(--white);}
+  .past-left{display:flex;align-items:center;gap:1.2rem;}
+  .past-icon{width:38px;height:38px;border:1px solid rgba(184,145,46,0.3);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+  .past-name{font-size:0.92rem;font-weight:500;color:var(--dark);}.past-info{font-size:0.78rem;color:var(--muted);font-weight:300;}
+  .past-right{display:flex;align-items:center;gap:1rem;}
+  .past-time{font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--gold);}
+  .past-badge{font-size:0.6rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,145,46,0.35);padding:0.2rem 0.6rem;}
+  footer{background:var(--dark);padding:3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,145,46,0.1);}
+  .footer-left{font-family:var(--serif);font-style:italic;font-size:0.95rem;color:rgba(255,255,255,0.3);}
+  .footer-right{font-size:0.7rem;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .footer-links{display:flex;gap:2rem;list-style:none;margin-bottom:0.5rem;justify-content:flex-end;}
+  .footer-links a{color:rgba(255,255,255,0.35);text-decoration:none;font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;}.footer-links a:hover{color:var(--gold-light);}
+  @media(max-width:900px){
+    nav{padding:0 1.5rem;}.hero{padding:0 1.5rem 4rem;min-height:65vh;}.section,.rad-section{padding:5rem 1.5rem;}
+    .nav-links{display:none;position:fixed;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;height:auto;background:rgba(16,15,14,0.98);border-bottom:1px solid rgba(184,145,46,0.1);padding:1.5rem;gap:0.5rem;}
+    .nav-links.open{display:flex;}.nav-links li{height:auto;}.nav-links li a{height:auto;padding:0.8rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .nav-login a,.nav-member a{border:none!important;padding:0.8rem 0.5rem!important;background:transparent!important;color:rgba(255,255,255,0.5)!important;}
+    .nav-cta a{border:none!important;padding:0.8rem 0.5rem!important;}.menu-toggle{display:block;}
+    .race-grid{grid-template-columns:1fr;}.race-card{border-right:none;border-bottom:1px solid var(--border);}.race-card:last-child{border-bottom:none;}
+    .rad-inner{grid-template-columns:1fr;gap:3rem;}.rad-deco{display:none;}.rad-stats{gap:1.5rem;}
+    .past-item{flex-direction:column;align-items:flex-start;gap:0.8rem;padding:1.2rem 1.5rem;}.past-right{align-items:flex-start;}
+    footer{flex-direction:column;gap:1.5rem;text-align:center;padding:2rem 1.5rem;}.footer-links{justify-content:center;}
   }
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a href="index.html" class="logo">
-    <img src="logo_nav_final.png" alt="Nico Rüttimann">
-  </a>
-  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <a href="index.html" class="logo"><img src="logo_nav_final.png" alt="Nico Rüttimann"></a>
+  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
   <ul class="nav-links" id="navlinks">
     <li><a href="uebermich.html">Über mich</a></li>
-    <li><a href="wettkampfe.html">Wettkämpfe</a></li>
+    <li><a href="wettkampfe.html" class="active">Wettkämpfe</a></li>
     <li><a href="community.html">Community</a></li>
     <li><a href="sponsoring.html">Gönner werden</a></li>
     <li><a href="unterstuetzen.html">Unterstützen</a></li>
-    <li><a href="login.html" class="active">Login</a></li>
+    <li class="nav-login" id="navLoginLi"><a href="login.html">Login</a></li>
+    <li class="nav-member" id="navMemberLi"><a href="mitglieder.html">Mein Bereich</a></li>
     <li class="nav-cta"><a href="kontakt.html">Kontakt</a></li>
   </ul>
 </nav>
-
-<!-- HERO – kein Hintergrundbild -->
 <header class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -342,8 +111,6 @@
     <p class="hero-sub">Ironman 70.3 · Sprint Triathlon · Challenge</p>
   </div>
 </header>
-
-<!-- RAD SECTION – nur Text + dekoratives Element -->
 <div class="rad-section">
   <div class="rad-inner">
     <div class="rad-text">
@@ -352,228 +119,94 @@
       <p>Das Radfahren ist meine stärkste Disziplin. Lange Ausfahrten auf den Strassen rund um Freiburg und Bern bilden das Fundament meiner Wettkampfvorbereitung.</p>
       <p>Beim Ironman 70.3 warten 90 km Velo — hier will ich Zeit gutmachen und stark in den Lauf gehen.</p>
       <div class="rad-stats">
-        <div>
-          <div class="rad-stat-val">90</div>
-          <div class="rad-stat-label">km Ironman Velo</div>
-        </div>
-        <div>
-          <div class="rad-stat-val">3–4h</div>
-          <div class="rad-stat-label">Lange Ausfahrt Sa</div>
-        </div>
-        <div>
-          <div class="rad-stat-val">~200</div>
-          <div class="rad-stat-label">km / Woche</div>
-        </div>
+        <div><div class="rad-stat-val">90</div><div class="rad-stat-label">km Ironman Velo</div></div>
+        <div><div class="rad-stat-val">3–4h</div><div class="rad-stat-label">Lange Ausfahrt Sa</div></div>
+        <div><div class="rad-stat-val">~200</div><div class="rad-stat-label">km / Woche</div></div>
       </div>
     </div>
     <div class="rad-deco">
       <div class="rad-photo-wrap">
-        <div class="rad-photo-clip">
-          <img src="Rad.png" alt="Nico Rüttimann auf dem Rad">
-        </div>
+        <div class="rad-photo-clip"><img src="Rad.png" alt="Nico Rüttimann auf dem Rad"></div>
         <div class="rad-photo-border"></div>
-        <div class="rad-photo-tag">Velo-Disziplin</div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- KOMMENDE RENNEN -->
 <section class="section races-section">
   <div class="section-inner">
     <p class="label">Saison 2026</p>
     <h2 class="display">Kommende<br><em>Rennen.</em></h2>
     <div class="race-grid">
-
-      <!-- IRONMAN -->
       <div class="race-card">
-        <div class="race-tag">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          7. Juni 2026
-        </div>
+        <div class="race-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>7. Juni 2026</div>
         <div class="race-name">Ironman 70.3 Rapperswil</div>
-        <div class="race-meta-row">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          <a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank">Rapperswil, Schweiz</a>
-        </div>
-        <div class="race-meta-row" style="margin-bottom:0">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          <a href="https://www.ironman.com/races/im703-switzerland" target="_blank">Offizielle Rennseite</a>
-        </div>
-        <div class="race-dist-bar">
-          <div class="race-dist-label">Mitteldistanz</div>
-          <div class="race-dist-items">
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>1.9 km</div>
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>90 km</div>
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>21.1 km</div>
-          </div>
-        </div>
-        <div class="race-countdown">
-          <div class="cd-label-top">Countdown zum Rennen</div>
-          <div class="countdown" id="cd-ironman"></div>
-        </div>
-        <div class="race-card-bottom">
-          <a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a>
-        </div>
+        <div class="race-meta-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><a href="https://maps.google.com/?q=Rapperswil,Schweiz" target="_blank">Rapperswil, Schweiz</a></div>
+        <div class="race-meta-row" style="margin-bottom:0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><a href="https://www.ironman.com/races/im703-switzerland" target="_blank">Offizielle Rennseite</a></div>
+        <div class="race-dist-bar"><div class="race-dist-label">Mitteldistanz</div><div class="race-dist-items"><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>1.9 km</div><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>90 km</div><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>21.1 km</div></div></div>
+        <div class="race-countdown"><div class="cd-label-top">Countdown zum Rennen</div><div class="countdown" id="cd-ironman"></div></div>
+        <div class="race-card-bottom"><a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a></div>
       </div>
-
-      <!-- USTER -->
       <div class="race-card">
-        <div class="race-tag">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Sommer 2026
-        </div>
+        <div class="race-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Sommer 2026</div>
         <div class="race-name">Sprint Triathlon Uster</div>
-        <div class="race-meta-row" style="margin-bottom:0">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          <a href="https://maps.google.com/?q=Uster,Zürich,Schweiz" target="_blank">Uster, Zürich</a>
-        </div>
-        <div class="race-dist-bar">
-          <div class="race-dist-label">Sprint Distanz</div>
-          <div class="race-dist-items">
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>750 m</div>
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>20 km</div>
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>5 km</div>
-          </div>
-        </div>
-        <div class="race-card-bottom" style="margin-top:auto;">
-          <a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a>
-        </div>
+        <div class="race-meta-row" style="margin-bottom:0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><a href="https://maps.google.com/?q=Uster,Zürich,Schweiz" target="_blank">Uster, Zürich</a></div>
+        <div class="race-dist-bar"><div class="race-dist-label">Sprint Distanz</div><div class="race-dist-items"><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>750 m</div><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>20 km</div><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>5 km</div></div></div>
+        <div class="race-card-bottom" style="margin-top:auto;"><a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a></div>
       </div>
-
-      <!-- SAN REMO -->
       <div class="race-card">
-        <div class="race-tag">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          4. Oktober 2026
-        </div>
+        <div class="race-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>4. Oktober 2026</div>
         <div class="race-name">Challenge San Remo</div>
-        <div class="race-meta-row">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          <a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank">San Remo, Italien</a>
-        </div>
-        <div class="race-meta-row" style="margin-bottom:0">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          <a href="https://challenge-sanremo.com/" target="_blank">Offizielle Rennseite</a>
-        </div>
-        <div class="race-dist-bar">
-          <div class="race-dist-label">Challenge Distanz</div>
-          <div class="race-dist-items">
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>1.9 km</div>
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>80 km</div>
-            <div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>21 km</div>
-          </div>
-        </div>
-        <div class="race-countdown">
-          <div class="cd-label-top">Countdown zum Rennen</div>
-          <div class="countdown" id="cd-sanremo"></div>
-        </div>
-        <div class="race-card-bottom">
-          <a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a>
-        </div>
+        <div class="race-meta-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><a href="https://maps.google.com/?q=San+Remo,Italien" target="_blank">San Remo, Italien</a></div>
+        <div class="race-meta-row" style="margin-bottom:0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><a href="https://challenge-sanremo.com/" target="_blank">Offizielle Rennseite</a></div>
+        <div class="race-dist-bar"><div class="race-dist-label">Challenge Distanz</div><div class="race-dist-items"><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c1.5-2 3-3 5-3s3.5 2 5 2 3.5-2 5-2 3.5 1 5 3"/></svg>1.9 km</div><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5 14V9l4-4h6l3 5H5"/></svg>80 km</div><div class="dist-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="m6 20 4-9"/><path d="m18 20-4-9"/></svg>21 km</div></div></div>
+        <div class="race-countdown"><div class="cd-label-top">Countdown zum Rennen</div><div class="countdown" id="cd-sanremo"></div></div>
+        <div class="race-card-bottom"><a href="unterstuetzen.html" class="btn">Für dieses Rennen unterstützen</a></div>
       </div>
-
     </div>
   </div>
 </section>
-
-<!-- VERGANGENE WETTKÄMPFE -->
 <section class="section past-section-wrap">
   <div class="section-inner">
     <p class="label">Bisherige Resultate</p>
     <h2 class="display">Vergangene<br><em>Wettkämpfe.</em></h2>
     <div class="past-grid">
       <div class="past-item">
-        <div class="past-left">
-          <div class="past-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-          </div>
-          <div>
-            <div class="past-name">Sprint Triathlon Wallisellen</div>
-            <div class="past-info">Wallisellen · April 2026 · 750m / 20km / 5km</div>
-          </div>
-        </div>
-        <div class="past-right">
-          <div class="past-time">1:03</div>
-          <span class="past-badge">Finisher</span>
-        </div>
+        <div class="past-left"><div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div><div><div class="past-name">Sprint Triathlon Wallisellen</div><div class="past-info">Wallisellen · April 2026 · 750m / 20km / 5km</div></div></div>
+        <div class="past-right"><div class="past-time">1:03</div><span class="past-badge">Finisher</span></div>
       </div>
       <div class="past-item">
-        <div class="past-left">
-          <div class="past-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-          </div>
-          <div>
-            <div class="past-name">Kerzerslauf</div>
-            <div class="past-info">Kerzers · März 2026 · Laufevent</div>
-          </div>
-        </div>
-        <div class="past-right">
-          <div class="past-time">1:11</div>
-          <span class="past-badge">Finisher</span>
-        </div>
+        <div class="past-left"><div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div><div><div class="past-name">Kerzerslauf</div><div class="past-info">Kerzers · März 2026 · Laufevent</div></div></div>
+        <div class="past-right"><div class="past-time">1:11</div><span class="past-badge">Finisher</span></div>
       </div>
       <div class="past-item">
-        <div class="past-left">
-          <div class="past-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-          </div>
-          <div>
-            <div class="past-name">Sprint Triathlon Aarau</div>
-            <div class="past-info">Aarau · September 2025 · 750m / 20km / 5km</div>
-          </div>
-        </div>
-        <div class="past-right">
-          <div class="past-time">1:17</div>
-          <span class="past-badge">Finisher</span>
-        </div>
+        <div class="past-left"><div class="past-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div><div><div class="past-name">Sprint Triathlon Aarau</div><div class="past-info">Aarau · September 2025 · 750m / 20km / 5km</div></div></div>
+        <div class="past-right"><div class="past-time">1:17</div><span class="past-badge">Finisher</span></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-left">„One step further every day."</div>
   <div class="footer-right">
     <ul class="footer-links">
       <li><a href="uebermich.html">Über mich</a></li>
       <li><a href="wettkampfe.html">Wettkämpfe</a></li>
-      <li><a href="sponsoring.html">Sponsoring</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="sponsoring.html">Gönner werden</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
     <div>© 2026 Nico Rüttimann</div>
   </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  document.querySelectorAll('#navlinks a').forEach(a =>
-    a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'))
-  );
-  function buildCountdown(id, targetDate) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    function update() {
-      const diff = new Date(targetDate) - new Date();
-      if (diff <= 0) {
-        el.innerHTML = '<span style="color:var(--gold-light);font-size:0.82rem;font-weight:500;letter-spacing:1px;">Rennen hat stattgefunden</span>';
-        return;
-      }
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      el.innerHTML = `
-        <div class="cd-box"><div class="cd-num">${d}</div><div class="cd-unit">Tage</div></div>
-        <div class="cd-box"><div class="cd-num">${String(h).padStart(2,'0')}</div><div class="cd-unit">Std</div></div>
-        <div class="cd-box"><div class="cd-num">${String(m).padStart(2,'0')}</div><div class="cd-unit">Min</div></div>
-        <div class="cd-box"><div class="cd-num">${String(s).padStart(2,'0')}</div><div class="cd-unit">Sek</div></div>`;
-    }
-    update();
-    setInterval(update, 1000);
-  }
-  buildCountdown('cd-ironman', '2026-06-07T07:00:00');
-  buildCountdown('cd-sanremo', '2026-10-04T07:00:00');
+  document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
+  (function(){var sb=window.supabase.createClient('https://qzetjamugzvqlajrfxsc.supabase.co','sb_publishable_IAqHAuB5MxQ7EzadazBYXg_8m_oObIK');sb.auth.getSession().then(function(r){if(r.data&&r.data.session){var l=document.getElementById('navLoginLi'),m=document.getElementById('navMemberLi');if(l)l.style.display='none';if(m)m.style.display='flex';}});})();
+  function buildCountdown(id,targetDate){const el=document.getElementById(id);if(!el)return;function update(){const diff=new Date(targetDate)-new Date();if(diff<=0){el.innerHTML='<span style="color:var(--gold-light);font-size:0.82rem;font-weight:500;letter-spacing:1px;">Rennen hat stattgefunden</span>';return;}const d=Math.floor(diff/86400000);const h=Math.floor((diff%86400000)/3600000);const m=Math.floor((diff%3600000)/60000);const s=Math.floor((diff%60000)/1000);el.innerHTML=`<div class="cd-box"><div class="cd-num">${d}</div><div class="cd-unit">Tage</div></div><div class="cd-box"><div class="cd-num">${String(h).padStart(2,'0')}</div><div class="cd-unit">Std</div></div><div class="cd-box"><div class="cd-num">${String(m).padStart(2,'0')}</div><div class="cd-unit">Min</div></div><div class="cd-box"><div class="cd-num">${String(s).padStart(2,'0')}</div><div class="cd-unit">Sek</div></div>`;}update();setInterval(update,1000);}
+  buildCountdown('cd-ironman','2026-06-07T07:00:00');
+  buildCountdown('cd-sanremo','2026-10-04T07:00:00');
+  const obs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target);}});},{threshold:0.2});
+  document.querySelectorAll('.rad-photo-wrap').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
