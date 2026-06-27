@@ -86,6 +86,18 @@
   .btn-submit:hover { background: var(--gold); }
   .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
   .hint { font-size: 0.72rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
+  .datenschutz-check {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    font-size: 0.78rem; color: var(--muted); font-weight: 300; line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+  .datenschutz-check input[type="checkbox"] {
+    width: 16px; height: 16px; flex-shrink: 0; margin-top: 0.15rem;
+    accent-color: var(--gold); cursor: pointer;
+    background: var(--light); border: 1px solid var(--border);
+  }
+  .datenschutz-check a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(184,145,46,0.4); transition: border-color 0.2s; }
+  .datenschutz-check a:hover { border-bottom-color: var(--gold); }
 
   .msg { font-size: 0.82rem; padding: 0.8rem 1rem; display: none; line-height: 1.5; margin-bottom: 1rem; }
   .msg.show { display: block; }
@@ -171,11 +183,15 @@
         <label for="regPassword">Passwort</label>
         <input type="password" id="regPassword" required minlength="6" placeholder="Mind. 6 Zeichen" autocomplete="new-password">
       </div>
+      <label class="datenschutz-check">
+        <input type="checkbox" id="datenschutzCheck" required>
+        <span>Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und akzeptiere sie. Ich stimme zu, dass meine Daten zur Bereitstellung des Community-Bereichs verarbeitet werden.</span>
+      </label>
       <button type="submit" class="btn-submit" id="registerBtn">
         Konto erstellen
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
-      <p class="hint">Mit der Registrierung erhältst du kostenlosen Zugriff auf alle exklusiven Inhalte.</p>
+      <p class="hint">Kostenlose Registrierung — jederzeit kündbar.</p>
     </form>
   </div>
 </div>
