@@ -8,468 +8,206 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold: #b8912e;
-    --gold-light: #d4aa52;
-    --dark: #161614;
-    --dark-2: #1e1d1a;
-    --dark-3: #2a2926;
-    --mid: #5a5850;
-    --muted: #9a9890;
-    --light: #f5f3ee;
-    --border: #e4e0d8;
-    --white: #fefefe;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0 3rem; height: 68px;
-    background: rgba(22,22,20,0.96);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(184,145,46,0.12);
-  }
-  nav .logo { text-decoration: none; display: flex; align-items: center; height: 100%; }
-  nav .logo img { height: 42px; width: auto; object-fit: contain; display: block; }
-  .nav-links { display: flex; align-items: center; gap: 0; list-style: none; height: 100%; }
-  .nav-links li { height: 100%; display: flex; align-items: center; }
-  .nav-links li a {
-    color: rgba(255,255,255,0.5); text-decoration: none;
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase;
-    padding: 0 1.1rem; height: 100%; display: flex; align-items: center;
-    border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s;
-  }
-  .nav-links li a:hover, .nav-links li a.active { color: #fff; border-bottom-color: var(--gold); }
-  .nav-cta a {
-    background: transparent !important; border: 1px solid rgba(184,145,46,0.5) !important;
-    border-bottom: 1px solid rgba(184,145,46,0.5) !important;
-    color: var(--gold-light) !important; padding: 0 1.1rem !important;
-    height: 100% !important; letter-spacing: 1.8px; transition: all 0.2s !important;
-  }
-  .nav-cta a:hover { background: var(--gold) !important; color: #fff !important; border-color: var(--gold) !important; }
-  .menu-toggle { display: none; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.4rem; cursor: pointer; padding: 0.3rem; }
-
-  .hero {
-    min-height: 100vh;
-    background: var(--dark);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 3rem 5rem;
-    position: relative; overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background-image: url('Rad.png');
-    background-size: cover; background-position: center 40%;
-    filter: brightness(1.2) contrast(1.05) saturate(1.1);
-    animation: kenburns 20s ease-in-out infinite alternate;
-    transform-origin: center center;
-  }
-  @keyframes kenburns {
-    0%   { transform: scale(1)    translateX(0)   translateY(0); }
-    100% { transform: scale(1.08) translateX(-1%) translateY(-1%); }
-  }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(16,15,14,0.3) 0%,
-      rgba(16,15,14,0.1) 30%,
-      rgba(16,15,14,0.55) 65%,
-      rgba(16,15,14,0.95) 100%
-    );
-  }
-  .hero-content { position: relative; z-index: 2; max-width: 700px; }
-  .label {
-    font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.8rem;
-  }
-  .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-  .label-light { color: var(--gold); }
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 300; line-height: 0.92; letter-spacing: -1px;
-    color: #fff; margin-bottom: 2rem;
-    text-shadow: 0 2px 30px rgba(0,0,0,0.5);
-  }
-  .hero h1 em { font-style: italic; color: #fff; }
-  .hero-sub {
-    font-size: 1rem; color: rgba(255,255,255,0.65);
-    font-weight: 300; line-height: 1.8; max-width: 480px;
-    margin-bottom: 3rem; font-family: var(--serif); font-style: italic;
-  }
-  .hero-scroll {
-    position: absolute; bottom: 2.5rem; right: 3rem; z-index: 2;
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    color: rgba(255,255,255,0.25); font-size: 0.62rem; letter-spacing: 2.5px;
-    text-transform: uppercase; writing-mode: vertical-rl;
-  }
-  .hero-scroll::after {
-    content: ''; display: block; width: 1px; height: 50px;
-    background: linear-gradient(to bottom, rgba(184,145,46,0.5), transparent);
-    animation: linedown 2s ease infinite;
-  }
-  @keyframes linedown { 0%,100%{opacity:0.3;} 50%{opacity:1;} }
-
-  .manifest { background: var(--light); padding: 8rem 3rem; }
-  .manifest-inner { max-width: 1000px; margin: 0 auto; }
-  .manifest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-  .manifest-quote {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 300; line-height: 1.2; color: var(--dark);
-  }
-  .manifest-quote em { font-style: italic; color: var(--gold); }
-  .manifest-quote .quote-line { display: block; margin-bottom: 0.1em; }
-  .manifest-text p { font-size: 0.92rem; color: var(--mid); font-weight: 300; line-height: 1.9; margin-bottom: 1.2rem; }
-  .manifest-text p strong { color: var(--dark); font-weight: 500; }
-
-  /* Sunrise image effect */
-  .sunrise-wrap { max-width: 380px; opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease, transform 0.9s ease; }
-  .sunrise-wrap.visible { opacity: 1; transform: translateY(0); }
-  .sunrise-frame {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4/3; border-radius: 2px; cursor: pointer;
-  }
-  .sunrise-img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
-    filter: saturate(1.15) contrast(1.05) brightness(1.02);
-    transition: transform 7s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
-    display: block;
-  }
-  .sunrise-frame:hover .sunrise-img { transform: scale(1.06); filter: saturate(1.3) contrast(1.08) brightness(1.06); }
-  .sunrise-shine {
-    position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(115deg, transparent 0%, transparent 35%, rgba(212,170,82,0.18) 50%, transparent 65%, transparent 100%);
-    transform: translateX(-100%); transition: transform 0s;
-  }
-  .sunrise-frame:hover .sunrise-shine { transform: translateX(100%); transition: transform 0.9s ease; }
-  .sunrise-frame::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(184,145,46,0); transition: border-color 0.4s ease; pointer-events: none; }
-  .sunrise-frame:hover::after { border-color: rgba(184,145,46,0.45); }
-
-  .what { background: #28261f; padding: 8rem 3rem; }
-  .what-inner { max-width: 1000px; margin: 0 auto; }
-  .what h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: #fff; line-height: 1.1; margin-bottom: 4rem; }
-  .what h2 em { font-style: italic; color: var(--gold-light); }
-  .what-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(255,255,255,0.15); }
-  .what-item { padding: 2.5rem 2rem; border-right: 1px solid rgba(255,255,255,0.15); transition: background 0.3s; }
-  .what-item:last-child { border-right: none; }
-  .what-item:hover { background: rgba(184,145,46,0.07); }
-  .what-num { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: rgba(184,145,46,0.4); line-height: 1; margin-bottom: 1.2rem; }
-  .what-item h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: #ffffff; margin-bottom: 0.7rem; }
-  .what-item p { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.75; font-weight: 300; }
-
-  .packages { background: var(--white); padding: 8rem 3rem; }
-  .packages-inner { max-width: 1000px; margin: 0 auto; }
-  .packages-header { margin-bottom: 4rem; }
-  .packages-header h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; }
-  .packages-header h2 em { font-style: italic; color: var(--gold); }
-  .packages-header p { font-size: 0.88rem; color: var(--mid); font-weight: 300; max-width: 500px; }
-  .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); margin-bottom: 3rem; }
-  .pkg { padding: 3rem 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; transition: background 0.25s; position: relative; }
-  .pkg:last-child { border-right: none; }
-  .pkg.featured { background: var(--dark); border-color: var(--dark); }
-  .pkg:not(.featured):hover { background: var(--light); }
-  .pkg-badge { display: inline-block; font-size: 0.62rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,145,46,0.4); padding: 0.25rem 0.8rem; margin-bottom: 1.5rem; align-self: flex-start; }
-  .pkg-badge.featured-badge { color: var(--gold-light); border-color: rgba(212,170,82,0.4); }
-  .pkg-name { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--dark); margin-bottom: 0.3rem; }
-  .pkg.featured .pkg-name { color: #fff; }
-  .pkg-price { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 0.3rem; }
-  .pkg-price-sub { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2rem; }
-  .pkg.featured .pkg-price-sub { color: rgba(255,255,255,0.35); }
-  .pkg-list { list-style: none; flex: 1; margin-bottom: 2.5rem; }
-  .pkg-list li { font-size: 0.85rem; color: var(--mid); padding: 0.6rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.7rem; font-weight: 300; }
-  .pkg.featured .pkg-list li { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.08); }
-  .pkg-list li::before { content: ''; display: block; flex-shrink: 0; width: 16px; height: 1px; background: var(--gold); }
-  .pkg-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.95rem 1.5rem; font-family: var(--sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; width: 100%; }
-  .pkg-btn-dark { background: var(--dark); color: #fff; }
-  .pkg-btn-dark:hover { background: var(--gold); }
-  .pkg-btn-gold { background: var(--gold); color: #fff; }
-  .pkg-btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .pkg-btn-outline { background: transparent; color: var(--dark); border: 1px solid var(--border); }
-  .pkg-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-  .custom-box { border: 1px dashed rgba(184,145,46,0.35); padding: 3rem 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
-  .custom-box-text h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
-  .custom-box-text h3 em { font-style: italic; color: var(--gold); }
-  .custom-box-text p { font-size: 0.85rem; color: var(--mid); font-weight: 300; max-width: 420px; }
-  .btn-outline-gold { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.7rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; transition: all 0.2s; flex-shrink: 0; }
-  .btn-outline-gold:hover { background: var(--gold); color: #fff; }
-
-  .form-section { background: var(--light); padding: 8rem 3rem; }
-  .form-inner { max-width: 700px; margin: 0 auto; }
-  .form-inner h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 0.5rem; }
-  .form-inner h2 em { font-style: italic; color: var(--gold); }
-  .form-inner .form-sub { font-size: 0.85rem; color: var(--mid); font-weight: 300; margin-bottom: 3rem; }
-  form { display: grid; gap: 1.3rem; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  label { font-size: 0.65rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-  input, textarea, select { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: 0; font-size: 0.88rem; font-family: var(--sans); background: var(--white); color: var(--dark); transition: border-color 0.2s; -webkit-appearance: none; }
-  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
-  textarea { resize: vertical; min-height: 130px; }
-  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9890' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
-  .btn-submit { display: flex; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; padding: 1rem 2rem; background: var(--dark); color: #fff; border: none; border-radius: 0; cursor: pointer; font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; transition: background 0.2s, transform 0.2s; }
-  .btn-submit:hover { background: var(--gold); transform: translateY(-1px); }
-  .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; font-weight: 300; font-style: italic; }
-
-  footer { background: var(--dark); padding: 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,145,46,0.1); }
-  .footer-left { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.3); }
-  .footer-right { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
-  .footer-links { display: flex; gap: 2rem; list-style: none; margin-bottom: 0.5rem; justify-content: flex-end; }
-  .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold-light); }
-
-  @media (max-width: 900px) {
-    nav { padding: 0 1.5rem; }
-    .hero { padding: 0 1.5rem 4rem; }
-    .manifest, .what, .packages, .form-section { padding: 5rem 1.5rem; }
-    .nav-links { display: none; position: fixed; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch; height: auto; background: rgba(16,15,14,0.98); border-bottom: 1px solid rgba(184,145,46,0.1); padding: 1.5rem; gap: 0.5rem; }
-    .nav-links.open { display: flex; }
-    .nav-links li { height: auto; }
-    .nav-links li a { height: auto; padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .nav-cta a { border: none !important; padding: 0.8rem 0.5rem !important; }
-    .menu-toggle { display: block; }
-    .manifest-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .what-grid { grid-template-columns: 1fr 1fr; }
-    .what-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .pkg-grid { grid-template-columns: 1fr; border: none; gap: 1px; background: var(--border); }
-    .pkg { border-right: none; border: none; background: var(--white); }
-    .pkg.featured { background: var(--dark); }
-    .custom-box { flex-direction: column; }
-    .form-row { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
-    .footer-links { justify-content: center; }
-    .hero-scroll { display: none; }
+  :root{--gold:#b8912e;--gold-light:#d4aa52;--dark:#161614;--dark-2:#1e1d1a;--dark-3:#2a2926;--mid:#5a5850;--muted:#9a9890;--light:#f5f3ee;--border:#e4e0d8;--white:#fefefe;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;}
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}body{font-family:var(--sans);color:var(--dark);background:var(--white);line-height:1.6;overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:0 3rem;height:68px;background:rgba(22,22,20,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(184,145,46,0.12);}
+  nav .logo{text-decoration:none;display:flex;align-items:center;height:100%;}nav .logo img{height:42px;width:auto;object-fit:contain;display:block;}
+  .nav-links{display:flex;align-items:center;gap:0;list-style:none;height:100%;}.nav-links li{height:100%;display:flex;align-items:center;}
+  .nav-links li a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.72rem;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;padding:0 1.1rem;height:100%;display:flex;align-items:center;border-bottom:1.5px solid transparent;transition:color 0.2s,border-color 0.2s;}
+  .nav-links li a:hover,.nav-links li a.active{color:#fff;border-bottom-color:var(--gold);}
+  .nav-login a{background:transparent!important;border:1px solid rgba(184,145,46,0.5)!important;border-bottom:1px solid rgba(184,145,46,0.5)!important;color:var(--gold-light)!important;padding:0 1.1rem!important;height:100%!important;transition:all 0.2s!important;}
+  .nav-login a:hover{background:var(--gold)!important;color:#fff!important;border-color:var(--gold)!important;}
+  .nav-member{display:none;}.nav-member a{background:var(--gold)!important;border:none!important;color:#fff!important;padding:0 1.1rem!important;height:100%!important;}.nav-member a:hover{background:var(--gold-light)!important;}
+  .nav-cta a{background:transparent!important;border:1px solid rgba(184,145,46,0.5)!important;border-bottom:1px solid rgba(184,145,46,0.5)!important;color:var(--gold-light)!important;padding:0 1.1rem!important;height:100%!important;transition:all 0.2s!important;}.nav-cta a:hover{background:var(--gold)!important;color:#fff!important;border-color:var(--gold)!important;}
+  .menu-toggle{display:none;background:none;border:none;color:rgba(255,255,255,0.7);font-size:1.4rem;cursor:pointer;padding:0.3rem;}
+  .hero{min-height:100vh;background:var(--dark);display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background-image:url('Rad.png');background-size:cover;background-position:center 40%;filter:brightness(1.2) contrast(1.05) saturate(1.1);animation:kenburns 20s ease-in-out infinite alternate;transform-origin:center center;}
+  @keyframes kenburns{0%{transform:scale(1) translateX(0) translateY(0);}100%{transform:scale(1.08) translateX(-1%) translateY(-1%);}}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(16,15,14,0.3) 0%,rgba(16,15,14,0.1) 30%,rgba(16,15,14,0.55) 65%,rgba(16,15,14,0.95) 100%);}
+  .hero-content{position:relative;z-index:2;max-width:700px;}
+  .label{font-size:0.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.8rem;}.label::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+  .hero h1{font-family:var(--serif);font-size:clamp(3rem,8vw,6.5rem);font-weight:300;line-height:0.92;letter-spacing:-1px;color:#fff;margin-bottom:2rem;text-shadow:0 2px 30px rgba(0,0,0,0.5);}
+  .hero h1 em{font-style:italic;color:#fff;}
+  .hero-sub{font-size:1rem;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.8;max-width:480px;margin-bottom:3rem;font-family:var(--serif);font-style:italic;}
+  .hero-scroll{position:absolute;bottom:2.5rem;right:3rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.25);font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;writing-mode:vertical-rl;}
+  .hero-scroll::after{content:'';display:block;width:1px;height:50px;background:linear-gradient(to bottom,rgba(184,145,46,0.5),transparent);animation:linedown 2s ease infinite;}
+  @keyframes linedown{0%,100%{opacity:0.3;}50%{opacity:1;}}
+  .manifest{background:var(--light);padding:8rem 3rem;}.manifest-inner{max-width:1000px;margin:0 auto;}
+  .manifest-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+  .manifest-quote{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.2;color:var(--dark);}
+  .manifest-quote em{font-style:italic;color:var(--gold);}.manifest-quote .quote-line{display:block;margin-bottom:0.1em;}
+  .manifest-text p{font-size:0.92rem;color:var(--mid);font-weight:300;line-height:1.9;margin-bottom:1.2rem;}.manifest-text p strong{color:var(--dark);font-weight:500;}
+  .sunrise-wrap{max-width:380px;opacity:0;transform:translateY(30px);transition:opacity 0.9s ease,transform 0.9s ease;}.sunrise-wrap.visible{opacity:1;transform:translateY(0);}
+  .sunrise-frame{position:relative;overflow:hidden;aspect-ratio:4/3;border-radius:2px;cursor:pointer;}
+  .sunrise-img{width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:saturate(1.15) contrast(1.05) brightness(1.02);transition:transform 7s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.6s ease;display:block;}
+  .sunrise-frame:hover .sunrise-img{transform:scale(1.06);filter:saturate(1.3) contrast(1.08) brightness(1.06);}
+  .what{background:#28261f;padding:8rem 3rem;}.what-inner{max-width:1000px;margin:0 auto;}
+  .what h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:#fff;line-height:1.1;margin-bottom:4rem;}.what h2 em{font-style:italic;color:var(--gold-light);}
+  .what-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(255,255,255,0.15);}
+  .what-item{padding:2.5rem 2rem;border-right:1px solid rgba(255,255,255,0.15);transition:background 0.3s;}.what-item:last-child{border-right:none;}.what-item:hover{background:rgba(184,145,46,0.07);}
+  .what-num{font-family:var(--serif);font-size:2.5rem;font-weight:300;color:rgba(184,145,46,0.4);line-height:1;margin-bottom:1.2rem;}
+  .what-item h3{font-family:var(--serif);font-size:1.3rem;font-weight:300;color:#fff;margin-bottom:0.7rem;}.what-item p{font-size:0.85rem;color:rgba(255,255,255,0.72);line-height:1.75;font-weight:300;}
+  .packages{background:var(--white);padding:8rem 3rem;}.packages-inner{max-width:1000px;margin:0 auto;}
+  .packages-header{margin-bottom:4rem;}
+  .packages-header h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.1;margin-bottom:1rem;}.packages-header h2 em{font-style:italic;color:var(--gold);}
+  .packages-header p{font-size:0.88rem;color:var(--mid);font-weight:300;max-width:500px;}
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);margin-bottom:3rem;}
+  .pkg{padding:3rem 2.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;transition:background 0.25s;position:relative;}.pkg:last-child{border-right:none;}.pkg.featured{background:var(--dark);border-color:var(--dark);}.pkg:not(.featured):hover{background:var(--light);}
+  .pkg-badge{display:inline-block;font-size:0.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(184,145,46,0.4);padding:0.25rem 0.8rem;margin-bottom:1.5rem;align-self:flex-start;}.pkg-badge.featured-badge{color:var(--gold-light);border-color:rgba(212,170,82,0.4);}
+  .pkg-name{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--dark);margin-bottom:0.3rem;}.pkg.featured .pkg-name{color:#fff;}
+  .pkg-price{font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:0.3rem;}
+  .pkg-price-sub{font-size:0.72rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:2rem;}.pkg.featured .pkg-price-sub{color:rgba(255,255,255,0.35);}
+  .pkg-list{list-style:none;flex:1;margin-bottom:2.5rem;}.pkg-list li{font-size:0.85rem;color:var(--mid);padding:0.6rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.7rem;font-weight:300;}.pkg.featured .pkg-list li{color:rgba(255,255,255,0.65);border-color:rgba(255,255,255,0.08);}
+  .pkg-list li::before{content:'';display:block;flex-shrink:0;width:16px;height:1px;background:var(--gold);}
+  .pkg-btn{display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.95rem 1.5rem;font-family:var(--sans);font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all 0.2s;border:none;cursor:pointer;width:100%;}
+  .pkg-btn-gold{background:var(--gold);color:#fff;}.pkg-btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);}
+  .pkg-btn-outline{background:transparent;color:var(--dark);border:1px solid var(--border);}.pkg-btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+  .custom-box{border:1px dashed rgba(184,145,46,0.35);padding:3rem 2.5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;}
+  .custom-box-text h3{font-family:var(--serif);font-size:1.6rem;font-weight:300;margin-bottom:0.5rem;}.custom-box-text h3 em{font-style:italic;color:var(--gold);}
+  .custom-box-text p{font-size:0.85rem;color:var(--mid);font-weight:300;max-width:420px;}
+  .btn-outline-gold{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s;flex-shrink:0;}.btn-outline-gold:hover{background:var(--gold);color:#fff;}
+  .form-section{background:var(--light);padding:8rem 3rem;}.form-inner{max-width:700px;margin:0 auto;}
+  .form-inner h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:0.5rem;}.form-inner h2 em{font-style:italic;color:var(--gold);}
+  .form-inner .form-sub{font-size:0.85rem;color:var(--mid);font-weight:300;margin-bottom:3rem;}
+  form{display:grid;gap:1.3rem;}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;}.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+  label{font-size:0.65rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+  input,textarea,select{width:100%;padding:0.85rem 1rem;border:1px solid var(--border);border-radius:0;font-size:0.88rem;font-family:var(--sans);background:var(--white);color:var(--dark);transition:border-color 0.2s;-webkit-appearance:none;}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold);}textarea{resize:vertical;min-height:130px;}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9890' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer;}
+  .btn-submit{display:flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;padding:1rem 2rem;background:var(--dark);color:#fff;border:none;border-radius:0;cursor:pointer;font-family:var(--sans);font-size:0.72rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;transition:background 0.2s,transform 0.2s;}.btn-submit:hover{background:var(--gold);transform:translateY(-1px);}
+  .form-note{font-size:0.75rem;color:var(--muted);text-align:center;font-weight:300;font-style:italic;}
+  footer{background:var(--dark);padding:3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(184,145,46,0.1);}
+  .footer-left{font-family:var(--serif);font-style:italic;font-size:0.95rem;color:rgba(255,255,255,0.3);}
+  .footer-right{font-size:0.7rem;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+  .footer-links{display:flex;gap:2rem;list-style:none;margin-bottom:0.5rem;justify-content:flex-end;}
+  .footer-links a{color:rgba(255,255,255,0.35);text-decoration:none;font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;}.footer-links a:hover{color:var(--gold-light);}
+  @media(max-width:900px){
+    nav{padding:0 1.5rem;}.hero{padding:0 1.5rem 4rem;}.manifest,.what,.packages,.form-section{padding:5rem 1.5rem;}
+    .nav-links{display:none;position:fixed;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;height:auto;background:rgba(16,15,14,0.98);border-bottom:1px solid rgba(184,145,46,0.1);padding:1.5rem;gap:0.5rem;}
+    .nav-links.open{display:flex;}.nav-links li{height:auto;}.nav-links li a{height:auto;padding:0.8rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .nav-login a,.nav-member a{border:none!important;padding:0.8rem 0.5rem!important;background:transparent!important;color:rgba(255,255,255,0.5)!important;}
+    .nav-cta a{border:none!important;padding:0.8rem 0.5rem!important;}.menu-toggle{display:block;}
+    .manifest-grid{grid-template-columns:1fr;gap:3rem;}.what-grid{grid-template-columns:1fr 1fr;}.what-item{border-bottom:1px solid rgba(255,255,255,0.07);}
+    .pkg-grid{grid-template-columns:1fr;border:none;gap:1px;background:var(--border);}.pkg{border-right:none;border:none;background:var(--white);}.pkg.featured{background:var(--dark);}
+    .custom-box{flex-direction:column;}.form-row{grid-template-columns:1fr;}.hero-scroll{display:none;}
+    footer{flex-direction:column;gap:1.5rem;text-align:center;padding:2rem 1.5rem;}.footer-links{justify-content:center;}
   }
 </style>
 </head>
 <body>
-
 <nav>
-  <a href="index.html" class="logo">
-    <img src="logo_nav_final.png" alt="Nico Rüttimann">
-  </a>
-  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <a href="index.html" class="logo"><img src="logo_nav_final.png" alt="Nico Rüttimann"></a>
+  <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
   <ul class="nav-links" id="navlinks">
     <li><a href="uebermich.html">Über mich</a></li>
     <li><a href="wettkampfe.html">Wettkämpfe</a></li>
     <li><a href="community.html">Community</a></li>
-    <li><a href="sponsoring.html">Gönner werden</a></li>
+    <li><a href="sponsoring.html" class="active">Gönner werden</a></li>
     <li><a href="unterstuetzen.html">Unterstützen</a></li>
-    <li><a href="login.html" class="active">Login</a></li>
+    <li class="nav-login" id="navLoginLi"><a href="login.html">Login</a></li>
+    <li class="nav-member" id="navMemberLi"><a href="mitglieder.html">Mein Bereich</a></li>
     <li class="nav-cta"><a href="kontakt.html">Kontakt</a></li>
   </ul>
 </nav>
-
 <header class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
+  <div class="hero-bg"></div><div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="label label-light">Sponsoring 2026</p>
+    <p class="label">Sponsoring 2026</p>
     <h1>Sei dabei,<br>wenn es<br><em>zählt.</em></h1>
-    <p class="hero-sub">
-      Triathlon ist meine Leidenschaft — und ich freue mich,
-      diesen Weg gemeinsam mit einem Sponsor zu gehen.
-    </p>
-    <a href="#formular" class="pkg-btn pkg-btn-gold" style="width:auto; display:inline-flex; padding: 1rem 2.5rem;">
-      Jetzt anfragen →
-    </a>
+    <p class="hero-sub">Triathlon ist meine Leidenschaft — und ich freue mich, diesen Weg gemeinsam mit einem Sponsor zu gehen.</p>
+    <a href="#formular" class="pkg-btn pkg-btn-gold" style="width:auto;display:inline-flex;padding:1rem 2.5rem;">Jetzt anfragen →</a>
   </div>
   <div class="hero-scroll">Scroll</div>
 </header>
-
 <section class="manifest">
   <div class="manifest-inner">
     <div class="manifest-grid">
       <div style="position:relative;">
         <p class="label">Sponsoring</p>
-        <div class="manifest-quote">
-          <span class="quote-line">Sport ist</span>
-          <span class="quote-line">mehr als</span>
-          <span class="quote-line">Training —</span>
-          <span class="quote-line" style="margin-top:0.5em;"><em>er ist Alltag.</em></span>
-        </div>
-        <div class="sunrise-wrap" style="margin-top:2.5rem;">
-          <div class="sunrise-frame">
-            <img src="Sonnenaufgang bild.jpg" alt="Sonnenaufgang" class="sunrise-img">
-            <div class="sunrise-shine"></div>
-          </div>
-        </div>
+        <div class="manifest-quote"><span class="quote-line">Sport ist</span><span class="quote-line">mehr als</span><span class="quote-line">Training —</span><span class="quote-line" style="margin-top:0.5em;"><em>er ist Alltag.</em></span></div>
+        <div class="sunrise-wrap" style="margin-top:2.5rem;"><div class="sunrise-frame"><img src="Sonnenaufgang bild.jpg" alt="Sonnenaufgang" class="sunrise-img"></div></div>
       </div>
       <div class="manifest-text">
-        <p>
-          Triathlon begleitet meinen Alltag — morgens im Wasser, mittags auf dem Velo, abends auf der Laufstrecke. Neben dem Studium der Betriebsökonomie an der BFH Bern ist Sport das, was mich antreibt und strukturiert.
-        </p>
-        <p>
-          Ich nehme regelmässig an Wettkämpfen in der Schweiz und im Ausland teil und möchte mich in den nächsten Jahren kontinuierlich weiterentwickeln. <strong>Über eine Unterstützung würde ich mich sehr freuen</strong> — egal in welcher Form.
-        </p>
+        <p>Triathlon begleitet meinen Alltag — morgens im Wasser, mittags auf dem Velo, abends auf der Laufstrecke. Neben dem Studium der Betriebsökonomie an der BFH Bern ist Sport das, was mich antreibt und strukturiert.</p>
+        <p>Ich nehme regelmässig an Wettkämpfen in der Schweiz und im Ausland teil und möchte mich in den nächsten Jahren kontinuierlich weiterentwickeln. <strong>Über eine Unterstützung würde ich mich sehr freuen</strong> — egal in welcher Form.</p>
       </div>
     </div>
   </div>
 </section>
-
 <section class="what">
   <div class="what-inner">
     <p class="label" style="color:var(--gold);">Was eine Unterstützung beinhaltet</p>
     <h2>Gemeinsam<br><em>unterwegs.</em></h2>
     <div class="what-grid">
-      <div class="what-item">
-        <div class="what-num">01</div>
-        <h3>Sichtbarkeit</h3>
-        <p>Dein Logo auf meinem Trikot an Wettkämpfen — sichtbar für Zuschauer und in Fotos und Videos.</p>
-      </div>
-      <div class="what-item">
-        <div class="what-num">02</div>
-        <h3>Webseite</h3>
-        <p>Nennung und Verlinkung auf dieser Webseite für die gesamte Saison 2026.</p>
-      </div>
-      <div class="what-item">
-        <div class="what-num">03</div>
-        <h3>Social Media</h3>
-        <p>Regelmässige Erwähnungen auf Instagram — aus dem echten Trainings- und Wettkampfalltag.</p>
-      </div>
-      <div class="what-item">
-        <div class="what-num">04</div>
-        <h3>Direkter Kontakt</h3>
-        <p>Ich melde mich persönlich nach jedem Rennen mit einem kurzen Update — kein Newsletter, sondern direkt.</p>
-      </div>
+      <div class="what-item"><div class="what-num">01</div><h3>Sichtbarkeit</h3><p>Dein Logo auf meinem Trikot an Wettkämpfen — sichtbar für Zuschauer und in Fotos und Videos.</p></div>
+      <div class="what-item"><div class="what-num">02</div><h3>Webseite</h3><p>Nennung und Verlinkung auf dieser Webseite für die gesamte Saison 2026.</p></div>
+      <div class="what-item"><div class="what-num">03</div><h3>Social Media</h3><p>Regelmässige Erwähnungen auf Instagram — aus dem echten Trainings- und Wettkampfalltag.</p></div>
+      <div class="what-item"><div class="what-num">04</div><h3>Direkter Kontakt</h3><p>Ich melde mich persönlich nach jedem Rennen mit einem kurzen Update — direkt, kein Newsletter.</p></div>
     </div>
   </div>
 </section>
-
 <section class="packages" id="pakete">
   <div class="packages-inner">
     <div class="packages-header">
       <p class="label">Sponsoring-Pakete</p>
-      <h2 class="packages-header-title">Drei Optionen —<br><em>oder etwas eigenes.</em></h2>
+      <h2>Drei Optionen —<br><em>oder etwas eigenes.</em></h2>
       <p>Wähle ein Paket oder schreib mir direkt — ich bin offen für alle Formen der Unterstützung.</p>
     </div>
-
     <div class="pkg-grid">
-      <div class="pkg">
-        <span class="pkg-badge">Einstieg</span>
-        <div class="pkg-name">Bronze</div>
-        <div class="pkg-price">100</div>
-        <div class="pkg-price-sub">CHF / Jahr</div>
-        <ul class="pkg-list">
-          <li>Namensnennung auf der Webseite</li>
-          <li>Persönliches Dankeschön</li>
-          <li>Wettkampf-Updates per E-Mail</li>
-        </ul>
-        <a href="#formular" class="pkg-btn pkg-btn-outline">Anfragen →</a>
-      </div>
-
-      <div class="pkg featured">
-        <span class="pkg-badge featured-badge">Empfohlen</span>
-        <div class="pkg-name">Gold</div>
-        <div class="pkg-price" style="color:var(--gold-light);">500</div>
-        <div class="pkg-price-sub">CHF / Jahr</div>
-        <ul class="pkg-list">
-          <li>Logo prominent auf der Webseite</li>
-          <li>Logo auf Trikot (gross)</li>
-          <li>Regelmässige Social-Media-Erwähnungen</li>
-          <li>Persönliches Treffen oder Call</li>
-          <li>Exklusiver Rennbericht nach jedem Wettkampf</li>
-        </ul>
-        <a href="#formular" class="pkg-btn pkg-btn-gold">Jetzt anfragen →</a>
-      </div>
-
-      <div class="pkg">
-        <span class="pkg-badge">Beliebt</span>
-        <div class="pkg-name">Silber</div>
-        <div class="pkg-price">300</div>
-        <div class="pkg-price-sub">CHF / Jahr</div>
-        <ul class="pkg-list">
-          <li>Logo auf der Webseite</li>
-          <li>Logo auf Trikot (klein)</li>
-          <li>Erwähnung auf Social Media</li>
-          <li>Persönliches Update nach jedem Rennen</li>
-        </ul>
-        <a href="#formular" class="pkg-btn pkg-btn-outline">Anfragen →</a>
-      </div>
+      <div class="pkg"><span class="pkg-badge">Einstieg</span><div class="pkg-name">Bronze</div><div class="pkg-price">100</div><div class="pkg-price-sub">CHF / Jahr</div>
+        <ul class="pkg-list"><li>Namensnennung auf der Webseite</li><li>Persönliches Dankeschön</li><li>Wettkampf-Updates per E-Mail</li></ul>
+        <a href="#formular" class="pkg-btn pkg-btn-outline">Anfragen →</a></div>
+      <div class="pkg featured"><span class="pkg-badge featured-badge">Empfohlen</span><div class="pkg-name">Gold</div><div class="pkg-price" style="color:var(--gold-light);">500</div><div class="pkg-price-sub">CHF / Jahr</div>
+        <ul class="pkg-list"><li>Logo prominent auf der Webseite</li><li>Logo auf Trikot (gross)</li><li>Regelmässige Social-Media-Erwähnungen</li><li>Persönliches Treffen oder Call</li><li>Exklusiver Rennbericht</li></ul>
+        <a href="#formular" class="pkg-btn pkg-btn-gold">Jetzt anfragen →</a></div>
+      <div class="pkg"><span class="pkg-badge">Beliebt</span><div class="pkg-name">Silber</div><div class="pkg-price">300</div><div class="pkg-price-sub">CHF / Jahr</div>
+        <ul class="pkg-list"><li>Logo auf der Webseite</li><li>Logo auf Trikot (klein)</li><li>Erwähnung auf Social Media</li><li>Persönliches Update nach jedem Rennen</li></ul>
+        <a href="#formular" class="pkg-btn pkg-btn-outline">Anfragen →</a></div>
     </div>
-
     <div class="custom-box">
-      <div class="custom-box-text">
-        <h3>Andere <em>Idee?</em></h3>
-        <p>Ausrüstung, Produkte, eine andere Zusammenarbeit — ich bin für alle Vorschläge offen. Schreib mir einfach.</p>
-      </div>
+      <div class="custom-box-text"><h3>Andere <em>Idee?</em></h3><p>Ausrüstung, Produkte, eine andere Zusammenarbeit — ich bin für alle Vorschläge offen.</p></div>
       <a href="#formular" class="btn-outline-gold">Kontakt aufnehmen →</a>
     </div>
   </div>
 </section>
-
 <section class="form-section" id="formular">
   <div class="form-inner">
     <p class="label">Kontakt</p>
     <h2>Interesse?<br><em>Meld dich.</em></h2>
     <p class="form-sub">Ich freue mich über jede Nachricht — ob konkretes Interesse oder einfach eine Frage.</p>
-
     <form action="https://formspree.io/f/mykvlznn" method="POST">
       <div class="form-row">
-        <div class="form-group">
-          <label>Name / Firma</label>
-          <input type="text" name="name" required placeholder="Dein Name oder Firma">
-        </div>
-        <div class="form-group">
-          <label>E-Mail</label>
-          <input type="email" name="email" required placeholder="name@beispiel.ch">
-        </div>
+        <div class="form-group"><label>Name / Firma</label><input type="text" name="name" required placeholder="Dein Name oder Firma"></div>
+        <div class="form-group"><label>E-Mail</label><input type="email" name="email" required placeholder="name@beispiel.ch"></div>
       </div>
-      <div class="form-group">
-        <label>Gewünschtes Paket</label>
-        <select name="paket">
-          <option>Bronze – CHF 100 / Jahr</option>
-          <option>Silber – CHF 300 / Jahr</option>
-          <option selected>Gold – CHF 500 / Jahr</option>
-          <option>Individuelles Angebot</option>
-          <option>Material / Ausrüstung</option>
-          <option>Sonstiges</option>
-        </select>
+      <div class="form-group"><label>Gewünschtes Paket</label>
+        <select name="paket"><option>Bronze – CHF 100 / Jahr</option><option>Silber – CHF 300 / Jahr</option><option selected>Gold – CHF 500 / Jahr</option><option>Individuelles Angebot</option><option>Material / Ausrüstung</option><option>Sonstiges</option></select>
       </div>
-      <div class="form-group">
-        <label>Deine Nachricht</label>
-        <textarea name="nachricht" rows="5" placeholder="Deine Nachricht oder Idee…"></textarea>
-      </div>
-      <button type="submit" class="btn-submit">
-        Anfrage senden
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </button>
+      <div class="form-group"><label>Deine Nachricht</label><textarea name="nachricht" rows="5" placeholder="Deine Nachricht oder Idee…"></textarea></div>
+      <button type="submit" class="btn-submit">Anfrage senden <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="form-note">Ich antworte persönlich – in der Regel innerhalb von 24 Stunden.</p>
     </form>
   </div>
 </section>
-
 <footer>
   <div class="footer-left">„One step further every day."</div>
   <div class="footer-right">
     <ul class="footer-links">
       <li><a href="uebermich.html">Über mich</a></li>
       <li><a href="wettkampfe.html">Wettkämpfe</a></li>
-      <li><a href="sponsoring.html">Sponsoring</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="sponsoring.html">Gönner werden</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
     <div>© 2026 Nico Rüttimann</div>
   </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  document.querySelectorAll('#navlinks a').forEach(a =>
-    a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'))
-  );
-
-  // Scroll-reveal for sunrise image
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.sunrise-wrap').forEach(el => observer.observe(el));
+  document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
+  (function(){var sb=window.supabase.createClient('https://qzetjamugzvqlajrfxsc.supabase.co','sb_publishable_IAqHAuB5MxQ7EzadazBYXg_8m_oObIK');sb.auth.getSession().then(function(r){if(r.data&&r.data.session){var l=document.getElementById('navLoginLi'),m=document.getElementById('navMemberLi');if(l)l.style.display='none';if(m)m.style.display='flex';}});})();
+  const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:0.2});
+  document.querySelectorAll('.sunrise-wrap').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
